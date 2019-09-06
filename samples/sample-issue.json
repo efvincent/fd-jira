@@ -1,0 +1,70 @@
+{
+  "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+  "id": "5038814",
+  "self": "https://jira.walmart.com/rest/api/2/issue/5038814",
+  "key": "RCTFD-4223",
+  "fields": {
+    "summary": "Set up Madrox autoscaling for Channel Decision Kafka processor",
+    "issuetype": {
+      "self": "https://jira.walmart.com/rest/api/2/issuetype/7",
+      "id": "7",
+      "description": "Created by Jira Software - do not edit or delete. Issue type for a user story.",
+      "iconUrl": "https://jira.walmart.com/secure/viewavatar?size=xsmall&avatarId=19615&avatarType=issuetype",
+      "name": "Story",
+      "subtask": false,
+      "avatarId": 19615
+    },
+    "components": [
+      {
+        "self": "https://jira.walmart.com/rest/api/2/component/35567",
+        "id": "35567",
+        "name": "Wolverine"
+      }
+    ],
+    "resolutiondate": "2019-08-08T09:59:49.000-0700",
+    "created": "2019-07-30T08:55:34.000-0700",
+    "description": "Set up Madrox autoscaling for Channel Decision Kafka processor",
+    "assignee": {
+      "self": "https://jira.walmart.com/rest/api/2/user?username=yul0000",
+      "name": "yul0000",
+      "key": "yul0000",
+      "emailAddress": "Yaron.Librach@walmart.com",
+      "avatarUrls": {
+        "48x48": "https://jira.walmart.com/secure/useravatar?avatarId=10122",
+        "24x24": "https://jira.walmart.com/secure/useravatar?size=small&avatarId=10122",
+        "16x16": "https://jira.walmart.com/secure/useravatar?size=xsmall&avatarId=10122",
+        "32x32": "https://jira.walmart.com/secure/useravatar?size=medium&avatarId=10122"
+      },
+      "displayName": "Yaron Librach",
+      "active": true,
+      "timeZone": "America/New_York"
+    },
+    "priority": {
+      "self": "https://jira.walmart.com/rest/api/2/priority/7",
+      "iconUrl": "https://jira.walmart.com/images/icons/priorities/none.png",
+      "name": "None",
+      "id": "7"
+    },
+    "resolution": {
+      "self": "https://jira.walmart.com/rest/api/2/resolution/8",
+      "id": "8",
+      "description": "Reviewed by Product Owner",
+      "name": "Reviewed by Product Owner"
+    },
+    "updated": "2019-09-05T07:07:55.000-0700",
+    "status": {
+      "self": "https://jira.walmart.com/rest/api/2/status/6",
+      "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+      "iconUrl": "https://jira.walmart.com/images/icons/statuses/closed.png",
+      "name": "Done",
+      "id": "6",
+      "statusCategory": {
+        "self": "https://jira.walmart.com/rest/api/2/statuscategory/3",
+        "id": 3,
+        "key": "done",
+        "colorName": "green",
+        "name": "Done"
+      }
+    }
+  }
+}
