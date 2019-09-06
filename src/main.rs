@@ -1,3 +1,8 @@
+#![allow(non_snake_case)] // b/c serialized message types from Jira use camelCase
+
+use curl::easy::{Auth,Easy2,Handler,WriteError};
+use serde::{Serialize,Deserialize};
+use chrono::prelude::*;
 
 #[derive(Debug)]
 /// Credentials for Jira to call the API. For example, the un/pw of a service account.
@@ -5,6 +10,36 @@
 struct Creds {
     un: String,
     pw: String
+}
+
+#[derive(Serialize,Deserialize,Debug)]
+struct JiraFields {
+    summary: String,
+    resolutiondate: DateTime<Utc>,
+    created: DateTime<Utc>,
+    description: String,
+    updated: DateTime<Utc>
+}
+
+#[derive(Serialize,Deserialize,Debug)]
+struct Issue {
+    id: String,
+    key: String,
+    fields: JiraFields
+}
+
+#[derive(Serialize,Deserialize,Debug)]
+struct IssueSearchResult {
+    id: String,
+    key: String
+}
+
+#[derive(Serialize,Deserialize,Debug)]
+struct IssueSearchResultSet {
+    startAt: i32,
+    maxResults: i32,
+    total: i32,
+    issues: Vec<IssueSearchResult>
 }
 
 /// Returns Jira credentials retrieved from an environment variable
@@ -30,29 +65,68 @@ fn get_creds() -> Result<Creds, String> {
     }
 }
 
-use curl::easy::{Auth,Easy};
+/// Supports the curl crate by providing a type that can have a handler trait. The handler
+/// trait is similar in function to an interface. It has a `write` method, and it's passed
+/// to the `Easy2` constructor and used to collect http responses
+struct Collector {
+    content: String
+}
 
-fn curl_call(un:&str, pw:&str, url:&str) {
-    let mut easy = Easy::new();
-    easy.url(url).unwrap();
-    easy.http_auth(Auth::new().basic(true)).unwrap();
-    easy.username(un).unwrap();
-    easy.password(pw).unwrap();
-    println!("easy:\n{:?}\nun: {}\npw: {}\n", easy, un, pw);
-    
-    easy.write_function(|data| {
-        println!("{:?}", std::str::from_utf8(data));
+impl Collector {
+    fn new() -> Collector {
+        Collector { content: String::new() }
+    }
+}
+
+
+impl Handler for Collector {
+    fn write(&mut self, data: &[u8]) -> Result<usize, WriteError> {
+        self.content.push_str(std::str::from_utf8(data).unwrap());
         Ok(data.len())
-    }).unwrap();
-    easy.perform().unwrap();
-    println!("{}", easy.response_code().unwrap());
+    }
+}
+
+fn curl_call(creds:&Creds, url:String) -> String  {
+    let mut http_client = Easy2::new(Collector::new());
+    http_client.url(&url).unwrap();
+    http_client.http_auth(Auth::new().basic(true)).unwrap();
+    http_client.username(&creds.un).unwrap();
+    http_client.password(&creds.pw).unwrap();
+    http_client.perform().unwrap();
+    let collector = http_client.get_ref();
+    return collector.content.clone();
+}
+
+fn get_changed_issues(creds:&Creds, base_url: String) {
+    let query = "project%3DRCTFD%20AND%20updatedDate%20%3E%3D%20%222019-09-06%2009%3A30%22%0A";
+    let url = format!("{}/search?jql={}&expand=names&fields=updated&startAt=49", base_url, query);
+    let raw = curl_call(creds, url);
+    let sr: IssueSearchResultSet = serde_json::from_str(raw.as_str()).unwrap();
+    for isr in sr.issues {
+        println!("id: {} issue: {}", isr.id, isr.key);
+    }
+    
+    let max_rec_number_returned = std::cmp::min(sr.maxResults + sr.startAt, sr.total);
+    println!("Returned results numbered {0} to {1} out of {1}", 
+        sr.startAt + 1, max_rec_number_returned);
+}
+
+fn get_issue_snapshot(creds:&Creds, base_url: String, issue:String) -> Issue {
+    let url = format!("{}/issue/{}?fields=assignee,status,summary,description,created,updated,resolutiondate,issuetype,components,priority,resolution", 
+        base_url, issue);
+    let raw = curl_call(creds, url);
+    let issue: Issue = serde_json::from_str(raw.as_str()).unwrap();
+    return issue
 }
 
 fn main() {
     let creds = get_creds();
+    let base_url = "https://jira.walmart.com/rest/api/2".to_string();
     match creds {
         Ok(c) => {
-            curl_call(c.un.as_str(), c.pw.as_str(), "https://jira.walmart.com/rest/api/2/issue/RCTFD-4223?fields=assignee,status,summary,description,created,updated,resolutiondate,issuetype,components,priority,resolution");
+            let issue = get_issue_snapshot(&c, base_url.clone(), "RCTFD-4223".to_string());
+            println!("{:?}", issue);
+            get_changed_issues(&c, base_url);
         },
         Err(e) => println!("Error: {}",e)
     };
