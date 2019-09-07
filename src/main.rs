@@ -1,4 +1,5 @@
 #![allow(non_snake_case)] // b/c serialized message types from Jira use camelCase
+#![allow(dead_code)]
 
 use curl::easy::{Auth,Easy2,Handler,WriteError};
 use serde::{Serialize,Deserialize};
@@ -39,6 +40,7 @@ struct IssueSearchResultSet {
     startAt: i32,
     maxResults: i32,
     total: i32,
+    err: Option<String>,
     issues: Vec<IssueSearchResult>
 }
 
@@ -78,7 +80,6 @@ impl Collector {
     }
 }
 
-
 impl Handler for Collector {
     fn write(&mut self, data: &[u8]) -> Result<usize, WriteError> {
         self.content.push_str(std::str::from_utf8(data).unwrap());
@@ -97,18 +98,31 @@ fn curl_call(creds:&Creds, url:String) -> String  {
     return collector.content.clone();
 }
 
-fn get_changed_issues(creds:&Creds, base_url: String) {
-    let query = "project%3DRCTFD%20AND%20updatedDate%20%3E%3D%20%222019-09-06%2009%3A30%22%0A";
-    let url = format!("{}/search?jql={}&expand=names&fields=updated&startAt=49", base_url, query);
+fn make_query(project:&str, updatedSince:&DateTime<FixedOffset>) -> String {
+    let dt = updatedSince.format("%Y-%m-%d %H:%M");
+    let query = format!("project={} AND updatedDate >= \"{}\"", project, dt);
+    println!("{}", query);
+    urlencoding::encode(&query)
+}
+
+fn get_changed_issues(creds:&Creds, base_url: String, startAt:i32) -> IssueSearchResultSet {
+    let query = make_query("RCTFD", &DateTime::parse_from_rfc3339("2019-09-06T13:30:00-05:00").unwrap());
+    let url = format!("{}/search?jql={}&expand=names&fields=updated&startAt={}", base_url, query, startAt);
+    println!("{}", url);
     let raw = curl_call(creds, url);
-    let sr: IssueSearchResultSet = serde_json::from_str(raw.as_str()).unwrap();
-    for isr in sr.issues {
-        println!("id: {} issue: {}", isr.id, isr.key);
-    }
-    
-    let max_rec_number_returned = std::cmp::min(sr.maxResults + sr.startAt, sr.total);
-    println!("Returned results numbered {0} to {1} out of {1}", 
-        sr.startAt + 1, max_rec_number_returned);
+    let mut sr: IssueSearchResultSet = 
+        match serde_json::from_str(raw.as_str()) {
+            Ok(result_set) => result_set,
+            Err(err) => IssueSearchResultSet {
+                    startAt: 0,
+                    maxResults: 0,
+                    err: Some(err.to_string()),
+                    total: 0,
+                    issues: Vec::new()
+                }
+        };
+    sr.startAt = startAt;
+    return sr;
 }
 
 fn get_issue_snapshot(creds:&Creds, base_url: String, issue:String) -> Issue {
@@ -124,9 +138,15 @@ fn main() {
     let base_url = "https://jira.walmart.com/rest/api/2".to_string();
     match creds {
         Ok(c) => {
-            let issue = get_issue_snapshot(&c, base_url.clone(), "RCTFD-4223".to_string());
-            println!("{:?}", issue);
-            get_changed_issues(&c, base_url);
+            //let issue = get_issue_snapshot(&c, base_url.clone(), "RCTFD-4223".to_string());
+            //println!("{:?}", issue);
+            let sr = get_changed_issues(&c, base_url, 0);
+            match sr.err {
+                None =>
+                    println!("{:?}", sr),
+                Some(err) =>
+                    println!("Error: {}", err)
+            }
         },
         Err(e) => println!("Error: {}",e)
     };
