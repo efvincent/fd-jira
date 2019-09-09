@@ -26,16 +26,6 @@ struct JiraFields {
     updated: DateTime<Utc>
 }
 
-/// Top level Issue. Will probably change the way these are deserialized to make it less
-/// of a literal translation of what comes from Jira into something that makes more
-/// sense for this application
-#[derive(Serialize,Deserialize,Debug)]
-struct Issue {
-    id: String,
-    key: String,
-    fields: JiraFields
-}
-
 /// The shape of the issue when it's a search result is different. Also not sure we need
 /// to do it this way.
 #[derive(Serialize,Deserialize,Debug)]
@@ -136,12 +126,14 @@ fn get_changed_issues(creds:&Creds, base_url: String, startAt:usize) -> IssueSea
     return sr;
 }
 
-fn get_issue_snapshot(creds:&Creds, base_url: String, issue:String) -> Issue {
-    let url = format!("{}/issue/{}?fields=assignee,status,summary,description,created,updated,resolutiondate,issuetype,components,priority,resolution", 
+fn get_issue_snapshot(creds:&Creds, base_url: String, issue:String) {
+    let url = format!("{}/issue/{}?fields=assignee,status,summary,description,created,updated,resolutiondate,issuetype,components,priority,resolution,customfield_10002", 
         base_url, issue);
     let raw = curl_call(creds, url);
-    let issue: Issue = serde_json::from_str(raw.as_str()).unwrap();
-    return issue
+    // let issue: Issue = serde_json::from_str(raw).unwrap();
+    // return issue
+    let issue = jira_types::Issue::from_value(&raw);
+    println!("issue: {:?}", issue);
 }
 
 fn do_gira() {
@@ -174,13 +166,8 @@ fn main() {
     if opt.sync {
         write_issues().unwrap();
     }
-}
-
-#[derive(Debug)]
-struct Person {
-    id: i32,
-    name: String,
-    data: Option<Vec<u8>>,
+    let creds = get_creds().unwrap();
+    get_issue_snapshot(&creds, String::from(JIRA_URL), String::from("RCTFD-4472"));
 }
 
 fn write_issues() -> Result<(), rusqlite::Error> {
@@ -234,42 +221,5 @@ fn init_database() -> Result<(), rusqlite::Error> {
         NO_PARAMS)?;
 
     conn.close().unwrap();
-    Ok(())
-}
-
-fn do_sqlite() -> rusqlite::Result<()> {
-    let conn = Connection::open_in_memory()?;
-
-    conn.execute(
-        "CREATE TABLE person (
-                  id              INTEGER PRIMARY KEY,
-                  name            TEXT NOT NULL,
-                  data            BLOB
-                  )",
-        params![],
-    )?;
-    let me = Person {
-        id: 0,
-        name: "Steven".to_string(),
-        data: None,
-    };
-    conn.execute(
-        "INSERT INTO person (name, data)
-                  VALUES (?1, ?2)",
-        params![me.name, me.data],
-    )?;
-
-    let mut stmt = conn.prepare("SELECT id, name, data FROM person")?;
-    let person_iter = stmt.query_map(params![], |row| {
-        Ok(Person {
-            id: row.get(0)?,
-            name: row.get(1)?,
-            data: row.get(2)?,
-        })
-    })?;
-
-    for person in person_iter {
-        println!("Found person {:?}", person.unwrap());
-    }
     Ok(())
 }
