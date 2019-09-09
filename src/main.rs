@@ -1,20 +1,22 @@
 #![allow(non_snake_case)] // b/c serialized message types from Jira use camelCase
 #![allow(dead_code)]
+mod jira_types;
 
 use curl::easy::{Auth,Easy2,Handler,WriteError};
 use serde::{Serialize,Deserialize};
 use chrono::prelude::*;
-//use rusqlite::types::ToSql;
 use rusqlite::{Connection, params, NO_PARAMS};
+use structopt::StructOpt;
 
-#[derive(Debug)]
 /// Credentials for Jira to call the API. For example, the un/pw of a service account.
 /// or if running interactively, the current user
+#[derive(Debug)]
 struct Creds {
     un: String,
     pw: String
 }
 
+/// Jira returns a structure with only fields within the issue struct. Not sure why /shrug
 #[derive(Serialize,Deserialize,Debug)]
 struct JiraFields {
     summary: String,
@@ -24,6 +26,9 @@ struct JiraFields {
     updated: DateTime<Utc>
 }
 
+/// Top level Issue. Will probably change the way these are deserialized to make it less
+/// of a literal translation of what comes from Jira into something that makes more
+/// sense for this application
 #[derive(Serialize,Deserialize,Debug)]
 struct Issue {
     id: String,
@@ -31,12 +36,16 @@ struct Issue {
     fields: JiraFields
 }
 
+/// The shape of the issue when it's a search result is different. Also not sure we need
+/// to do it this way.
 #[derive(Serialize,Deserialize,Debug)]
 struct IssueSearchResult {
     id: String,
     key: String
 }
 
+/// The set of search results coming from Jira. Includes the results + info about
+/// which slice this is and what the total number of hits is
 #[derive(Serialize,Deserialize,Debug)]
 struct IssueSearchResultSet {
     startAt: usize,
@@ -105,15 +114,12 @@ fn curl_call(creds:&Creds, url:String) -> String  {
 fn make_query(project:&str, updatedSince:&DateTime<FixedOffset>) -> String {
     let dt = updatedSince.format("%Y-%m-%d %H:%M");
     let query = format!("project={} AND updatedDate >= \"{}\"", project, dt);
-    //let query = format!("project={}", project);
-    println!("{}", query);
     urlencoding::encode(&query)
 }
 
 fn get_changed_issues(creds:&Creds, base_url: String, startAt:usize) -> IssueSearchResultSet {
     let query = make_query("RCTFD", &DateTime::parse_from_rfc3339("2019-08-01T00:00:00-05:00").unwrap());
     let url = format!("{}/search?jql={}&expand=names&maxResults=100&fields=updated&startAt={}", base_url, query, startAt);
-    println!("{}", url);
     let raw = curl_call(creds, url);
     let mut sr: IssueSearchResultSet = 
         match serde_json::from_str(raw.as_str()) {
@@ -143,11 +149,10 @@ fn do_gira() {
     match creds {
         Ok(c) => {
             //let issue = get_issue_snapshot(&c, base_url.clone(), "RCTFD-4223".to_string());
-            //println!("{:?}", issue);
             let sr = get_changed_issues(&c, JIRA_URL.to_string(), 0);
             match sr.err {
                 None =>
-                    println!("{:?}", sr),
+                    (),
                 Some(err) =>
                     println!("Error: {}", err)
             }
@@ -156,9 +161,19 @@ fn do_gira() {
     };
 }
 
+#[derive(StructOpt, Debug)]
+#[structopt(name = "cli_args")]
+struct Opt {
+    /// Synchronize issues with changes that occured since last sync
+    sync:bool
+}
+
 fn main() {
+    let opt = Opt::from_args();
     init_database().unwrap();
-    write_issues().unwrap();
+    if opt.sync {
+        write_issues().unwrap();
+    }
 }
 
 #[derive(Debug)]
@@ -183,7 +198,6 @@ fn write_issues() -> Result<(), rusqlite::Error> {
                 " insert into issue (id, [key], last_updated) values (?1, ?2, ?3)
                 on conflict(id) do nothing", 
                 params![issue.id, issue.key, 100]).unwrap();
-            //println!("inserted {}", issue.key);
         }
         count = count + cur_count;
         println!("processed {} out of {}", count, issues.total);
