@@ -1,0 +1,5972 @@
+[
+  {
+    "id": "customfield_21400",
+    "name": "Domain Layer/ Domain",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21400]", "Domain Layer/ Domain"],
+    "schema": {
+      "type": "option-with-child",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:cascadingselect",
+      "customId": 21400
+    }
+  },
+  {
+    "id": "resolution",
+    "name": "Resolution",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["resolution"],
+    "schema": { "type": "resolution", "system": "resolution" }
+  },
+  {
+    "id": "customfield_12800",
+    "name": "Resolution SLA",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[12800]", "Resolution SLA"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 12800
+    }
+  },
+  {
+    "id": "customfield_10500",
+    "name": "Subcomponent",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10500]", "Subcomponent"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10500
+    }
+  },
+  {
+    "id": "customfield_10501",
+    "name": "issueFunction",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10501]", "issueFunction"],
+    "schema": {
+      "type": "any",
+      "custom": "com.onresolve.jira.groovy.groovyrunner:jqlFunctionsCustomFieldType",
+      "customId": 10501
+    }
+  },
+  {
+    "id": "customfield_12801",
+    "name": "Ticket Life SLA",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[12801]", "Ticket Life SLA"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 12801
+    }
+  },
+  {
+    "id": "customfield_10504",
+    "name": "Market (for sub-tasks)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10504]", "Market (for sub-tasks)"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10504
+    }
+  },
+  {
+    "id": "customfield_22600",
+    "name": "Resolution (Test)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[22600]", "Resolution (Test)"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 22600
+    }
+  },
+  {
+    "id": "customfield_18100",
+    "name": "New Cost Center (full)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18100]", "New Cost Center (full)"],
+    "schema": {
+      "type": "array",
+      "items": "string",
+      "custom": "com.valiantys.jira.plugins.SQLFeed:nfeed-standard-customfield-type",
+      "customId": 18100
+    }
+  },
+  {
+    "id": "lastViewed",
+    "name": "Last Viewed",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": ["lastViewed"],
+    "schema": { "type": "datetime", "system": "lastViewed" }
+  },
+  {
+    "id": "customfield_20300",
+    "name": "Queue",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20300]", "Queue"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 20300
+    }
+  },
+  {
+    "id": "customfield_11700",
+    "name": "Resolution (Support Incident)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[11700]", "Resolution (Support Incident)"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 11700
+    }
+  },
+  {
+    "id": "aggregatetimeoriginalestimate",
+    "name": "Σ Original Estimate",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": [],
+    "schema": { "type": "number", "system": "aggregatetimeoriginalestimate" }
+  },
+  {
+    "id": "issuelinks",
+    "name": "Linked Issues",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": { "type": "array", "items": "issuelinks", "system": "issuelinks" }
+  },
+  {
+    "id": "assignee",
+    "name": "Assignee",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["assignee"],
+    "schema": { "type": "user", "system": "assignee" }
+  },
+  {
+    "id": "customfield_12901",
+    "name": "For Management/QBR Reporting",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[12901]", "For Management/QBR Reporting"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 12901
+    }
+  },
+  {
+    "id": "customfield_10604",
+    "name": "Status Color",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10604]", "Status Color"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10604
+    }
+  },
+  {
+    "id": "customfield_10605",
+    "name": "Additional Information",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Additional Information", "cf[10605]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10605
+    }
+  },
+  {
+    "id": "customfield_10608",
+    "name": "Impact",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10608]", "Impact"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10608
+    }
+  },
+  {
+    "id": "customfield_10609",
+    "name": "Product Manager",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10609]", "Product Manager"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 10609
+    }
+  },
+  {
+    "id": "customfield_20400",
+    "name": "Application/Service",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Application/Service", "cf[20400]"],
+    "schema": {
+      "type": "array",
+      "items": "string",
+      "custom": "com.valiantys.jira.plugins.SQLFeed:nfeed-standard-customfield-type",
+      "customId": 20400
+    }
+  },
+  {
+    "id": "customfield_18200",
+    "name": "Amount",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Amount", "cf[18200]"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 18200
+    }
+  },
+  {
+    "id": "customfield_18201",
+    "name": "Ready for Review Date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18201]", "Ready for Review Date"],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 18201
+    }
+  },
+  {
+    "id": "subtasks",
+    "name": "Sub-Tasks",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": ["subtasks"],
+    "schema": { "type": "array", "items": "issuelinks", "system": "subtasks" }
+  },
+  {
+    "id": "customfield_19414",
+    "name": "SN Task Number",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19414]", "SN Task Number"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 19414
+    }
+  },
+  {
+    "id": "customfield_19415",
+    "name": "Service Now ID",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19415]", "Service Now ID"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 19415
+    }
+  },
+  {
+    "id": "customfield_11801",
+    "name": "New Manager",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[11801]", "New Manager"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 11801
+    }
+  },
+  {
+    "id": "customfield_11800",
+    "name": "People to Change",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[11800]", "People to Change"],
+    "schema": {
+      "type": "array",
+      "items": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiuserpicker",
+      "customId": 11800
+    }
+  },
+  {
+    "id": "customfield_11803",
+    "name": "Resolved By",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[11803]", "Resolved By"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 11803
+    }
+  },
+  {
+    "id": "customfield_11802",
+    "name": "New Cost Center",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[11802]", "New Cost Center"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 11802
+    }
+  },
+  {
+    "id": "customfield_11805",
+    "name": "Start Date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[11805]", "Start Date"],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 11805
+    }
+  },
+  {
+    "id": "votes",
+    "name": "Votes",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": ["votes"],
+    "schema": { "type": "votes", "system": "votes" }
+  },
+  {
+    "id": "worklog",
+    "name": "Log Work",
+    "custom": false,
+    "orderable": true,
+    "navigable": false,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": { "type": "array", "items": "worklog", "system": "worklog" }
+  },
+  {
+    "id": "customfield_11808",
+    "name": "Effective On",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[11808]", "Effective On"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 11808
+    }
+  },
+  {
+    "id": "customfield_21600",
+    "name": "Requestor",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21600]", "Requestor"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21600
+    }
+  },
+  {
+    "id": "issuetype",
+    "name": "Issue Type",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["issuetype", "type"],
+    "schema": { "type": "issuetype", "system": "issuetype" }
+  },
+  {
+    "id": "customfield_17102",
+    "name": "Security_Approval",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17102]", "Security_Approval"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 17102
+    }
+  },
+  {
+    "id": "customfield_17105",
+    "name": "Validation_Monitoring_Steps",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17105]", "Validation_Monitoring_Steps"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 17105
+    }
+  },
+  {
+    "id": "customfield_17104",
+    "name": "Back_Out_Steps",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Back_Out_Steps", "cf[17104]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 17104
+    }
+  },
+  {
+    "id": "customfield_17103",
+    "name": "DBA_Approval",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17103]", "DBA_Approval"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 17103
+    }
+  },
+  {
+    "id": "customfield_10700",
+    "name": "Website",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10700]", "Website"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10700
+    }
+  },
+  {
+    "id": "customfield_10701",
+    "name": "Issue Category",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10701]", "Issue Category"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10701
+    }
+  },
+  {
+    "id": "customfield_10702",
+    "name": "Impact Start",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10702]", "Impact Start"],
+    "schema": {
+      "type": "datetime",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datetime",
+      "customId": 10702
+    }
+  },
+  {
+    "id": "customfield_10704",
+    "name": "Business Area Impacted",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Business Area Impacted", "cf[10704]"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiselect",
+      "customId": 10704
+    }
+  },
+  {
+    "id": "customfield_20505",
+    "name": "Depreciation Cost Center",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20505]", "Depreciation Cost Center"],
+    "schema": {
+      "type": "array",
+      "items": "string",
+      "custom": "com.valiantys.jira.plugins.SQLFeed:nfeed-standard-customfield-type",
+      "customId": 20505
+    }
+  },
+  {
+    "id": "customfield_20503",
+    "name": "Decommission Date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20503]", "Decommission Date"],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 20503
+    }
+  },
+  {
+    "id": "customfield_20504",
+    "name": "Product",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20504]", "Product"],
+    "schema": {
+      "type": "array",
+      "items": "string",
+      "custom": "com.valiantys.jira.plugins.SQLFeed:nfeed-standard-customfield-type",
+      "customId": 20504
+    }
+  },
+  {
+    "id": "customfield_20501",
+    "name": "Internally Developed AND Walmart owns IP?",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20501]", "Internally Developed AND Walmart owns IP?"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 20501
+    }
+  },
+  {
+    "id": "customfield_22800",
+    "name": "External issue ID",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[22800]", "External issue ID"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 22800
+    }
+  },
+  {
+    "id": "customfield_20502",
+    "name": "Is it SaaS purchased from a vendor AND hosted externally?",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[20502]",
+      "Is it SaaS purchased from a vendor AND hosted externally?"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 20502
+    }
+  },
+  {
+    "id": "customfield_20500",
+    "name": "Does this contain new product development work?",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[20500]",
+      "Does this contain new product development work?"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 20500
+    }
+  },
+  {
+    "id": "customfield_18300",
+    "name": "DataCenter",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18300]", "DataCenter"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiselect",
+      "customId": 18300
+    }
+  },
+  {
+    "id": "customfield_18410",
+    "name": "Which Systems And Tools Will This Impact In The New Platform",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[18410]",
+      "Which Systems And Tools Will This Impact In The New Platform"
+    ],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 18410
+    }
+  },
+  {
+    "id": "customfield_19500",
+    "name": "Frequency",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19500]", "Frequency"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 19500
+    }
+  },
+  {
+    "id": "customfield_18411",
+    "name": "Product & Engineering Team",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18411]", "Product & Engineering Team"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 18411
+    }
+  },
+  {
+    "id": "customfield_17202",
+    "name": "Testing Status",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17202]", "Testing Status"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 17202
+    }
+  },
+  {
+    "id": "customfield_19501",
+    "name": "Format",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19501]", "Format"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 19501
+    }
+  },
+  {
+    "id": "customfield_18412",
+    "name": "Teams With Cross Functional Dependencies",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18412]", "Teams With Cross Functional Dependencies"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 18412
+    }
+  },
+  {
+    "id": "customfield_19502",
+    "name": "Data Consumption",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19502]", "Data Consumption"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 19502
+    }
+  },
+  {
+    "id": "customfield_18413",
+    "name": "Estimated Pangaea Release",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18413]", "Estimated Pangaea Release"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 18413
+    }
+  },
+  {
+    "id": "customfield_19503",
+    "name": "Pillar",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19503]", "Pillar"],
+    "schema": {
+      "type": "array",
+      "items": "string",
+      "custom": "com.valiantys.jira.plugins.SQLFeed:nfeed-standard-customfield-type",
+      "customId": 19503
+    }
+  },
+  {
+    "id": "timetracking",
+    "name": "Time Tracking",
+    "custom": false,
+    "orderable": true,
+    "navigable": false,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": { "type": "timetracking", "system": "timetracking" }
+  },
+  {
+    "id": "customfield_10800",
+    "name": "URL",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10800]", "URL"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:url",
+      "customId": 10800
+    }
+  },
+  {
+    "id": "customfield_18409",
+    "name": "The New Platform Will Support This",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18409]", "The New Platform Will Support This"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 18409
+    }
+  },
+  {
+    "id": "customfield_22900",
+    "name": "Validation SLA",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[22900]", "Validation SLA"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 22900
+    }
+  },
+  {
+    "id": "customfield_20600",
+    "name": "Will source code be made freely available (open source) that anyone publicly/external parties can access, inspect, share, redistribute, modify and enhance?",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [
+      "cf[20600]",
+      "Will source code be made freely available (open source) that anyone publicly/external parties can access, inspect, share, redistribute, modify and enhance?"
+    ],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 20600
+    }
+  },
+  {
+    "id": "customfield_20601",
+    "name": "Lifecycle Status",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20601]", "Lifecycle Status"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 20601
+    }
+  },
+  {
+    "id": "customfield_16101",
+    "name": "Is a continuous workstream?",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16101]", "Is a continuous workstream?"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 16101
+    }
+  },
+  {
+    "id": "customfield_16100",
+    "name": "GTO Goal",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16100]", "GTO Goal"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 16100
+    }
+  },
+  {
+    "id": "customfield_18405",
+    "name": "Markets",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18405]", "Markets"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiselect",
+      "customId": 18405
+    }
+  },
+  {
+    "id": "customfield_18406",
+    "name": "Channel",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18406]", "Channel"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 18406
+    }
+  },
+  {
+    "id": "customfield_16102",
+    "name": "Device",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16102]", "Device"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 16102
+    }
+  },
+  {
+    "id": "customfield_18408",
+    "name": "Strategic Tracks",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18408]", "Strategic Tracks"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 18408
+    }
+  },
+  {
+    "id": "customfield_18401",
+    "name": "Require",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18401]", "Require"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 18401
+    }
+  },
+  {
+    "id": "customfield_18403",
+    "name": "Can we currently do this",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Can we currently do this", "cf[18403]"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 18403
+    }
+  },
+  {
+    "id": "customfield_18404",
+    "name": "CVI",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18404]", "CVI"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 18404
+    }
+  },
+  {
+    "id": "environment",
+    "name": "Environment",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["environment"],
+    "schema": { "type": "string", "system": "environment" }
+  },
+  {
+    "id": "duedate",
+    "name": "Due Date",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["due", "duedate"],
+    "schema": { "type": "date", "system": "duedate" }
+  },
+  {
+    "id": "customfield_20716",
+    "name": "Revision",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20716]", "Revision"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 20716
+    }
+  },
+  {
+    "id": "customfield_20717",
+    "name": "Test Execution Status",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "any",
+      "custom": "com.xpandit.plugins.xray:test-execution-status-custom-field",
+      "customId": 20717
+    }
+  },
+  {
+    "id": "customfield_20714",
+    "name": "Begin Date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Begin Date", "cf[20714]"],
+    "schema": {
+      "type": "datetime",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datetime",
+      "customId": 20714
+    }
+  },
+  {
+    "id": "customfield_20715",
+    "name": "End Date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20715]", "End Date"],
+    "schema": {
+      "type": "datetime",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datetime",
+      "customId": 20715
+    }
+  },
+  {
+    "id": "customfield_20712",
+    "name": "Test Set Status",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "any",
+      "custom": "com.xpandit.plugins.xray:test-set-status-custom-field",
+      "customId": 20712
+    }
+  },
+  {
+    "id": "customfield_20713",
+    "name": "Tests association with a Test Execution",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "array",
+      "custom": "com.xpandit.plugins.xray:testexec-tests-custom-field",
+      "customId": 20713
+    }
+  },
+  {
+    "id": "customfield_20710",
+    "name": "Conditions",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20710]", "Conditions"],
+    "schema": {
+      "type": "string",
+      "custom": "com.xpandit.plugins.xray:precondition-editor-custom-field",
+      "customId": 20710
+    }
+  },
+  {
+    "id": "customfield_20711",
+    "name": "Tests association with a Test Set",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "array",
+      "custom": "com.xpandit.plugins.xray:test-sets-tests-custom-field",
+      "customId": 20711
+    }
+  },
+  {
+    "id": "customfield_21246",
+    "name": "First Reviewer",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21246]", "First Reviewer"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 21246
+    }
+  },
+  {
+    "id": "customfield_21245",
+    "name": "Backoff",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Backoff", "cf[21245]"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 21245
+    }
+  },
+  {
+    "id": "customfield_21244",
+    "name": "Deployment Finish Date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21244]", "Deployment Finish Date"],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 21244
+    }
+  },
+  {
+    "id": "customfield_21243",
+    "name": "Deployment Start Date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21243]", "Deployment Start Date"],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 21243
+    }
+  },
+  {
+    "id": "customfield_21000",
+    "name": "Asset Class",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Asset Class", "cf[21000]"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 21000
+    }
+  },
+  {
+    "id": "customfield_21242",
+    "name": "Validator(s)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21242]", "Validator(s)"],
+    "schema": {
+      "type": "array",
+      "items": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiuserpicker",
+      "customId": 21242
+    }
+  },
+  {
+    "id": "customfield_21241",
+    "name": "Functional Validation Plan details",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21241]", "Functional Validation Plan details"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 21241
+    }
+  },
+  {
+    "id": "customfield_21240",
+    "name": "QA Tester(s)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21240]", "QA Tester(s)"],
+    "schema": {
+      "type": "array",
+      "items": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiuserpicker",
+      "customId": 21240
+    }
+  },
+  {
+    "id": "customfield_10231",
+    "name": "Resolution (Epic)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10231]", "Resolution (Epic)"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10231
+    }
+  },
+  {
+    "id": "customfield_14704",
+    "name": "Committee Approvers",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14704]", "Committee Approvers"],
+    "schema": {
+      "type": "array",
+      "items": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiuserpicker",
+      "customId": 14704
+    }
+  },
+  {
+    "id": "customfield_14705",
+    "name": "Resolution (Approval Request)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14705]", "Resolution (Approval Request)"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 14705
+    }
+  },
+  {
+    "id": "customfield_14702",
+    "name": "Time to Complete Review",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14702]", "Time to Complete Review"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 14702
+    }
+  },
+  {
+    "id": "customfield_10228",
+    "name": "Resolution (Story)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10228]", "Resolution (Story)"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10228
+    }
+  },
+  {
+    "id": "customfield_14703",
+    "name": "Time to Complete Documentation",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14703]", "Time to Complete Documentation"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 14703
+    }
+  },
+  {
+    "id": "customfield_10229",
+    "name": "Resolution (Bug)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10229]", "Resolution (Bug)"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10229
+    }
+  },
+  {
+    "id": "customfield_14706",
+    "name": "Readiness Checklist",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14706]", "Readiness Checklist"],
+    "schema": {
+      "type": "array",
+      "items": "checklist-item",
+      "custom": "com.okapya.jira.checklist:checklist",
+      "customId": 14706
+    }
+  },
+  {
+    "id": "customfield_14707",
+    "name": "Release Type",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14707]", "Release Type"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 14707
+    }
+  },
+  {
+    "id": "customfield_21239",
+    "name": "DI Category",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21239]", "DI Category"],
+    "schema": {
+      "type": "option-with-child",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:cascadingselect",
+      "customId": 21239
+    }
+  },
+  {
+    "id": "customfield_21238",
+    "name": "Build ID",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Build ID", "cf[21238]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21238
+    }
+  },
+  {
+    "id": "customfield_21237",
+    "name": "Distribution Number",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21237]", "Distribution Number"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21237
+    }
+  },
+  {
+    "id": "customfield_21236",
+    "name": "File Signature",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21236]", "File Signature"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 21236
+    }
+  },
+  {
+    "id": "customfield_21235",
+    "name": "Build Server",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Build Server", "cf[21235]"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 21235
+    }
+  },
+  {
+    "id": "customfield_21234",
+    "name": "Build Successful",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Build Successful", "cf[21234]"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 21234
+    }
+  },
+  {
+    "id": "customfield_21233",
+    "name": "Package Response",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21233]", "Package Response"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21233
+    }
+  },
+  {
+    "id": "customfield_22200",
+    "name": "Approvers",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Approvers", "cf[22200]"],
+    "schema": {
+      "type": "array",
+      "items": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiuserpicker",
+      "customId": 22200
+    }
+  },
+  {
+    "id": "customfield_21232",
+    "name": "Package Location",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21232]", "Package Location"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21232
+    }
+  },
+  {
+    "id": "customfield_21231",
+    "name": "Package Name",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21231]", "Package Name"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21231
+    }
+  },
+  {
+    "id": "customfield_21230",
+    "name": "Pre Requisites",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21230]", "Pre Requisites"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 21230
+    }
+  },
+  {
+    "id": "customfield_12400",
+    "name": "Business Impact Area",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Business Impact Area", "cf[12400]"],
+    "schema": {
+      "type": "array",
+      "items": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:labels",
+      "customId": 12400
+    }
+  },
+  {
+    "id": "customfield_14700",
+    "name": "License Version",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14700]", "License Version"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 14700
+    }
+  },
+  {
+    "id": "customfield_10100",
+    "name": "Team Name",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10100]", "Team Name"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10100
+    }
+  },
+  {
+    "id": "customfield_14701",
+    "name": "Time to Initiate Review",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14701]", "Time to Initiate Review"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 14701
+    }
+  },
+  {
+    "id": "customfield_10222",
+    "name": "Verified By",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10222]", "Verified By"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 10222
+    }
+  },
+  {
+    "id": "customfield_10102",
+    "name": "Program Manager",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10102]", "Program Manager"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 10102
+    }
+  },
+  {
+    "id": "customfield_10214",
+    "name": "Test Case Type",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10214]", "Test Case Type"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10214
+    }
+  },
+  {
+    "id": "customfield_11303",
+    "name": "Type of Request",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[11303]", "Type of Request"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 11303
+    }
+  },
+  {
+    "id": "customfield_10215",
+    "name": "Steps",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10215]", "Steps"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10215
+    }
+  },
+  {
+    "id": "customfield_10216",
+    "name": "Severity",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10216]", "Severity"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10216
+    }
+  },
+  {
+    "id": "customfield_10217",
+    "name": "Sub-task Type",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10217]", "Sub-task Type"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10217
+    }
+  },
+  {
+    "id": "timeestimate",
+    "name": "Remaining Estimate",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": ["remainingEstimate", "timeestimate"],
+    "schema": { "type": "number", "system": "timeestimate" }
+  },
+  {
+    "id": "customfield_21229",
+    "name": "Activity Numbers",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Activity Numbers", "cf[21229]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 21229
+    }
+  },
+  {
+    "id": "customfield_21228",
+    "name": "Reboot",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21228]", "Reboot"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 21228
+    }
+  },
+  {
+    "id": "customfield_21227",
+    "name": "Backout Plan",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Backout Plan", "cf[21227]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 21227
+    }
+  },
+  {
+    "id": "customfield_21226",
+    "name": "Build Instructions",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Build Instructions", "cf[21226]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 21226
+    }
+  },
+  {
+    "id": "status",
+    "name": "Status",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["status"],
+    "schema": { "type": "status", "system": "status" }
+  },
+  {
+    "id": "customfield_21225",
+    "name": "Time Stamp",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21225]", "Time Stamp"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21225
+    }
+  },
+  {
+    "id": "customfield_21224",
+    "name": "Automation Testing Build",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Automation Testing Build", "cf[21224]"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 21224
+    }
+  },
+  {
+    "id": "customfield_21223",
+    "name": "Distribution Confirmation",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21223]", "Distribution Confirmation"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 21223
+    }
+  },
+  {
+    "id": "customfield_21222",
+    "name": "Resolution Description",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21222]", "Resolution Description"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 21222
+    }
+  },
+  {
+    "id": "customfield_21221",
+    "name": "Completed Date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21221]", "Completed Date"],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 21221
+    }
+  },
+  {
+    "id": "customfield_21220",
+    "name": "Applied Count",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Applied Count", "cf[21220]"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 21220
+    }
+  },
+  {
+    "id": "customfield_10211",
+    "name": "Story Type",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10211]", "Story Type"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10211
+    }
+  },
+  {
+    "id": "customfield_10212",
+    "name": "Found in",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10212]", "Found in"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 10212
+    }
+  },
+  {
+    "id": "customfield_14801",
+    "name": "Exception Details",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14801]", "Exception Details"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 14801
+    }
+  },
+  {
+    "id": "aggregatetimeestimate",
+    "name": "Σ Remaining Estimate",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": [],
+    "schema": { "type": "number", "system": "aggregatetimeestimate" }
+  },
+  {
+    "id": "customfield_21219",
+    "name": "Sent Count",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21219]", "Sent Count"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 21219
+    }
+  },
+  {
+    "id": "customfield_21218",
+    "name": "Country",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21218]", "Country"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiselect",
+      "customId": 21218
+    }
+  },
+  {
+    "id": "customfield_21217",
+    "name": "Site List",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21217]", "Site List"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 21217
+    }
+  },
+  {
+    "id": "customfield_21216",
+    "name": "Requested Number",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21216]", "Requested Number"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 21216
+    }
+  },
+  {
+    "id": "customfield_21215",
+    "name": "Implementation Instructions",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21215]", "Implementation Instructions"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 21215
+    }
+  },
+  {
+    "id": "customfield_21214",
+    "name": "CRQ",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21214]", "CRQ"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21214
+    }
+  },
+  {
+    "id": "customfield_21213",
+    "name": "Target Install Environment",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21213]", "Target Install Environment"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 21213
+    }
+  },
+  {
+    "id": "customfield_22301",
+    "name": "External issue ID",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[22301]", "External issue ID"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 22301
+    }
+  },
+  {
+    "id": "customfield_21212",
+    "name": "Project ID",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21212]", "Project ID"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21212
+    }
+  },
+  {
+    "id": "creator",
+    "name": "Creator",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["creator"],
+    "schema": { "type": "user", "system": "creator" }
+  },
+  {
+    "id": "customfield_21211",
+    "name": "File Path",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21211]", "File Path"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21211
+    }
+  },
+  {
+    "id": "customfield_20000",
+    "name": "Solution",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20000]", "Solution"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 20000
+    }
+  },
+  {
+    "id": "customfield_20001",
+    "name": "Budget Required",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Budget Required", "cf[20001]"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 20001
+    }
+  },
+  {
+    "id": "customfield_21210",
+    "name": "Install TimeFrame",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21210]", "Install TimeFrame"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21210
+    }
+  },
+  {
+    "id": "customfield_19010",
+    "name": "Risks",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19010]", "Risks"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 19010
+    }
+  },
+  {
+    "id": "customfield_19011",
+    "name": "Problem Statement",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19011]", "Problem Statement"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 19011
+    }
+  },
+  {
+    "id": "customfield_14800",
+    "name": "Business (multiple)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Business (multiple)", "cf[14800]"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiselect",
+      "customId": 14800
+    }
+  },
+  {
+    "id": "customfield_12500",
+    "name": "sd.origin.customfield.default.name",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[12500]", "sd.origin.customfield.default.name"],
+    "schema": {
+      "type": "sd-customerrequesttype",
+      "custom": "com.atlassian.servicedesk:vp-origin",
+      "customId": 12500
+    }
+  },
+  {
+    "id": "customfield_21209",
+    "name": "Send Date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21209]", "Send Date"],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 21209
+    }
+  },
+  {
+    "id": "customfield_21208",
+    "name": "Store Type",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21208]", "Store Type"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 21208
+    }
+  },
+  {
+    "id": "customfield_21207",
+    "name": "Sequence Number",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21207]", "Sequence Number"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21207
+    }
+  },
+  {
+    "id": "customfield_21206",
+    "name": "Release Category",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21206]", "Release Category"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 21206
+    }
+  },
+  {
+    "id": "customfield_21205",
+    "name": "Notification Group",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21205]", "Notification Group"],
+    "schema": {
+      "type": "array",
+      "items": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiuserpicker",
+      "customId": 21205
+    }
+  },
+  {
+    "id": "customfield_20117",
+    "name": "Stage",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20117]", "Stage"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 20117
+    }
+  },
+  {
+    "id": "customfield_21204",
+    "name": "Verification Assignee",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21204]", "Verification Assignee"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 21204
+    }
+  },
+  {
+    "id": "customfield_20115",
+    "name": "Exec slide",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20115]", "Exec slide"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 20115
+    }
+  },
+  {
+    "id": "customfield_21203",
+    "name": "Test Plan",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21203]", "Test Plan"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 21203
+    }
+  },
+  {
+    "id": "customfield_21202",
+    "name": "HPALM ID",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21202]", "HPALM ID"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21202
+    }
+  },
+  {
+    "id": "customfield_19002",
+    "name": "Membership Income",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19002]", "Membership Income"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 19002
+    }
+  },
+  {
+    "id": "customfield_20112",
+    "name": "Timeline",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20112]", "Timeline"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 20112
+    }
+  },
+  {
+    "id": "customfield_21201",
+    "name": "Close Resolution",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21201]", "Close Resolution"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 21201
+    }
+  },
+  {
+    "id": "customfield_20113",
+    "name": "Context",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20113]", "Context"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 20113
+    }
+  },
+  {
+    "id": "customfield_21200",
+    "name": "Blocked Reason",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Blocked Reason", "cf[21200]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 21200
+    }
+  },
+  {
+    "id": "customfield_20110",
+    "name": "Goal",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20110]", "Goal"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 20110
+    }
+  },
+  {
+    "id": "customfield_20111",
+    "name": "Project Status date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20111]", "Project Status date"],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 20111
+    }
+  },
+  {
+    "id": "customfield_19005",
+    "name": "Tech Investment Est",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19005]", "Tech Investment Est"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 19005
+    }
+  },
+  {
+    "id": "timespent",
+    "name": "Time Spent",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": ["timespent"],
+    "schema": { "type": "number", "system": "timespent" }
+  },
+  {
+    "id": "customfield_19000",
+    "name": "Sales (GMV)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19000]", "Sales (GMV)"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 19000
+    }
+  },
+  {
+    "id": "customfield_19001",
+    "name": "Operating Income (GEC View)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19001]", "Operating Income (GEC View)"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 19001
+    }
+  },
+  {
+    "id": "aggregatetimespent",
+    "name": "Σ Time Spent",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": [],
+    "schema": { "type": "number", "system": "aggregatetimespent" }
+  },
+  {
+    "id": "customfield_19008",
+    "name": "Net Present Value",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19008]", "Net Present Value"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 19008
+    }
+  },
+  {
+    "id": "customfield_13700",
+    "name": "Reviewed By",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[13700]", "Reviewed By"],
+    "schema": {
+      "type": "array",
+      "items": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiuserpicker",
+      "customId": 13700
+    }
+  },
+  {
+    "id": "customfield_19009",
+    "name": "Explanation of Business Impact",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19009]", "Explanation of Business Impact"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 19009
+    }
+  },
+  {
+    "id": "customfield_10302",
+    "name": "Acceptance Criteria",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Acceptance Criteria", "cf[10302]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 10302
+    }
+  },
+  {
+    "id": "customfield_14902",
+    "name": "Implementation SLA",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14902]", "Implementation SLA"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 14902
+    }
+  },
+  {
+    "id": "customfield_14900",
+    "name": "PL Readiness Checklist",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14900]", "PL Readiness Checklist"],
+    "schema": {
+      "type": "array",
+      "items": "checklist-item",
+      "custom": "com.okapya.jira.checklist:checklist",
+      "customId": 14900
+    }
+  },
+  {
+    "id": "customfield_14901",
+    "name": "Review SLA",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14901]", "Review SLA"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 14901
+    }
+  },
+  {
+    "id": "customfield_20109",
+    "name": "Sub_Initiative",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20109]", "Sub_Initiative"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 20109
+    }
+  },
+  {
+    "id": "workratio",
+    "name": "Work Ratio",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["workratio"],
+    "schema": { "type": "number", "system": "workratio" }
+  },
+  {
+    "id": "customfield_20107",
+    "name": "ETOOLS Instance",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20107]", "ETOOLS Instance"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiselect",
+      "customId": 20107
+    }
+  },
+  {
+    "id": "customfield_20108",
+    "name": "Strategic Initiative",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20108]", "Strategic Initiative"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 20108
+    }
+  },
+  {
+    "id": "customfield_20105",
+    "name": "Release Date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20105]", "Release Date"],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 20105
+    }
+  },
+  {
+    "id": "customfield_20104",
+    "name": "Release Name",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20104]", "Release Name"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 20104
+    }
+  },
+  {
+    "id": "customfield_22400",
+    "name": "Approved By",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Approved By", "cf[22400]"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 22400
+    }
+  },
+  {
+    "id": "customfield_19115",
+    "name": "Engineering LOE",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19115]", "Engineering LOE"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 19115
+    }
+  },
+  {
+    "id": "customfield_19110",
+    "name": "UX LOE",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19110]", "UX LOE"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 19110
+    }
+  },
+  {
+    "id": "customfield_19111",
+    "name": "Product LOE",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19111]", "Product LOE"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 19111
+    }
+  },
+  {
+    "id": "customfield_12600",
+    "name": "Resolution Time",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[12600]", "Resolution Time"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 12600
+    }
+  },
+  {
+    "id": "customfield_10301",
+    "name": "Blocked?",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Blocked?", "cf[10301]"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons",
+      "customId": 10301
+    }
+  },
+  {
+    "id": "customfield_21304",
+    "name": "UX Approver",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21304]", "UX Approver"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 21304
+    }
+  },
+  {
+    "id": "customfield_21303",
+    "name": "Measurement Approver",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21303]", "Measurement Approver"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 21303
+    }
+  },
+  {
+    "id": "customfield_21302",
+    "name": "Legal Approver",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21302]", "Legal Approver"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 21302
+    }
+  },
+  {
+    "id": "customfield_19101",
+    "name": "Resolution (Design)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19101]", "Resolution (Design)"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 19101
+    }
+  },
+  {
+    "id": "customfield_21301",
+    "name": "Site Speed Approver",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21301]", "Site Speed Approver"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 21301
+    }
+  },
+  {
+    "id": "customfield_21300",
+    "name": "ADA Approver",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["ADA Approver", "cf[21300]"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 21300
+    }
+  },
+  {
+    "id": "customfield_19102",
+    "name": "UX Contact",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19102]", "UX Contact"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 19102
+    }
+  },
+  {
+    "id": "customfield_19103",
+    "name": "Marketing Contact",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19103]", "Marketing Contact"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 19103
+    }
+  },
+  {
+    "id": "customfield_19100",
+    "name": "Request Date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19100]", "Request Date"],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 19100
+    }
+  },
+  {
+    "id": "customfield_19105",
+    "name": "Analytics Contact",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Analytics Contact", "cf[19105]"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 19105
+    }
+  },
+  {
+    "id": "customfield_19106",
+    "name": "Finance Contact",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19106]", "Finance Contact"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 19106
+    }
+  },
+  {
+    "id": "customfield_19107",
+    "name": "Platforms",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19107]", "Platforms"],
+    "schema": {
+      "type": "array",
+      "items": "checklist-item",
+      "custom": "com.okapya.jira.checklist:checklist",
+      "customId": 19107
+    }
+  },
+  {
+    "id": "customfield_12700",
+    "name": "Response SLA",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[12700]", "Response SLA"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 12700
+    }
+  },
+  {
+    "id": "customfield_20204",
+    "name": "Tech Rank",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20204]", "Tech Rank"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 20204
+    }
+  },
+  {
+    "id": "customfield_20205",
+    "name": "UX resourcing",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20205]", "UX resourcing"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 20205
+    }
+  },
+  {
+    "id": "customfield_20202",
+    "name": "Dig Rank",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20202]", "Dig Rank"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 20202
+    }
+  },
+  {
+    "id": "customfield_20203",
+    "name": "Memb Rank",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20203]", "Memb Rank"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 20203
+    }
+  },
+  {
+    "id": "customfield_22501",
+    "name": "Why",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[22501]", "Why"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 22501
+    }
+  },
+  {
+    "id": "customfield_22500",
+    "name": "Additional Impact",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Additional Impact", "cf[22500]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 22500
+    }
+  },
+  {
+    "id": "customfield_20200",
+    "name": "Merch Rank",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20200]", "Merch Rank"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 20200
+    }
+  },
+  {
+    "id": "customfield_18002",
+    "name": "CRQ Number",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18002]", "CRQ Number"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 18002
+    }
+  },
+  {
+    "id": "customfield_20201",
+    "name": "Ops Rank",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20201]", "Ops Rank"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 20201
+    }
+  },
+  {
+    "id": "customfield_10400",
+    "name": "Planned \"Done\" Date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10400]", "Planned \"Done\" Date"],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 10400
+    }
+  },
+  {
+    "id": "customfield_13900",
+    "name": "WIP  to Done SLA",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[13900]", "WIP  to Done SLA"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 13900
+    }
+  },
+  {
+    "id": "customfield_11600",
+    "name": "Submitting Business Group",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[11600]", "Submitting Business Group"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 11600
+    }
+  },
+  {
+    "id": "customfield_11607",
+    "name": "Resolution (Support Ticket)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[11607]", "Resolution (Support Ticket)"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 11607
+    }
+  },
+  {
+    "id": "customfield_21402",
+    "name": "Atlassian Project/ Space/ Repository ",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Atlassian Project/ Space/ Repository ", "cf[21402]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21402
+    }
+  },
+  {
+    "id": "customfield_21401",
+    "name": "JIRA Project",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21401]", "JIRA Project"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21401
+    }
+  },
+  {
+    "id": "customfield_17703",
+    "name": "Success Metrics",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17703]", "Success Metrics"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 17703
+    }
+  },
+  {
+    "id": "customfield_17702",
+    "name": "Customer Objective",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17702]", "Customer Objective"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 17702
+    }
+  },
+  {
+    "id": "customfield_18900",
+    "name": "Strategic_Tracks",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18900]", "Strategic_Tracks"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiselect",
+      "customId": 18900
+    }
+  },
+  {
+    "id": "customfield_16600",
+    "name": "Team DL Email Address",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16600]", "Team DL Email Address"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 16600
+    }
+  },
+  {
+    "id": "customfield_14300",
+    "name": "Tester",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14300]", "Tester"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 14300
+    }
+  },
+  {
+    "id": "customfield_14301",
+    "name": "Reviewer",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14301]", "Reviewer"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 14301
+    }
+  },
+  {
+    "id": "labels",
+    "name": "Labels",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["labels"],
+    "schema": { "type": "array", "items": "string", "system": "labels" }
+  },
+  {
+    "id": "customfield_14303",
+    "name": "Score",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14303]", "Score"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 14303
+    }
+  },
+  {
+    "id": "components",
+    "name": "Component/s",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["component"],
+    "schema": { "type": "array", "items": "component", "system": "components" }
+  },
+  {
+    "id": "customfield_23000",
+    "name": "External issue ID",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[23000]", "External issue ID"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 23000
+    }
+  },
+  {
+    "id": "customfield_14410",
+    "name": "IP Address",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14410]", "IP Address"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 14410
+    }
+  },
+  {
+    "id": "customfield_15500",
+    "name": "DNS Record Classification",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[15500]", "DNS Record Classification"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 15500
+    }
+  },
+  {
+    "id": "customfield_14411",
+    "name": "OneOps Assembly Link",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14411]", "OneOps Assembly Link"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:url",
+      "customId": 14411
+    }
+  },
+  {
+    "id": "customfield_13200",
+    "name": "Response time SLA",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[13200]", "Response time SLA"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 13200
+    }
+  },
+  {
+    "id": "customfield_13203",
+    "name": "What is Required?",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[13203]", "What is Required?"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 13203
+    }
+  },
+  {
+    "id": "customfield_17800",
+    "name": "ROI",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17800]", "ROI"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 17800
+    }
+  },
+  {
+    "id": "customfield_12107",
+    "name": "Target KPI",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[12107]", "Target KPI"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 12107
+    }
+  },
+  {
+    "id": "customfield_14407",
+    "name": "Using the Couchbase API directly?",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14407]", "Using the Couchbase API directly?"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 14407
+    }
+  },
+  {
+    "id": "customfield_14408",
+    "name": "Cache client API",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Cache client API", "cf[14408]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 14408
+    }
+  },
+  {
+    "id": "customfield_12106",
+    "name": "Engineering Contact",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[12106]", "Engineering Contact"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 12106
+    }
+  },
+  {
+    "id": "customfield_14405",
+    "name": "Couchbase Server Version",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14405]", "Couchbase Server Version"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 14405
+    }
+  },
+  {
+    "id": "customfield_14406",
+    "name": "Cache Client Version",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Cache Client Version", "cf[14406]"],
+    "schema": {
+      "type": "version",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:version",
+      "customId": 14406
+    }
+  },
+  {
+    "id": "customfield_12108",
+    "name": "Target Quarter",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[12108]", "Target Quarter"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 12108
+    }
+  },
+  {
+    "id": "customfield_14409",
+    "name": "GitHub Link",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14409]", "GitHub Link"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:url",
+      "customId": 14409
+    }
+  },
+  {
+    "id": "reporter",
+    "name": "Reporter",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["reporter"],
+    "schema": { "type": "user", "system": "reporter" }
+  },
+  {
+    "id": "customfield_12101",
+    "name": "Product Teams",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[12101]", "Product Teams"],
+    "schema": {
+      "type": "array",
+      "items": "string",
+      "custom": "com.valiantys.jira.plugins.SQLFeed:nfeed-standard-customfield-type",
+      "customId": 12101
+    }
+  },
+  {
+    "id": "customfield_12103",
+    "name": "Initiative",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[12103]", "Initiative"],
+    "schema": {
+      "type": "array",
+      "items": "string",
+      "custom": "com.valiantys.jira.plugins.SQLFeed:nfeed-standard-customfield-type",
+      "customId": 12103
+    }
+  },
+  {
+    "id": "customfield_14403",
+    "name": "Tools Team Resolution Time",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14403]", "Tools Team Resolution Time"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 14403
+    }
+  },
+  {
+    "id": "customfield_16701",
+    "name": "Aha! Reference",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Aha! Reference", "cf[16701]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:url",
+      "customId": 16701
+    }
+  },
+  {
+    "id": "customfield_16700",
+    "name": "Display on Executive Roadmap",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16700]", "Display on Executive Roadmap"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 16700
+    }
+  },
+  {
+    "id": "customfield_14402",
+    "name": "Tools Team Response Time",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14402]", "Tools Team Response Time"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 14402
+    }
+  },
+  {
+    "id": "progress",
+    "name": "Progress",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": ["progress"],
+    "schema": { "type": "progress", "system": "progress" }
+  },
+  {
+    "id": "project",
+    "name": "Project",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["project"],
+    "schema": { "type": "project", "system": "project" }
+  },
+  {
+    "id": "customfield_11001",
+    "name": "Browser",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Browser", "cf[11001]"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 11001
+    }
+  },
+  {
+    "id": "customfield_17902",
+    "name": "Item Count",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17902]", "Item Count"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 17902
+    }
+  },
+  {
+    "id": "customfield_11003",
+    "name": "Activity Type",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Activity Type", "cf[11003]"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 11003
+    }
+  },
+  {
+    "id": "customfield_17901",
+    "name": "Development Type",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17901]", "Development Type"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 17901
+    }
+  },
+  {
+    "id": "customfield_17900",
+    "name": "Agent",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Agent", "cf[17900]"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 17900
+    }
+  },
+  {
+    "id": "customfield_15600",
+    "name": "Initiative Year",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[15600]", "Initiative Year"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiselect",
+      "customId": 15600
+    }
+  },
+  {
+    "id": "customfield_15601",
+    "name": "Release Captain",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[15601]", "Release Captain"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 15601
+    }
+  },
+  {
+    "id": "resolutiondate",
+    "name": "Resolved",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["resolutiondate", "resolved"],
+    "schema": { "type": "datetime", "system": "resolutiondate" }
+  },
+  {
+    "id": "watches",
+    "name": "Watchers",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": ["watchers"],
+    "schema": { "type": "watches", "system": "watches" }
+  },
+  {
+    "id": "customfield_22003",
+    "name": "Satisfaction date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[22003]", "Satisfaction date"],
+    "schema": {
+      "type": "datetime",
+      "custom": "com.atlassian.servicedesk:sd-request-feedback-date",
+      "customId": 22003
+    }
+  },
+  {
+    "id": "customfield_22002",
+    "name": "Satisfaction",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[22002]", "Satisfaction"],
+    "schema": {
+      "type": "any",
+      "custom": "com.atlassian.servicedesk:sd-request-feedback",
+      "customId": 22002
+    }
+  },
+  {
+    "id": "customfield_22001",
+    "name": "Organizations",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "array",
+      "items": "sd-customerorganization",
+      "custom": "com.atlassian.servicedesk:sd-customer-organizations",
+      "customId": 22001
+    }
+  },
+  {
+    "id": "customfield_22000",
+    "name": "Approvals",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Approvals", "cf[22000]"],
+    "schema": {
+      "type": "sd-approvals",
+      "custom": "com.atlassian.servicedesk.approvals-plugin:sd-approvals",
+      "customId": 22000
+    }
+  },
+  {
+    "id": "customfield_21274",
+    "name": "Sub-Status",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21274]", "Sub-Status"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 21274
+    }
+  },
+  {
+    "id": "customfield_21273",
+    "name": "JIRA Workflow",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21273]", "JIRA Workflow"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 21273
+    }
+  },
+  {
+    "id": "customfield_21272",
+    "name": "Tools for the project",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21272]", "Tools for the project"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 21272
+    }
+  },
+  {
+    "id": "customfield_21271",
+    "name": "Project Admins",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21271]", "Project Admins"],
+    "schema": {
+      "type": "array",
+      "items": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiuserpicker",
+      "customId": 21271
+    }
+  },
+  {
+    "id": "customfield_21270",
+    "name": "Software Product",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21270]", "Software Product"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21270
+    }
+  },
+  {
+    "id": "customfield_12202",
+    "name": "Actions from Lookahead Planning",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Actions from Lookahead Planning", "cf[12202]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 12202
+    }
+  },
+  {
+    "id": "customfield_14502",
+    "name": "Expiration Date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14502]", "Expiration Date"],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 14502
+    }
+  },
+  {
+    "id": "customfield_12201",
+    "name": "Dependent Teams",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[12201]", "Dependent Teams"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 12201
+    }
+  },
+  {
+    "id": "customfield_14500",
+    "name": "Justification",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14500]", "Justification"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 14500
+    }
+  },
+  {
+    "id": "customfield_16800",
+    "name": "Requestor Teams",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16800]", "Requestor Teams"],
+    "schema": {
+      "type": "array",
+      "items": "string",
+      "custom": "com.valiantys.jira.plugins.SQLFeed:nfeed-standard-customfield-type",
+      "customId": 16800
+    }
+  },
+  {
+    "id": "customfield_14501",
+    "name": "SRCR Number",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14501]", "SRCR Number"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 14501
+    }
+  },
+  {
+    "id": "customfield_14617",
+    "name": "Executive Approvers",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14617]", "Executive Approvers"],
+    "schema": {
+      "type": "array",
+      "items": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiuserpicker",
+      "customId": 14617
+    }
+  },
+  {
+    "id": "customfield_14614",
+    "name": "Business",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Business", "cf[14614]"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 14614
+    }
+  },
+  {
+    "id": "customfield_14615",
+    "name": "Customer Goals",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14615]", "Customer Goals"],
+    "schema": {
+      "type": "array",
+      "items": "string",
+      "custom": "com.valiantys.jira.plugins.SQLFeed:nfeed-standard-customfield-type",
+      "customId": 14615
+    }
+  },
+  {
+    "id": "updated",
+    "name": "Updated",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["updated", "updatedDate"],
+    "schema": { "type": "datetime", "system": "updated" }
+  },
+  {
+    "id": "customfield_21269",
+    "name": "Software Domain",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21269]", "Software Domain"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 21269
+    }
+  },
+  {
+    "id": "customfield_21268",
+    "name": "Returned Reason",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21268]", "Returned Reason"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 21268
+    }
+  },
+  {
+    "id": "customfield_21267",
+    "name": "Business Owner",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Business Owner", "cf[21267]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21267
+    }
+  },
+  {
+    "id": "customfield_21266",
+    "name": "Infrastructure Strategy",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21266]", "Infrastructure Strategy"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiselect",
+      "customId": 21266
+    }
+  },
+  {
+    "id": "customfield_21263",
+    "name": "Root Cause",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21263]", "Root Cause"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 21263
+    }
+  },
+  {
+    "id": "timeoriginalestimate",
+    "name": "Original Estimate",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": ["originalEstimate", "timeoriginalestimate"],
+    "schema": { "type": "number", "system": "timeoriginalestimate" }
+  },
+  {
+    "id": "customfield_21261",
+    "name": "Detection Source",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21261]", "Detection Source"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 21261
+    }
+  },
+  {
+    "id": "customfield_21260",
+    "name": "Infra Website",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21260]", "Infra Website"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 21260
+    }
+  },
+  {
+    "id": "description",
+    "name": "Description",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["description"],
+    "schema": { "type": "string", "system": "description" }
+  },
+  {
+    "id": "customfield_10010",
+    "name": "Epic Colour",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10010]", "Epic Colour"],
+    "schema": {
+      "type": "string",
+      "custom": "com.pyxis.greenhopper.jira:gh-epic-color",
+      "customId": 10010
+    }
+  },
+  {
+    "id": "customfield_10011",
+    "name": "Release Version History",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10011]", "Release Version History"],
+    "schema": {
+      "type": "version",
+      "custom": "com.pyxis.greenhopper.jira:greenhopper-releasedmultiversionhistory",
+      "customId": 10011
+    }
+  },
+  {
+    "id": "customfield_14612",
+    "name": "Status Remarks",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14612]", "Status Remarks"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 14612
+    }
+  },
+  {
+    "id": "customfield_13403",
+    "name": "Response Time",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[13403]", "Response Time"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 13403
+    }
+  },
+  {
+    "id": "customfield_14611",
+    "name": "Business KPIs",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Business KPIs", "cf[14611]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 14611
+    }
+  },
+  {
+    "id": "customfield_15700",
+    "name": "Sub-Initiative",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[15700]", "Sub-Initiative"],
+    "schema": {
+      "type": "array",
+      "items": "string",
+      "custom": "com.valiantys.jira.plugins.SQLFeed:nfeed-standard-customfield-type",
+      "customId": 15700
+    }
+  },
+  {
+    "id": "customfield_10005",
+    "name": "Sprint",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10005]", "Sprint"],
+    "schema": {
+      "type": "array",
+      "items": "string",
+      "custom": "com.pyxis.greenhopper.jira:gh-sprint",
+      "customId": 10005
+    }
+  },
+  {
+    "id": "customfield_10007",
+    "name": "Epic Link",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10007]", "Epic Link"],
+    "schema": {
+      "type": "any",
+      "custom": "com.pyxis.greenhopper.jira:gh-epic-link",
+      "customId": 10007
+    }
+  },
+  {
+    "id": "customfield_14604",
+    "name": "Business Partner",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Business Partner", "cf[14604]"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 14604
+    }
+  },
+  {
+    "id": "customfield_10008",
+    "name": "Epic Name",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10008]", "Epic Name"],
+    "schema": {
+      "type": "string",
+      "custom": "com.pyxis.greenhopper.jira:gh-epic-label",
+      "customId": 10008
+    }
+  },
+  {
+    "id": "customfield_14609",
+    "name": "Customer KPIs",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14609]", "Customer KPIs"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 14609
+    }
+  },
+  {
+    "id": "customfield_10009",
+    "name": "Epic Status",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10009]", "Epic Status"],
+    "schema": {
+      "type": "option",
+      "custom": "com.pyxis.greenhopper.jira:gh-epic-status",
+      "customId": 10009
+    }
+  },
+  {
+    "id": "customfield_21259",
+    "name": "Clarity Project ID",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21259]", "Clarity Project ID"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21259
+    }
+  },
+  {
+    "id": "customfield_21258",
+    "name": "Review Accepted By",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21258]", "Review Accepted By"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 21258
+    }
+  },
+  {
+    "id": "summary",
+    "name": "Summary",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["summary"],
+    "schema": { "type": "string", "system": "summary" }
+  },
+  {
+    "id": "customfield_21257",
+    "name": "Information Source",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21257]", "Information Source"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21257
+    }
+  },
+  {
+    "id": "customfield_21256",
+    "name": "Information Description",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21256]", "Information Description"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 21256
+    }
+  },
+  {
+    "id": "customfield_21255",
+    "name": "Reveiwer",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21255]", "Reveiwer"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 21255
+    }
+  },
+  {
+    "id": "customfield_21254",
+    "name": "Blocking Team(s)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Blocking Team(s)", "cf[21254]"],
+    "schema": {
+      "type": "array",
+      "items": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:labels",
+      "customId": 21254
+    }
+  },
+  {
+    "id": "customfield_22100",
+    "name": "Development",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[22100]", "Development"],
+    "schema": {
+      "type": "any",
+      "custom": "com.atlassian.jira.plugins.jira-development-integration-plugin:devsummary",
+      "customId": 22100
+    }
+  },
+  {
+    "id": "customfield_21253",
+    "name": "Reviewer(s)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21253]", "Reviewer(s)"],
+    "schema": {
+      "type": "array",
+      "items": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiuserpicker",
+      "customId": 21253
+    }
+  },
+  {
+    "id": "customfield_21252",
+    "name": "Collision Path",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21252]", "Collision Path"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 21252
+    }
+  },
+  {
+    "id": "customfield_21251",
+    "name": "DI Release Environment",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21251]", "DI Release Environment"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 21251
+    }
+  },
+  {
+    "id": "customfield_21250",
+    "name": "Technical Lead",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21250]", "Technical Lead"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 21250
+    }
+  },
+  {
+    "id": "customfield_10000",
+    "name": "Flagged",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10000]", "Flagged"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 10000
+    }
+  },
+  {
+    "id": "customfield_10001",
+    "name": "Epic/Theme",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10001]", "Epic/Theme"],
+    "schema": {
+      "type": "array",
+      "items": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:labels",
+      "customId": 10001
+    }
+  },
+  {
+    "id": "customfield_14601",
+    "name": "Regression Tests Added?",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14601]", "Regression Tests Added?"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 14601
+    }
+  },
+  {
+    "id": "customfield_12301",
+    "name": "Time to resolution",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[12301]", "Time to resolution"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 12301
+    }
+  },
+  {
+    "id": "customfield_12300",
+    "name": "Customer Request Type",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[12300]", "Customer Request Type"],
+    "schema": {
+      "type": "sd-customerrequesttype",
+      "custom": "com.atlassian.servicedesk:vp-origin",
+      "customId": 12300
+    }
+  },
+  {
+    "id": "customfield_16900",
+    "name": "Initiative Prioritization",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16900]", "Initiative Prioritization"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 16900
+    }
+  },
+  {
+    "id": "customfield_10002",
+    "name": "Story Points",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10002]", "Story Points"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 10002
+    }
+  },
+  {
+    "id": "customfield_14602",
+    "name": "Unit Tests Added?",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14602]", "Unit Tests Added?"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 14602
+    }
+  },
+  {
+    "id": "customfield_10003",
+    "name": "Business Value",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Business Value", "cf[10003]"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 10003
+    }
+  },
+  {
+    "id": "customfield_12303",
+    "name": "Time waiting for support",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[12303]", "Time waiting for support"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 12303
+    }
+  },
+  {
+    "id": "customfield_14600",
+    "name": "Performance Tests Added?",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[14600]", "Performance Tests Added?"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 14600
+    }
+  },
+  {
+    "id": "customfield_10004",
+    "name": "Rank (Obsolete)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10004]", "Rank (Obsolete)"],
+    "schema": {
+      "type": "any",
+      "custom": "com.pyxis.greenhopper.jira:gh-global-rank",
+      "customId": 10004
+    }
+  },
+  {
+    "id": "customfield_12302",
+    "name": "Time to first response",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[12302]", "Time to first response"],
+    "schema": {
+      "type": "sd-servicelevelagreement",
+      "custom": "com.atlassian.servicedesk:sd-sla-field",
+      "customId": 12302
+    }
+  },
+  {
+    "id": "comment",
+    "name": "Comment",
+    "custom": false,
+    "orderable": true,
+    "navigable": false,
+    "searchable": true,
+    "clauseNames": ["comment"],
+    "schema": { "type": "comments-page", "system": "comment" }
+  },
+  {
+    "id": "customfield_21249",
+    "name": "Editing Notice",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21249]", "Editing Notice"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes",
+      "customId": 21249
+    }
+  },
+  {
+    "id": "customfield_21248",
+    "name": "Senior Reviewer",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21248]", "Senior Reviewer"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 21248
+    }
+  },
+  {
+    "id": "customfield_21247",
+    "name": "Second Reviewer",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21247]", "Second Reviewer"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 21247
+    }
+  },
+  {
+    "id": "customfield_17300",
+    "name": "End Date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17300]", "End Date"],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 17300
+    }
+  },
+  {
+    "id": "customfield_17304",
+    "name": "Build Type",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Build Type", "cf[17304]"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 17304
+    }
+  },
+  {
+    "id": "customfield_17303",
+    "name": "Creative Asset",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17303]", "Creative Asset"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 17303
+    }
+  },
+  {
+    "id": "customfield_17302",
+    "name": "Placement",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17302]", "Placement"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 17302
+    }
+  },
+  {
+    "id": "fixVersions",
+    "name": "Fix Version/s",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["fixVersion"],
+    "schema": { "type": "array", "items": "version", "system": "fixVersions" }
+  },
+  {
+    "id": "customfield_17301",
+    "name": "Story or Program Name",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17301]", "Story or Program Name"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 17301
+    }
+  },
+  {
+    "id": "customfield_19600",
+    "name": "Go To Market Date",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19600]", "Go To Market Date"],
+    "schema": {
+      "type": "date",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datepicker",
+      "customId": 19600
+    }
+  },
+  {
+    "id": "customfield_17308",
+    "name": "Language Affected",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17308]", "Language Affected"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiselect",
+      "customId": 17308
+    }
+  },
+  {
+    "id": "customfield_17307",
+    "name": "Browsers",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Browsers", "cf[17307]"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiselect",
+      "customId": 17307
+    }
+  },
+  {
+    "id": "customfield_17306",
+    "name": "Device Platform",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17306]", "Device Platform"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiselect",
+      "customId": 17306
+    }
+  },
+  {
+    "id": "customfield_17305",
+    "name": "Destination URL",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17305]", "Destination URL"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 17305
+    }
+  },
+  {
+    "id": "customfield_20709",
+    "name": "Pre-Condition Type",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20709]", "Pre-Condition Type"],
+    "schema": {
+      "type": "option",
+      "custom": "com.xpandit.plugins.xray:precondition-test-type-custom-field",
+      "customId": 20709
+    }
+  },
+  {
+    "id": "customfield_10900",
+    "name": "Business Value",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Business Value", "cf[10900]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 10900
+    }
+  },
+  {
+    "id": "customfield_20707",
+    "name": "Pre-Conditions association with a Test",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "array",
+      "custom": "com.xpandit.plugins.xray:test-precondition-custom-field",
+      "customId": 20707
+    }
+  },
+  {
+    "id": "customfield_20708",
+    "name": "TestRunStatus",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20708]", "TestRunStatus"],
+    "schema": {
+      "type": "any",
+      "custom": "com.xpandit.plugins.xray:test-run-status-custom-field",
+      "customId": 20708
+    }
+  },
+  {
+    "id": "customfield_20705",
+    "name": "Manual Test Steps (Export)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20705]", "Manual Test Steps (Export)"],
+    "schema": {
+      "type": "string",
+      "custom": "com.xpandit.plugins.xray:manual-test-steps-export-custom-field",
+      "customId": 20705
+    }
+  },
+  {
+    "id": "customfield_20706",
+    "name": "Test Sets association with a Test",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "array",
+      "custom": "com.xpandit.plugins.xray:test-sets-custom-field",
+      "customId": 20706
+    }
+  },
+  {
+    "id": "customfield_20703",
+    "name": "Generic Test Definition",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20703]", "Generic Test Definition"],
+    "schema": {
+      "type": "string",
+      "custom": "com.xpandit.plugins.xray:path-editor-custom-field",
+      "customId": 20703
+    }
+  },
+  {
+    "id": "customfield_10905",
+    "name": "Impact End",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[10905]", "Impact End"],
+    "schema": {
+      "type": "datetime",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datetime",
+      "customId": 10905
+    }
+  },
+  {
+    "id": "customfield_20704",
+    "name": "Manual Test Steps",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "any",
+      "custom": "com.xpandit.plugins.xray:manual-test-steps-custom-field",
+      "customId": 20704
+    }
+  },
+  {
+    "id": "customfield_20701",
+    "name": "Cucumber Test Type",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20701]", "Cucumber Test Type"],
+    "schema": {
+      "type": "option",
+      "custom": "com.xpandit.plugins.xray:automated-test-type-custom-field",
+      "customId": 20701
+    }
+  },
+  {
+    "id": "customfield_20702",
+    "name": "Cucumber Scenario",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20702]", "Cucumber Scenario"],
+    "schema": {
+      "type": "string",
+      "custom": "com.xpandit.plugins.xray:steps-editor-custom-field",
+      "customId": 20702
+    }
+  },
+  {
+    "id": "customfield_21911",
+    "name": "Test Plan Root Folders Custom Field",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "any",
+      "custom": "com.xpandit.plugins.xray:test-plan-root-folders-custom-field",
+      "customId": 21911
+    }
+  },
+  {
+    "id": "customfield_21910",
+    "name": "Test Plan Status",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "any",
+      "custom": "com.xpandit.plugins.xray:test-plan-status-custom-field",
+      "customId": 21910
+    }
+  },
+  {
+    "id": "customfield_20700",
+    "name": "Test Type",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20700]", "Test Type"],
+    "schema": {
+      "type": "option",
+      "custom": "com.xpandit.plugins.xray:test-type-custom-field",
+      "customId": 20700
+    }
+  },
+  {
+    "id": "customfield_16200",
+    "name": "Delivery/Execution Status Color",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16200]", "Delivery/Execution Status Color"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 16200
+    }
+  },
+  {
+    "id": "customfield_18504",
+    "name": "Document Name",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18504]", "Document Name"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 18504
+    }
+  },
+  {
+    "id": "customfield_18505",
+    "name": "Acknowledged",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Acknowledged", "cf[18505]"],
+    "schema": {
+      "type": "datetime",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datetime",
+      "customId": 18505
+    }
+  },
+  {
+    "id": "customfield_18506",
+    "name": "Engaged",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18506]", "Engaged"],
+    "schema": {
+      "type": "datetime",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:datetime",
+      "customId": 18506
+    }
+  },
+  {
+    "id": "customfield_16201",
+    "name": "Delivery/Execution Status Remarks",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16201]", "Delivery/Execution Status Remarks"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 16201
+    }
+  },
+  {
+    "id": "priority",
+    "name": "Priority",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["priority"],
+    "schema": { "type": "priority", "system": "priority" }
+  },
+  {
+    "id": "customfield_18500",
+    "name": "Benefit",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Benefit", "cf[18500]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 18500
+    }
+  },
+  {
+    "id": "customfield_18501",
+    "name": "Systems Impacted",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18501]", "Systems Impacted"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiselect",
+      "customId": 18501
+    }
+  },
+  {
+    "id": "customfield_18502",
+    "name": "RePlatforming Tracks",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18502]", "RePlatforming Tracks"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiselect",
+      "customId": 18502
+    }
+  },
+  {
+    "id": "customfield_18503",
+    "name": "What is the Strategic Question_single",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18503]", "What is the Strategic Question_single"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 18503
+    }
+  },
+  {
+    "id": "customfield_21909",
+    "name": "Test Plan",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21909]", "Test Plan"],
+    "schema": {
+      "type": "array",
+      "custom": "com.xpandit.plugins.xray:test-plan-custom-field",
+      "customId": 21909
+    }
+  },
+  {
+    "id": "customfield_21908",
+    "name": "Tests associated with a Test Plan",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "array",
+      "custom": "com.xpandit.plugins.xray:tests-associated-with-test-plan-custom-field",
+      "customId": 21908
+    }
+  },
+  {
+    "id": "customfield_21907",
+    "name": "Test Environments",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21907]", "Test Environments"],
+    "schema": {
+      "type": "array",
+      "items": "string",
+      "custom": "com.xpandit.plugins.xray:test-environments-custom-field",
+      "customId": 21907
+    }
+  },
+  {
+    "id": "versions",
+    "name": "Affects Version/s",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["affectedVersion"],
+    "schema": { "type": "array", "items": "version", "system": "versions" }
+  },
+  {
+    "id": "customfield_21906",
+    "name": "Tests association with a Pre-Condition",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "array",
+      "custom": "com.xpandit.plugins.xray:precondition-test-custom-field",
+      "customId": 21906
+    }
+  },
+  {
+    "id": "customfield_21905",
+    "name": "Requirement Status",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21905]", "Requirement Status"],
+    "schema": {
+      "type": "any",
+      "custom": "com.xpandit.plugins.xray:requirement-group-test-status-custom-field",
+      "customId": 21905
+    }
+  },
+  {
+    "id": "customfield_21904",
+    "name": "Test Execution Defects",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21904]", "Test Execution Defects"],
+    "schema": {
+      "type": "any",
+      "custom": "com.xpandit.plugins.xray:test-execution-defects-custom-field",
+      "customId": 21904
+    }
+  },
+  {
+    "id": "customfield_21903",
+    "name": "Test Count",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21903]", "Test Count"],
+    "schema": {
+      "type": "number",
+      "custom": "com.xpandit.plugins.xray:issue-link-count-custom-field",
+      "customId": 21903
+    }
+  },
+  {
+    "id": "customfield_21902",
+    "name": "Test Repository Path",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "any",
+      "custom": "com.xpandit.plugins.xray:test-repository-path-custom-field",
+      "customId": 21902
+    }
+  },
+  {
+    "id": "customfield_21901",
+    "name": "Test Plans associated with a Test",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": [],
+    "schema": {
+      "type": "array",
+      "custom": "com.xpandit.plugins.xray:test-plans-associated-with-test-custom-field",
+      "customId": 21901
+    }
+  },
+  {
+    "id": "customfield_21900",
+    "name": "Steps Count",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[21900]", "Steps Count"],
+    "schema": {
+      "type": "number",
+      "custom": "com.xpandit.plugins.xray:manual-test-steps-count-count-custom-field",
+      "customId": 21900
+    }
+  },
+  {
+    "id": "issuekey",
+    "name": "Key",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": ["id", "issue", "issuekey", "key"]
+  },
+  {
+    "id": "customfield_16310",
+    "name": "P&L_Line_Owner",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16310]", "P&L_Line_Owner"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 16310
+    }
+  },
+  {
+    "id": "customfield_15100",
+    "name": "Pillar (Old)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[15100]", "Pillar (Old)"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 15100
+    }
+  },
+  {
+    "id": "customfield_16313",
+    "name": "ControllershipApprovalStatus",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16313]", "ControllershipApprovalStatus"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 16313
+    }
+  },
+  {
+    "id": "customfield_17402",
+    "name": "Time Spent",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17402]", "Time Spent"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 17402
+    }
+  },
+  {
+    "id": "customfield_16312",
+    "name": "Controllership",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16312]", "Controllership"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 16312
+    }
+  },
+  {
+    "id": "customfield_15101",
+    "name": "Dependencies",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[15101]", "Dependencies"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 15101
+    }
+  },
+  {
+    "id": "customfield_17401",
+    "name": "Resolution (General)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17401]", "Resolution (General)"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 17401
+    }
+  },
+  {
+    "id": "customfield_16311",
+    "name": "P&L_Line_OwnerApprovalStatus",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16311]", "P&L_Line_OwnerApprovalStatus"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 16311
+    }
+  },
+  {
+    "id": "customfield_19700",
+    "name": "Business Contact",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Business Contact", "cf[19700]"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 19700
+    }
+  },
+  {
+    "id": "customfield_16309",
+    "name": "BI_Champion",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["BI_Champion", "cf[16309]"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 16309
+    }
+  },
+  {
+    "id": "customfield_16308",
+    "name": "Initiative for Story",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16308]", "Initiative for Story"],
+    "schema": {
+      "type": "array",
+      "items": "string",
+      "custom": "com.valiantys.jira.plugins.SQLFeed:nfeed-standard-customfield-type",
+      "customId": 16308
+    }
+  },
+  {
+    "id": "customfield_20800",
+    "name": "Automation Status",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Automation Status", "cf[20800]"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 20800
+    }
+  },
+  {
+    "id": "customfield_16302",
+    "name": "BusinessOwnerApprover",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["BusinessOwnerApprover", "cf[16302]"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 16302
+    }
+  },
+  {
+    "id": "customfield_16301",
+    "name": "ManagerApprovalStatus",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16301]", "ManagerApprovalStatus"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 16301
+    }
+  },
+  {
+    "id": "aggregateprogress",
+    "name": "Σ Progress",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": [],
+    "schema": { "type": "progress", "system": "aggregateprogress" }
+  },
+  {
+    "id": "customfield_16300",
+    "name": "ManagerApprover",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16300]", "ManagerApprover"],
+    "schema": {
+      "type": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:userpicker",
+      "customId": 16300
+    }
+  },
+  {
+    "id": "customfield_16307",
+    "name": "BI_Champion_Approval_Status",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["BI_Champion_Approval_Status", "cf[16307]"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 16307
+    }
+  },
+  {
+    "id": "customfield_16306",
+    "name": "Item Type",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16306]", "Item Type"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 16306
+    }
+  },
+  {
+    "id": "customfield_18600",
+    "name": "Placement Info Needed",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18600]", "Placement Info Needed"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 18600
+    }
+  },
+  {
+    "id": "customfield_16305",
+    "name": "CubeName",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16305]", "CubeName"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 16305
+    }
+  },
+  {
+    "id": "customfield_16304",
+    "name": "Source",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16304]", "Source"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 16304
+    }
+  },
+  {
+    "id": "customfield_15202",
+    "name": "Decommission",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[15202]", "Decommission"],
+    "schema": {
+      "type": "array",
+      "items": "checklist-item",
+      "custom": "com.okapya.jira.checklist:checklist",
+      "customId": 15202
+    }
+  },
+  {
+    "id": "customfield_17501",
+    "name": "Estimated Effort",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17501]", "Estimated Effort"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 17501
+    }
+  },
+  {
+    "id": "customfield_17500",
+    "name": "Group Requested From",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17500]", "Group Requested From"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 17500
+    }
+  },
+  {
+    "id": "customfield_15200",
+    "name": "Operational KPIs",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[15200]", "Operational KPIs"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 15200
+    }
+  },
+  {
+    "id": "customfield_19800",
+    "name": "Proposed Business Initiative",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19800]", "Proposed Business Initiative"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 19800
+    }
+  },
+  {
+    "id": "customfield_19801",
+    "name": "NIST Framework Category",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19801]", "NIST Framework Category"],
+    "schema": {
+      "type": "array",
+      "items": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiselect",
+      "customId": 19801
+    }
+  },
+  {
+    "id": "customfield_20900",
+    "name": "Participants",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[20900]", "Participants"],
+    "schema": {
+      "type": "array",
+      "items": "user",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:multiuserpicker",
+      "customId": 20900
+    }
+  },
+  {
+    "id": "thumbnail",
+    "name": "Images",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": false,
+    "clauseNames": []
+  },
+  {
+    "id": "created",
+    "name": "Created",
+    "custom": false,
+    "orderable": false,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["created", "createdDate"],
+    "schema": { "type": "datetime", "system": "created" }
+  },
+  {
+    "id": "customfield_14100",
+    "name": "Business Impact",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Business Impact", "cf[14100]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 14100
+    }
+  },
+  {
+    "id": "customfield_16400",
+    "name": "Daily Revenue Impact",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16400]", "Daily Revenue Impact"],
+    "schema": {
+      "type": "number",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:float",
+      "customId": 16400
+    }
+  },
+  {
+    "id": "customfield_18700",
+    "name": "Team",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18700]", "Team"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 18700
+    }
+  },
+  {
+    "id": "customfield_15301",
+    "name": "Rank",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[15301]", "Rank"],
+    "schema": {
+      "type": "any",
+      "custom": "com.pyxis.greenhopper.jira:gh-lexo-rank",
+      "customId": 15301
+    }
+  },
+  {
+    "id": "customfield_19901",
+    "name": "Resolution Steps",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19901]", "Resolution Steps"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 19901
+    }
+  },
+  {
+    "id": "customfield_15300",
+    "name": "Request participants",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[15300]", "Request participants"],
+    "schema": {
+      "type": "array",
+      "items": "user",
+      "custom": "com.atlassian.servicedesk:sd-request-participants",
+      "customId": 15300
+    }
+  },
+  {
+    "id": "customfield_17602",
+    "name": "Resolution (Task)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17602]", "Resolution (Task)"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 17602
+    }
+  },
+  {
+    "id": "customfield_19900",
+    "name": "Root Cause Analysis",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[19900]", "Root Cause Analysis"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 19900
+    }
+  },
+  {
+    "id": "security",
+    "name": "Security Level",
+    "custom": false,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["level"],
+    "schema": { "type": "securitylevel", "system": "security" }
+  },
+  {
+    "id": "attachment",
+    "name": "Attachment",
+    "custom": false,
+    "orderable": true,
+    "navigable": false,
+    "searchable": true,
+    "clauseNames": ["attachments"],
+    "schema": { "type": "array", "items": "attachment", "system": "attachment" }
+  },
+  {
+    "id": "customfield_16501",
+    "name": "Estimated Analytics Effort",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16501]", "Estimated Analytics Effort"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 16501
+    }
+  },
+  {
+    "id": "customfield_16500",
+    "name": "Hypothesis",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16500]", "Hypothesis"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 16500
+    }
+  },
+  {
+    "id": "customfield_16504",
+    "name": "Analytics Group Requested From",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Analytics Group Requested From", "cf[16504]"],
+    "schema": {
+      "type": "option",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:select",
+      "customId": 16504
+    }
+  },
+  {
+    "id": "customfield_16503",
+    "name": "Business Action That Will Be Taken",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["Business Action That Will Be Taken", "cf[16503]"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 16503
+    }
+  },
+  {
+    "id": "customfield_16502",
+    "name": "Other Requirements",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[16502]", "Other Requirements"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textfield",
+      "customId": 16502
+    }
+  },
+  {
+    "id": "customfield_18800",
+    "name": "What is the Strategic Question",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[18800]", "What is the Strategic Question"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 18800
+    }
+  },
+  {
+    "id": "customfield_17705",
+    "name": "Milestones (for Epics)",
+    "custom": true,
+    "orderable": true,
+    "navigable": true,
+    "searchable": true,
+    "clauseNames": ["cf[17705]", "Milestones (for Epics)"],
+    "schema": {
+      "type": "string",
+      "custom": "com.atlassian.jira.plugin.system.customfieldtypes:textarea",
+      "customId": 17705
+    }
+  }
+]
