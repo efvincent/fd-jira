@@ -1,34 +1,13 @@
 use rusqlite::{Connection, params, NO_PARAMS};
-use crate::credentials::*;
+use crate::jira_api::*;
 
-pub fn write_issues(jira_url:&str) -> Result<(), rusqlite::Error> {
-    // get the issues
-    let creds = get_creds().unwrap();
-    let conn = Connection::open("./fd-jira.db").unwrap();
-    let mut cur_start:usize = 0;
-    let mut count:usize = 0;
-    
-    loop {
-        let issues = crate::jira_api::get_changed_issues(&creds, jira_url, cur_start);
-        let cur_count = issues.issues.len();
-        for issue in issues.issues {
-            conn.execute(
-                " insert into issue (id, [key], last_updated) values (?1, ?2, ?3)
-                on conflict(id) do nothing", 
-                params![issue.id, issue.key, 100]).unwrap();
-        }
-        count = count + cur_count;
-        println!("processed {} out of {}", count, issues.total);
-        if count < issues.total {
-            cur_start = count;
-            println!("continuing with startAt = {}", cur_start)
-        } else {
-            println!("processing complete with count {} of {}", count, issues.total);
-            break;
-        }
+pub fn write_issues(conn:&Connection, issues:&Vec<IssueSearchResult>) -> Result<(), rusqlite::Error> {    
+    for issue in issues {
+        conn.execute(
+            " insert into issue (id, [key], last_updated) values (?1, ?2, ?3)
+            on conflict(id) do nothing", 
+            params![issue.id, issue.key, 100]).unwrap();
     }
-
-    conn.close().unwrap();
     Ok(())
 }
 
