@@ -21,7 +21,7 @@ fn main() {
     let opt = Opt::from_args();
     jira_sqlite::init_database().unwrap();
     if opt.sync {
-        jira_sqlite::write_issues().unwrap();
+        jira_sqlite::write_issues(JIRA_URL).unwrap();
     }
     let creds = get_creds().unwrap();
     jira_api::get_issue_snapshot(&creds, JIRA_URL, "RCTFD-4472");
