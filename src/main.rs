@@ -1,9 +1,9 @@
 #![allow(non_snake_case)] // b/c serialized message types from Jira use camelCase
 #![allow(dead_code)]
-mod jira_types;
 mod credentials;
 mod jira_api;
 mod jira_sqlite;
+mod jira_types;
 
 use credentials::*;
 use structopt::StructOpt;
@@ -14,14 +14,14 @@ static JIRA_URL: &str = "https://jira.walmart.com/rest/api/2";
 #[structopt(name = "fd-jira")]
 struct Opt {
     /// Synchronize issues with changes that occured since last sync
-    sync:bool
+    sync: bool,
 }
 
 fn sync_issues() {
     // get the first (and possibly only) batch of issues
     let conn = rusqlite::Connection::open("./fd-jira.db").unwrap();
-    let mut cur_start:usize = 0;
-    let mut count:usize = 0;
+    let mut cur_start: usize = 0;
+    let mut count: usize = 0;
     let creds = get_creds().unwrap();
     loop {
         let query = crate::jira_api::get_changed_issues(&creds, JIRA_URL, cur_start);
