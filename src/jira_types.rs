@@ -123,7 +123,7 @@ impl Issue {
     pub fn from_value(raw: &str) -> Issue {
         let val: Value = serde_json::from_str(raw).unwrap();
         let fields = &val["fields"];
-        let issue = Issue {
+        Issue {
             key: vstr(&val["key"]),
             id: vi64(&val["id"]),
             summary: vstr(&fields["summary"]),
@@ -136,7 +136,6 @@ impl Issue {
             created: Utc::now(),
             assignee: Person::from_value_opt(&fields["assignee"]),
             updated: Utc::now(),
-        };
-        issue
+        }
     }
 }
