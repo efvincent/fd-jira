@@ -3,7 +3,7 @@ use rusqlite::{params, Connection, NO_PARAMS};
 
 pub fn write_issues(
     conn: &Connection,
-    issues: &Vec<IssueSearchResult>,
+    issues: &[IssueSearchResult],
 ) -> Result<(), rusqlite::Error> {
     for issue in issues {
         conn.execute(

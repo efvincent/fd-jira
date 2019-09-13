@@ -1,4 +1,4 @@
-use crate::credentials::*;
+use crate::credentials::Creds;
 use crate::jira_types;
 use chrono::prelude::*;
 use curl::easy::{Auth, Easy2, Handler, WriteError};
@@ -107,7 +107,7 @@ pub fn get_changed_issues_do(
             },
         };
         sr.startAt = startAt;
-        return sr;
+        sr
     };
     curl_call_do(creds, &url, f)
 }
@@ -133,7 +133,7 @@ pub fn get_changed_issues(creds: &Creds, base_url: &str, startAt: usize) -> Issu
             },
         };
         sr.startAt = startAt;
-        return sr;
+        sr
     };
     curl_call_do(creds, &url, f)
 }
