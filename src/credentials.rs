@@ -6,10 +6,11 @@ pub struct Creds {
     pub pw: String,
 }
 
+const ENV_KEY: &'static str = "JIRA_CREDS";
+
 /// Returns Jira credentials retrieved from an environment variable
 pub fn get_creds() -> Result<Creds, String> {
-    let key: &'static str = "JIRA_CREDS";
-    match std::env::var_os(key) {
+    match std::env::var_os(ENV_KEY) {
         Some(val) => {
             match val.as_os_str().to_str() {
                 Some(val) => {
@@ -17,7 +18,7 @@ pub fn get_creds() -> Result<Creds, String> {
                     if unpw.len() != 2 {
                         Err(format!(
                             "Environment key {} should have the format 'un:pw'",
-                            key
+                            ENV_KEY
                         ))
                     } else {
                         // Note the rsplit function returns the parts in reverse order
@@ -29,10 +30,10 @@ pub fn get_creds() -> Result<Creds, String> {
                 }
                 None => Err(format!(
                     "Environment key {} has invalid credentials value. Use the format 'un:pw'",
-                    key
+                    ENV_KEY
                 )),
             }
         }
-        None => Err(format!("Environment key {} not found", key)),
+        None => Err(format!("Environment key {} not found", ENV_KEY)),
     }
 }
