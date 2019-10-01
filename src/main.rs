@@ -7,10 +7,10 @@ mod jira_types;
 
 use credentials::*;
 use structopt::StructOpt;
-use crossterm::{
-    execute, input, style, AsyncReader, Clear, ClearType, Color, Crossterm, Goto, InputEvent,
-    KeyEvent, PrintStyledFont, RawScreen, Result, Show,
-};
+// use crossterm::{
+//     execute, input, style, AsyncReader, Clear, ClearType, Color, Crossterm, Goto, InputEvent,
+//     KeyEvent, PrintStyledFont, RawScreen, Result, Show,
+// };
 
 static JIRA_URL: &str = "https://jira.walmart.com/rest/api/2";
 
@@ -41,9 +41,9 @@ fn sync_issues() {
 }
 
 fn main() -> Result<()> {
-    let crossterm = Crossterm::new();
-    let _raw = RawScreen::into_raw_mode();
-    crossterm.cursor().hide()?;
+    // let crossterm = Crossterm::new();
+    // let _raw = RawScreen::into_raw_mode();
+    // crossterm.cursor().hide()?;
 
     let opt = Opt::from_args();
     jira_sqlite::init_database().unwrap();

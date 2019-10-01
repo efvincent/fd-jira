@@ -145,7 +145,7 @@ pub fn get_issue_snapshot(creds: &Creds, base_url: &str, issue: &str) {
     // return issue
     let f = |raw: &str| {
         let issue = jira_types::Issue::from_value(&raw);
-        println!("issue: {:?}", issue);
+        println!("issue: {:#?}", issue);
     };
     curl_call_do(creds, &url, f);
 }
