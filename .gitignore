@@ -1,4 +1,5 @@
-/target
+rust/target
 **/*.rs.bk
-fd-jira.db
-settings.json
+rust/fd-jira.db
+rust/settings.json
+.ionide/
