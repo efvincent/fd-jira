@@ -1,5 +1,3 @@
-rust/target
-**/*.rs.bk
-rust/fd-jira.db
-rust/settings.json
+.DS_Store
+settings.json
 .ionide/
