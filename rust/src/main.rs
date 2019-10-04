@@ -40,7 +40,7 @@ fn sync_issues() {
     }
 }
 
-fn main() -> Result<()> {
+fn main() {
     // let crossterm = Crossterm::new();
     // let _raw = RawScreen::into_raw_mode();
     // crossterm.cursor().hide()?;
@@ -52,6 +52,6 @@ fn main() -> Result<()> {
     }
     let creds = get_creds().unwrap();
     jira_api::get_issue_snapshot(&creds, JIRA_URL, "RCTFD-4472");
-    
-    Ok(())
+
 }
+ 
