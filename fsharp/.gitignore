@@ -8,6 +8,9 @@
 *.sln.docstates
 **/launchSettings.json
 .ionide
+paket-files/
+.paket/.store/
+mydata.db
 
 # JetBrains Rider
 .idea/
