@@ -1,8 +1,7 @@
-﻿// Learn more about F# at http://fsharp.org
-
-open System
+﻿open System
 open System.IO
 open LiteDB
+open System.Text.Json
 
 type Stock (ticker, price) = 
   member val Id = 0 with get,set
@@ -12,8 +11,7 @@ type Stock (ticker, price) =
   override this.ToString () =
     sprintf "[%i] %s @ %f : %s" this.Id this.Ticker this.Price this.Comment
 
-
-[<EntryPoint>]
+[<EntryPoint>]    
 let main argv =
 
   let creds = 
