@@ -1,11 +1,7 @@
 ﻿open System
-open System.IO
 open LiteDB
 open System.Text.Json
-open System.Net.Http
 
-// use one HttpClient for all calls
-let httpClient = new HttpClient()
 
 [<Literal>]
 let BASE_URL = "https://jira.walmart.com/rest/api/2"
@@ -18,38 +14,6 @@ type Stock (ticker, price) =
   override this.ToString () =
     sprintf "[%i] %s @ %f : %s" this.Id this.Ticker this.Price this.Comment
 
-let makeJiraCall (creds:string) url =
-  async {
-    printfn "creds: %s" creds
-    let req = new HttpRequestMessage()
-    req.Method <- HttpMethod.Get
-    req.RequestUri <- Uri url  
-    req.Headers.Authorization <-
-      let bytes = System.Text.UTF8Encoding.UTF8.GetBytes creds
-      let encodedCreds = System.Convert.ToBase64String bytes
-      Headers.AuthenticationHeaderValue("Basic", encodedCreds)
-    let! rsp = httpClient.SendAsync req |> Async.AwaitTask
-    if rsp.IsSuccessStatusCode then 
-      let! content = rsp.Content.ReadAsStreamAsync() |> Async.AwaitTask
-      return! JsonDocument.ParseAsync(content) |> Async.AwaitTask
-    else 
-      printfn "response code: %A" rsp.StatusCode
-      return JsonDocument.Parse("null")
-  }
-
-let makeQuery project (updatedSince:DateTimeOffset) =
-  let dt = updatedSince.ToString("yyyy-MM-dd HH:mm")
-  let query = sprintf "project=%s AND updatedDate >= \"%s\"" project dt
-  Uri.EscapeDataString query
-  
-let getChangedIssues creds baseUrl startAt =
-  async {
-    let query = makeQuery "RCTFD" DateTimeOffset.MinValue
-    let url = sprintf "%s/search?jql=%s&expand=name&maxResults=100&fields=updated&startAt=%i"
-                baseUrl query startAt
-    printfn "url: %s\n" url
-    return! makeJiraCall creds url
-  }
 
 let doDbStuff () =
   use db = new LiteDatabase("mydata.db")
@@ -67,6 +31,31 @@ let doDbStuff () =
   let results = stocks.Find(fun x -> x.Comment.StartsWith("This"))
   printfn "%A" results
 
+let getUpdatedItems creds =
+  async {
+    match JiraApi.getChangedIssues creds BASE_URL 0 |> Async.RunSynchronously with
+    | Ok jd ->
+      let rs =
+        let opts = JsonSerializerOptions()
+        opts.WriteIndented <- true 
+        JsonSerializer.Serialize(jd.RootElement, opts)
+      printfn "\nresult:\n%s" rs
+    | Error e ->
+      printfn "Error: %s" e
+  }
+
+let getIssue creds issue =
+  async {
+    match! JiraApi.getIssue creds BASE_URL issue with
+    | Ok jd ->
+      let rs = 
+        let opts = JsonSerializerOptions()
+        opts.WriteIndented <- true
+        JsonSerializer.Serialize(jd.RootElement, opts)
+      printfn "\nIssue:\n%s\n" rs 
+    | Error e ->
+      printfn "Error: %s" e
+  }
 
 [<EntryPoint>]    
 let main argv =
@@ -76,12 +65,7 @@ let main argv =
     | Some s -> s
     | None -> ""
 
-  let result = getChangedIssues creds BASE_URL 0 |> Async.RunSynchronously
-  printfn "result:\n%s" (result.ToString())
-  
-  let rs =
-    let opts = JsonSerializerOptions()
-    opts.WriteIndented <- true 
-    JsonSerializer.Serialize(result, opts)
-  printfn "\nresult:\n%s" rs
+  // getUpdatedItems creds |> Async.RunSynchronously
+  getIssue creds "RCTFD-4574" |> Async.RunSynchronously
+
   0
