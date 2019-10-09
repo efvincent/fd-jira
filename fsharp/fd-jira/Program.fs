@@ -20,18 +20,21 @@ type Stock (ticker, price) =
 
 let makeJiraCall (creds:string) url =
   async {
+    printfn "creds: %s" creds
     let req = new HttpRequestMessage()
     req.Method <- HttpMethod.Get
-    req.RequestUri <- new Uri(url)  
+    req.RequestUri <- Uri url  
     req.Headers.Authorization <-
       let bytes = System.Text.UTF8Encoding.UTF8.GetBytes creds
       let encodedCreds = System.Convert.ToBase64String bytes
-      new Headers.AuthenticationHeaderValue("Basic", encodedCreds)
+      Headers.AuthenticationHeaderValue("Basic", encodedCreds)
     let! rsp = httpClient.SendAsync req |> Async.AwaitTask
     if rsp.IsSuccessStatusCode then 
-      return! rsp.Content.ReadAsStringAsync() |> Async.AwaitTask
+      let! content = rsp.Content.ReadAsStreamAsync() |> Async.AwaitTask
+      return! JsonDocument.ParseAsync(content) |> Async.AwaitTask
     else 
-      return ""
+      printfn "response code: %A" rsp.StatusCode
+      return JsonDocument.Parse("null")
   }
 
 let makeQuery project (updatedSince:DateTimeOffset) =
@@ -44,6 +47,7 @@ let getChangedIssues creds baseUrl startAt =
     let query = makeQuery "RCTFD" DateTimeOffset.MinValue
     let url = sprintf "%s/search?jql=%s&expand=name&maxResults=100&fields=updated&startAt=%i"
                 baseUrl query startAt
+    printfn "url: %s\n" url
     return! makeJiraCall creds url
   }
 
@@ -73,6 +77,11 @@ let main argv =
     | None -> ""
 
   let result = getChangedIssues creds BASE_URL 0 |> Async.RunSynchronously
-  printfn "result:\n%s" result
+  printfn "result:\n%s" (result.ToString())
   
+  let rs =
+    let opts = JsonSerializerOptions()
+    opts.WriteIndented <- true 
+    JsonSerializer.Serialize(result, opts)
+  printfn "\nresult:\n%s" rs
   0
