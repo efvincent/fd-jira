@@ -51,10 +51,14 @@ open System
         }
 
         type TestIssue = {
-            key: string
-            id: string
-            summary: string
+            description: string option
+            link       : string
+            points     : float option
         }
         with
             override this.ToString() =
-                sprintf "id: %s; key: %s\nsummary: %s" this.id this.key this.summary
+                sprintf "(%s) %s\nsummary: %s\ndescription: %s\nlink: %s\npoints: %f" 
+                        this.id this.key this.summary 
+                        (this.description |> Option.defaultValue "[none]")
+                        this.link
+                        (this.points |> Option.defaultValue 0.)
