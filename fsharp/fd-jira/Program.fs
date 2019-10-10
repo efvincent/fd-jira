@@ -78,7 +78,7 @@ let getIssue creds issue =
 
 [<EntryPoint>]    
 let main argv =
-
+  printfn "FD-Jira. Experiments in Jira API driven utility.\nCopyright 2019-2020 Eric F. Vincent\n"
   let creds = 
     match Environment.GetEnvironmentVariable("JIRA_CREDS") |> Option.ofObj with
     | Some s -> s
