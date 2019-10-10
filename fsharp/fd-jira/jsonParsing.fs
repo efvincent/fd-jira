@@ -39,12 +39,24 @@ open System.Text.Json
     | jvk -> 
       raise <| JsonParseExn(_typeErr jvk "String Option" je)
 
+  let getFloatOpt (je:JsonElement) =
+    match je.ValueKind with
+    | JsonValueKind.Number -> je.GetDouble() |> Some
+    | JsonValueKind.Null -> None
+    | jvk -> raise <| JsonParseExn(_typeErr jvk "float option" je)
+
+  let getFloat (je:JsonElement) =
+    match getFloatOpt je with
+    | Some f -> f
+    | None -> raise <| JsonParseExn(_typeErr je.ValueKind "float" je)
+
   let getProp (n:string) (je:JsonElement) =
     match je.TryGetProperty n with
     | (true, je') -> je'
     | (false, _)  -> raise <| JsonParseExn(PropNotFound(n, je))
 
-  let getPropInt n = (getProp n) >> getInt 
-  let getPropStr n = (getProp n) >> getStr
-  let getPropStrOpt n = (getProp n) >> getStrOpt
+  let getPropInt n      = (getProp n) >> getInt
+  let getPropStr n      = (getProp n) >> getStr
+  let getPropStrOpt n   = (getProp n) >> getStrOpt
+  let getPropFloatOpt n = (getProp n) >> getFloatOpt
   
