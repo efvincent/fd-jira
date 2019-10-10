@@ -42,13 +42,11 @@ let getIssue creds issue =
   async {
     match! JiraApi.getIssue creds BASE_URL issue with
     | Ok jd ->
-      let rs = 
-        let opts = JsonSerializerOptions()
-        opts.WriteIndented <- true
-        JsonSerializer.Serialize(jd.RootElement, opts)
-      printfn "\nIssue:\n%s\n" rs 
-      let testIssue = issueFromJson jd.RootElement
-      printfn "Issue:%s" (string testIssue)
+      // let rs = 
+      //   let opts = JsonSerializerOptions()
+      //   opts.WriteIndented <- true
+      //   JsonSerializer.Serialize(jd.RootElement, opts)
+      // printfn "\nIssue:\n%s\n" rs 
     | Error e ->
       printfn "Error: %s" e
   }
