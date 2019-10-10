@@ -14,7 +14,7 @@
             "env": { "name": "JIRA_CREDS", "value": "${env:JIRA_CREDS}" },
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
-            "console": "internalConsole"
+            "console": "externalTerminal"
         }
 
     ]
