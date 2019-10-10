@@ -1,4 +1,4 @@
-﻿open System
+open System
 
 open System.Text.Json
 open Types.Jira
@@ -26,16 +26,17 @@ let issueFromJson (je:JsonElement) : Types.Jira.TestIssue option =
     let flds = getProp "fields" je
     {
       TestIssue.id = getPropStr "id" je
-      key = getPropStr "key" je
-      summary = getPropStr "summary" flds
-    } |> Some
+      key          = getPropStr "key" je
+      summary      = getPropStr "summary" flds
+      description  = getPropStrOpt "description" flds
+      link         = getPropStr "self" je
+      points       = getPropFloatOpt "customfield_10002" flds
+    } |> Ok
   with
   | JsonParseExn jpe ->
-    printfn "Parse Error: %s" (string jpe)
-    None
+    Error(sprintf  "Parse Error: %s" (string jpe))
   | ex ->
-    printfn "Unexpected error: %s" (ex.ToString())
-    None
+    Error(sprintf "Unexpected error: %s" (ex.ToString()))
 
 let getIssue creds issue =
   async {
