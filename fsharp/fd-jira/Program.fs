@@ -1,4 +1,4 @@
-open System
+﻿open System
 
 open System.Text.Json
 open Types.Jira
@@ -21,7 +21,7 @@ let getUpdatedItems creds =
       printfn "Error: %s" e
   }
 
-let issueFromJson (je:JsonElement) : Types.Jira.TestIssue option =
+let issueFromJson (je:JsonElement) : Result<Types.Jira.TestIssue, string> =
   try
     let flds = getProp "fields" je
     {
@@ -47,8 +47,10 @@ let getIssue creds issue =
       //   opts.WriteIndented <- true
       //   JsonSerializer.Serialize(jd.RootElement, opts)
       // printfn "\nIssue:\n%s\n" rs 
+      return issueFromJson jd.RootElement
     | Error e ->
       printfn "Error: %s" e
+      return Error e
   }
 
 [<EntryPoint>]    
@@ -62,6 +64,8 @@ let main argv =
     | None -> "No Creds!"
 
   // getUpdatedItems creds |> Async.RunSynchronously
-  getIssue creds "RCTFD-4574" |> Async.RunSynchronously
+  match getIssue creds "RCTFD-4574" |> Async.RunSynchronously with
+  | Ok issue -> printfn "Issue: %s" (string issue)
+  | Error e -> printfn "%s" e
 
   0
