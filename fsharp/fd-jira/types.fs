@@ -49,3 +49,12 @@ open System
             assignee: Person option
             updated: DateTimeOffset 
         }
+
+        type TestIssue = {
+            key: string
+            id: string
+            summary: string
+        }
+        with
+            override this.ToString() =
+                sprintf "id: %s; key: %s\nsummary: %s" this.id this.key this.summary
