@@ -81,8 +81,10 @@ let main argv =
   printfn "FD-Jira. Experiments in Jira API driven utility.\nCopyright 2019-2020 Eric F. Vincent\n"
   let creds = 
     match Environment.GetEnvironmentVariable("JIRA_CREDS") |> Option.ofObj with
-    | Some s -> s
-    | None -> ""
+    | Some s ->
+      printfn "Creds found" 
+      s
+    | None -> "No Creds!"
 
   // getUpdatedItems creds |> Async.RunSynchronously
   getIssue creds "RCTFD-4574" |> Async.RunSynchronously
