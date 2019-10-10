@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="jsonParsing.fs" />
     <Compile Include="jiraApi.fs" />
     <Compile Include="types.fs" />
     <Compile Include="Program.fs" />
