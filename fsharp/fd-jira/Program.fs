@@ -1,7 +1,8 @@
 ﻿open System
 open LiteDB
 open System.Text.Json
-
+open Types.Jira
+open efvJson
 
 [<Literal>]
 let BASE_URL = "https://jira.walmart.com/rest/api/2"
@@ -44,6 +45,22 @@ let getUpdatedItems creds =
       printfn "Error: %s" e
   }
 
+let issueFromJson (je:JsonElement) : Types.Jira.TestIssue option =
+  try
+    let flds = getProp "fields" je
+    {
+      TestIssue.id = getPropStr "id" je
+      key = getPropStr "key" je
+      summary = getPropStr "summary" flds
+    } |> Some
+  with
+  | JsonParseExn jpe ->
+    printfn "Parse Error: %s" (string jpe)
+    None
+  | ex ->
+    printfn "Unexpected error: %s" (ex.ToString())
+    None
+
 let getIssue creds issue =
   async {
     match! JiraApi.getIssue creds BASE_URL issue with
@@ -53,6 +70,8 @@ let getIssue creds issue =
         opts.WriteIndented <- true
         JsonSerializer.Serialize(jd.RootElement, opts)
       printfn "\nIssue:\n%s\n" rs 
+      let testIssue = issueFromJson jd.RootElement
+      printfn "Issue:%s" (string testIssue)
     | Error e ->
       printfn "Error: %s" e
   }
