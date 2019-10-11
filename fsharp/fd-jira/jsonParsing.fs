@@ -57,6 +57,10 @@ open System.Text.Json
     | (false, _)  -> raise <| JsonParseException(PropNotFound(n, je))
 
   let getArray (je:JsonElement) =
+    match je.ValueKind with
+    | JsonValueKind.Array -> je.EnumerateArray() |> Seq.cast<JsonElement>
+    | JsonValueKind.Null -> Seq.empty
+    | jvk -> raise <| JsonParseException(_typeErr jvk "array" je)
 
   let getPropInt n      = (getProp n) >> getInt
   let getPropStr n      = (getProp n) >> getStr
