@@ -55,16 +55,18 @@ let getIssue creds issue =
 [<EntryPoint>]    
 let main argv =
   printfn "FD-Jira. Experiments in Jira API driven utility.\nCopyright 2019-2020 Eric F. Vincent\n"
-  let creds = 
-    match Environment.GetEnvironmentVariable("JIRA_CREDS") |> Option.ofObj with
-    | Some s ->
-      printfn "Creds found" 
-      s
-    | None -> "No Creds!"
-
-  // getUpdatedItems creds |> Async.RunSynchronously
-  match getIssue creds "RCTFD-4574" |> Async.RunSynchronously with
-  | Ok issue -> printfn "Issue: %s" (string issue)
+  let div = String('-', 80)
+  Environment.GetEnvironmentVariable("JIRA_CREDS")
+  |> Result.ofObj "No Creds Found!"
+  |> Result.map (fun cr ->
+      [1..20] 
+      |> List.map(fun n -> sprintf "RCTFD-%i" (3840 + n))
+      |> List.iter(fun id -> 
+        match getIssue cr id |> Async.RunSynchronously with
+        | Ok issue -> printfn "%s\nIssue: %s" div (string issue)
   | Error e -> printfn "%s" e
+      )
+    )
+  |> ignore
 
   0
