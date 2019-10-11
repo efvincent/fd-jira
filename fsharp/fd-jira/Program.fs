@@ -1,4 +1,4 @@
-open System
+﻿open System
 
 open System.Text.Json
 open JsonSerialization
@@ -20,23 +20,6 @@ let getUpdatedItems creds =
       printfn "Error: %s" e
   }
 
-let issueFromJson (je:JsonElement) : Result<Types.Jira.TestIssue, string> =
-  try
-    let flds = getProp "fields" je
-    {
-      TestIssue.id = getPropStr "id" je
-      key          = getPropStr "key" je
-      summary      = getPropStr "summary" flds
-      description  = getPropStrOpt "description" flds
-      link         = getPropStr "self" je
-      points       = getPropFloatOpt "customfield_10002" flds
-    } |> Ok
-  with
-  | JsonParseExn jpe ->
-    Error(sprintf  "Parse Error: %s" (string jpe))
-  | ex ->
-    Error(sprintf "Unexpected error: %s" (ex.ToString()))
-
 let getIssue creds issue =
   async {
     match! JiraApi.getIssue creds BASE_URL issue with
@@ -46,7 +29,7 @@ let getIssue creds issue =
       //   opts.WriteIndented <- true
       //   JsonSerializer.Serialize(jd.RootElement, opts)
       // printfn "\nIssue:\n%s\n" rs 
-      return issueFromJson jd.RootElement
+      return Issue.fromJson jd.RootElement
     | Error e ->
       printfn "Error: %s" e
       return Error e
@@ -64,7 +47,7 @@ let main argv =
       |> List.iter(fun id -> 
         match getIssue cr id |> Async.RunSynchronously with
         | Ok issue -> printfn "%s\nIssue: %s" div (string issue)
-  | Error e -> printfn "%s" e
+        | Error e -> printfn "%s" e     
       )
     )
   |> ignore
