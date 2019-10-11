@@ -1,9 +1,8 @@
-﻿open System
+open System
 
 open System.Text.Json
-open Types.Jira
-open efvJson
-open DataBase
+open JsonSerialization
+open Microsoft.FSharp.Core
 
 [<Literal>]
 let BASE_URL = "https://jira.walmart.com/rest/api/2"
