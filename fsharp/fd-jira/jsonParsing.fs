@@ -15,7 +15,7 @@ open System.Text.Json
       | TypeError(desiredType,_) -> desiredType
       | PropNotFound(pname, _) -> sprintf "Property %s not found" pname
 
-  exception JsonParseExn of JsonParseError
+  exception JsonParseException of JsonParseError
 
   let private _typeErr jvk desiredType je =
     let msg = sprintf "Count not parse (%s) as %s" (string jvk) desiredType
@@ -25,36 +25,38 @@ open System.Text.Json
     match je.TryGetInt32 () with
     | (true, n) ->  n
     | (false, _) -> 
-      raise <| JsonParseExn(_typeErr je.ValueKind "Integer" je)
+      raise <| JsonParseException(_typeErr je.ValueKind "Integer" je)
 
   let getStr (je:JsonElement) =
     match je.ValueKind with 
     | JsonValueKind.String -> je.GetString()
     | jvk -> 
-      raise <| JsonParseExn(_typeErr jvk "String" je)
+      raise <| JsonParseException(_typeErr jvk "String" je)
 
   let getStrOpt (je:JsonElement) =
     match je.ValueKind with
     | JsonValueKind.String -> je.GetString() |> Some
     | JsonValueKind.Null -> None
     | jvk -> 
-      raise <| JsonParseExn(_typeErr jvk "String Option" je)
+      raise <| JsonParseException(_typeErr jvk "String Option" je)
 
   let getFloatOpt (je:JsonElement) =
     match je.ValueKind with
     | JsonValueKind.Number -> je.GetDouble() |> Some
     | JsonValueKind.Null -> None
-    | jvk -> raise <| JsonParseExn(_typeErr jvk "float option" je)
+    | jvk -> raise <| JsonParseException(_typeErr jvk "float option" je)
 
   let getFloat (je:JsonElement) =
     match getFloatOpt je with
     | Some f -> f
-    | None -> raise <| JsonParseExn(_typeErr je.ValueKind "float" je)
+    | None -> raise <| JsonParseException(_typeErr je.ValueKind "float" je)
 
   let getProp (n:string) (je:JsonElement) =
     match je.TryGetProperty n with
     | (true, je') -> je'
-    | (false, _)  -> raise <| JsonParseExn(PropNotFound(n, je))
+    | (false, _)  -> raise <| JsonParseException(PropNotFound(n, je))
+
+  let getArray (je:JsonElement) =
 
   let getPropInt n      = (getProp n) >> getInt
   let getPropStr n      = (getProp n) >> getStr
