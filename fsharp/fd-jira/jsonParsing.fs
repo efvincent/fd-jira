@@ -15,6 +15,7 @@ open System.Text.Json
       | Unknown -> "Unknown Parse Error"
       | TypeError(desiredType,_) -> desiredType
       | PropNotFound(pname, _) -> sprintf "Property %s not found" pname
+      | DateParseError _ -> "Value could not be parsed as a date/time" 
 
   exception JsonParseException of JsonParseError
 
