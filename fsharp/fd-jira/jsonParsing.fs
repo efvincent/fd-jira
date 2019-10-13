@@ -7,6 +7,7 @@ open System.Text.Json
   | Unknown
   | TypeError of string * JsonElement
   | PropNotFound of string * JsonElement
+  | DateParseError of JsonElement
 
   with
     override this.ToString() =
@@ -46,10 +47,24 @@ open System.Text.Json
     | JsonValueKind.Null -> None
     | jvk -> raise <| JsonParseException(_typeErr jvk "float option" je)
 
-  let getFloat (je:JsonElement) =
+  let getFloat je =
     match getFloatOpt je with
     | Some f -> f
     | None -> raise <| JsonParseException(_typeErr je.ValueKind "float" je)
+
+  let getDateTimeOpt (je:JsonElement) =
+    match je.ValueKind with
+    | JsonValueKind.String -> 
+      match je.GetString() |> DateTimeOffset.TryParse with 
+      | (true, dto) -> Some dto
+      | (false, _) -> raise <| JsonParseException(JsonParseError.DateParseError je) 
+    | JsonValueKind.Null -> None 
+    | jvk -> raise <| JsonParseException(_typeErr jvk "date" je)
+
+  let getDateTime je =
+    match getDateTimeOpt je with
+    | Some d -> d
+    | None -> raise <| JsonParseException(_typeErr je.ValueKind "date" je)
 
   let getProp (n:string) (je:JsonElement) =
     match je.TryGetProperty n with
@@ -62,8 +77,9 @@ open System.Text.Json
     | JsonValueKind.Null -> Seq.empty
     | jvk -> raise <| JsonParseException(_typeErr jvk "array" je)
 
-  let getPropInt n      = (getProp n) >> getInt
-  let getPropStr n      = (getProp n) >> getStr
-  let getPropStrOpt n   = (getProp n) >> getStrOpt
-  let getPropFloatOpt n = (getProp n) >> getFloatOpt
-  
+  let getPropInt n         = (getProp n) >> getInt
+  let getPropStr n         = (getProp n) >> getStr
+  let getPropStrOpt n      = (getProp n) >> getStrOpt
+  let getPropFloatOpt n    = (getProp n) >> getFloatOpt
+  let getPropDateTime n    = (getProp n) >> getDateTime
+  let getPropDateTimeOpt n = (getProp n) >> getDateTimeOpt
