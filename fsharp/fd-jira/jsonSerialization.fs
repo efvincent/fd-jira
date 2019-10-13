@@ -72,7 +72,9 @@ open Microsoft.FSharp.Core
             issueType      = IssueType.fromJson (getProp "issuetype" flds) |> Result.orFailWith
             status         = Status.fromJson (getProp "status" flds) |> Result.orFailWith
             components     = comps
+            assignee       = assignee
             link           = getPropStr "self" je
             points         = getPropFloatOpt "customfield_10002" flds
             created        = getPropDateTime "created" flds
+            updated        = getPropDateTime "updated" flds
           } |> Ok)
