@@ -71,4 +71,5 @@ open Microsoft.FSharp.Core
             components   = comps
             link         = getPropStr "self" je
             points       = getPropFloatOpt "customfield_10002" flds
+            created      = getPropDateTime "created" flds
           } |> Ok)
