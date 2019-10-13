@@ -54,7 +54,8 @@ open Microsoft.FSharp.Core
     module Issue =
       let fromJson je =
         _wrapWithTry (fun () ->
-          let flds = getProp "fields" je
+          let flds  = getProp "fields" je
+          let res   = getPropOpt "resolution" flds
           let comps = 
             getProp "components" flds
             |> getArray
@@ -62,14 +63,16 @@ open Microsoft.FSharp.Core
             |> Seq.concatResult
             |> Result.orFailWith
           {
-            Issue.id     = getPropStr "id" je
-            key          = getPropStr "key" je
-            summary      = getPropStr "summary" flds
-            description  = getPropStrOpt "description" flds
-            issueType    = IssueType.fromJson (getProp "issuetype" flds) |> Result.orFailWith
-            status       = Status.fromJson (getProp "status" flds) |> Result.orFailWith
-            components   = comps
-            link         = getPropStr "self" je
-            points       = getPropFloatOpt "customfield_10002" flds
-            created      = getPropDateTime "created" flds
+            Issue.id       = getPropStr "id" je
+            key            = getPropStr "key" je
+            summary        = getPropStr "summary" flds
+            description    = getPropStrOpt "description" flds
+            resolution     = res |> Option.bind (getPropStrOpt "name") 
+            resolutionDate = getPropDateTimeOpt "resolutiondate" flds
+            issueType      = IssueType.fromJson (getProp "issuetype" flds) |> Result.orFailWith
+            status         = Status.fromJson (getProp "status" flds) |> Result.orFailWith
+            components     = comps
+            link           = getPropStr "self" je
+            points         = getPropFloatOpt "customfield_10002" flds
+            created        = getPropDateTime "created" flds
           } |> Ok)

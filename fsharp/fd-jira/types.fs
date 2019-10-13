@@ -53,20 +53,23 @@ open System
     }
 
     type Issue = {
-      key        : string
-      id         : string
-      summary    : string
-      description: string option
-      issueType  : IssueType
-      status     : Status
-      components : Component seq
-      link       : string
-      points     : float option
-      created    : DateTimeOffset
+      key           : string
+      id            : string
+      summary       : string
+      description   : string option
+      resolution    : string option
+      resolutionDate: DateTimeOffset option
+      issueType     : IssueType
+      status        : Status
+      components    : Component seq
+      link          : string
+      points        : float option
+      created       : DateTimeOffset
     }
     with
       override this.ToString() =
-        sprintf "%s %s [%s]\nstatus: %s\nsummary: %s\nlink: %s\npoints: %f\ncreated: %A\n" 
+        let res = match this.resolutionDate with Some d -> (string d) | None -> ""
+        sprintf "%s %s [%s]\nstatus: %s\nsummary: %s\nlink: %s\npoints: %f\ncreated: %A\nresolved: %s\nresolution: %s\n" 
                 this.key
                 (string this.issueType)
                 (this.components |> Seq.map string |> (fun comps -> String.Join(",", comps)))
@@ -74,4 +77,6 @@ open System
                 this.link
                 (this.points |> Option.defaultValue 0.)
                 this.created
+                res
+                (this.resolution |> Option.defaultValue "[not yet resolved]")
 
