@@ -67,10 +67,15 @@ open System.Text.Json
     | Some d -> d
     | None -> raise <| JsonParseException(_typeErr je.ValueKind "date" je)
 
-  let getProp (n:string) (je:JsonElement) =
+  let getPropOpt (n:string) (je:JsonElement) =
     match je.TryGetProperty n with
-    | (true, je') -> je'
-    | (false, _)  -> raise <| JsonParseException(PropNotFound(n, je))
+    | (true, je') when je'.ValueKind <> JsonValueKind.Null -> Some je'
+    | _ -> None 
+
+  let getProp n je =
+    match getPropOpt n je with 
+    | Some je' -> je'
+    | None  -> raise <| JsonParseException(PropNotFound(n, je))
 
   let getArray (je:JsonElement) =
     match je.ValueKind with
@@ -78,9 +83,9 @@ open System.Text.Json
     | JsonValueKind.Null -> Seq.empty
     | jvk -> raise <| JsonParseException(_typeErr jvk "array" je)
 
-  let getPropInt n         = (getProp n) >> getInt
-  let getPropStr n         = (getProp n) >> getStr
-  let getPropStrOpt n      = (getProp n) >> getStrOpt
-  let getPropFloatOpt n    = (getProp n) >> getFloatOpt
-  let getPropDateTime n    = (getProp n) >> getDateTime
-  let getPropDateTimeOpt n = (getProp n) >> getDateTimeOpt
+  let getPropInt n            = getProp n >> getInt
+  let getPropStr n            = getProp n >> getStr
+  let getPropStrOpt n je      = getPropOpt n je |> Option.bind getStrOpt
+  let getPropFloatOpt n je    = getPropOpt n je |> Option.bind getFloatOpt
+  let getPropDateTime n       = getProp n >> getDateTime
+  let getPropDateTimeOpt n je = getPropOpt n je |> Option.bind getDateTimeOpt
