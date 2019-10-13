@@ -37,21 +37,6 @@ open System
     | Deleted 
     | Other of string 
 
-    type Issue2 = {
-      key           : string
-      id            : int
-      summary       : string
-      description   : string
-      issueType     : IssueType
-      points        : float
-      components    : Component []
-      status        : Status
-      resolutionDate: DateTimeOffset
-      created       : DateTimeOffset
-      assignee      : Person option
-      updated       : DateTimeOffset
-    }
-
     type Issue = {
       key           : string
       id            : string
