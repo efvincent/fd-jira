@@ -14,6 +14,16 @@ open Microsoft.FSharp.Core
     | ex ->
       Error(sprintf "Unexpected error: %s" (ex.ToString()))    
 
+    module PersonType =
+      let fromJson je =
+        _wrapWithTry (fun () ->
+          {
+            email = getPropStr "emailAddress" je
+            key = getPropStr "key" je
+            name = getPropStr "displayName" je
+          } |> Ok
+        )
+
     module IssueType =
       let fromJson je =
         _wrapWithTry (fun () -> 
@@ -56,6 +66,15 @@ open Microsoft.FSharp.Core
         _wrapWithTry (fun () ->
           let flds  = getProp "fields" je
           let res   = getPropOpt "resolution" flds
+          let assignee = 
+            match getPropOpt "assignee" flds with
+            | Some aje -> 
+              match PersonType.fromJson aje with
+              | Ok p -> Some p
+              | Error e ->
+                printfn "malformed person json: %s" e   // If person is malformed json, we're skipping it (should we not?)
+                None
+            | None -> None
           let comps = 
             getProp "components" flds
             |> getArray
