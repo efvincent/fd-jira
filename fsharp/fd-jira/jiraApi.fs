@@ -43,8 +43,14 @@ let getChangedIssues creds baseUrl startAt =
   }
 
 let getIssue creds baseUrl issue =
-    async {
-        let url = sprintf "%s/issue/%s?fields=assignee,status,summary,description,created,updated,resolutiondate,issuetype,components,priority,resolution,customfield_10002"
-                            baseUrl issue
-        return! makeJiraCall creds url
-    }
+  async {
+    let url = sprintf "%s/issue/%s?fields=assignee,status,summary,description,created,updated,resolutiondate,issuetype,components,priority,resolution,customfield_10002,subtasks,customfield_10007,parent"
+                        baseUrl issue
+    return! makeJiraCall creds url
+  } 
+
+let getFields creds baseUrl =
+  async {
+    let url = sprintf "%s/field" baseUrl
+    return! makeJiraCall creds url
+  }
