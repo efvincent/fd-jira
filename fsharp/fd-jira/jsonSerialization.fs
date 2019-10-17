@@ -62,6 +62,19 @@ open Microsoft.FSharp.Core
           | other            -> Ok (Other other)
         )
 
+    module Parent =
+      let fromJson je =
+        _wrapWithTry (fun () ->
+          let flds  = getProp "fields" je
+          {
+            Parent.id = getPropStr "id" je
+            key       = getPropStr "key" je
+            summary   = getPropStr "summary" flds
+            status    = Status.fromJson (getProp "status" flds) |> Result.orFailWith
+            issueType = IssueType.fromJson (getProp "issuetype" flds) |> Result.orFailWith
+          } |> Ok
+        )
+
     module Issue =
       let fromJson je =
         _wrapWithTry (fun () ->
@@ -98,4 +111,10 @@ open Microsoft.FSharp.Core
             points         = getPropFloatOpt "customfield_10002" flds
             created        = getPropDateTime "created" flds
             updated        = getPropDateTime "updated" flds
+            parent         = match getPropOpt "parent" flds with 
+                             | Some jd -> 
+                                match Parent.fromJson jd with 
+                                | Ok parent -> Some parent
+                                | Error e -> printf "Error deserializing parent: %s" e; None
+                             | None -> None
           } |> Ok)
