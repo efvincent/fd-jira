@@ -40,6 +40,7 @@ open System
     type Issue = {
       key           : string
       id            : string
+      epic          : string option
       summary       : string
       description   : string option
       resolution    : string option
@@ -56,7 +57,7 @@ open System
     with
       override this.ToString() =
         let res = match this.resolutionDate with Some d -> (string d) | None -> ""
-        sprintf "%s %s [%s]\nstatus: %s\nsummary: %s\nlink: %s\npoints: %f\ncreated: %A\nupdated: %A\nassignee: %s" 
+        sprintf "%s %s [%s]\nstatus: %s\nsummary: %s\nlink: %s\npoints: %f\ncreated: %A\nupdated: %A\nassignee: %s\nepic: %s\n" 
                 this.key
                 (string this.issueType)
                 (this.components |> Seq.map string |> (fun comps -> String.Join(",", comps)))
@@ -65,5 +66,6 @@ open System
                 (this.points |> Option.defaultValue 0.)
                 this.created this.updated
                 (match this.assignee with Some a -> a.name | None -> "unassigned")
+                (match this.epic with Some e -> e | None -> "[no epic]")
 
 
