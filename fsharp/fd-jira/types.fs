@@ -13,6 +13,7 @@ open System
     type IssueType =  
     | Unknown
     | Issue
+    | Bug
     | Story 
     | Epic 
     | SubTask
