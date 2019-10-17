@@ -31,6 +31,7 @@ open Microsoft.FSharp.Core
           | "issue"    -> Ok IssueType.Issue
           | "epic"     -> Ok IssueType.Epic
           | "story"    -> Ok IssueType.Story
+          | "bug"      -> Ok IssueType.Bug
           | "subtask"
           | "sub-task" -> Ok IssueType.SubTask
           | other      -> Ok (IssueType.Other other)
