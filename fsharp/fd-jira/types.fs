@@ -38,6 +38,23 @@ open System
     | Deleted 
     | Other of string 
 
+    /// A subset issue held as a property of sub-task issues indicating
+    /// the parent of the sub-task
+    type Parent = {
+      key       : string
+      id        : string
+      summary   : string
+      status    : Status
+      issueType : IssueType
+    }
+    with 
+      override this.ToString() =
+        sprintf "%s %s %s - %s"
+                this.key
+                (string this.issueType)
+                this.summary
+                (string this.status)
+                           
     type Issue = {
       key           : string
       id            : string
