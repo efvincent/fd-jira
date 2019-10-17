@@ -84,6 +84,7 @@ open Microsoft.FSharp.Core
           {
             Issue.id       = getPropStr "id" je
             key            = getPropStr "key" je
+            epic           = getPropStrOpt "customfield_10007" flds
             summary        = getPropStr "summary" flds
             description    = getPropStrOpt "description" flds
             resolution     = res |> Option.bind (getPropStrOpt "name") 
