@@ -33,7 +33,7 @@ let getIssue creds issue =
   async {
     match! JiraApi.getIssue creds BASE_URL issue with
     | Ok jd ->
-      printfn "\nIssue:\n%s\n" (jsonToStr jd) 
+      // printfn "\nIssue:\n%s\n" (jsonToStr jd) 
       return Issue.fromJson jd.RootElement
     | Error e ->
       printfn "Error: %s" e
