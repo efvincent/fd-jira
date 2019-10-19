@@ -3,6 +3,7 @@ module JiraApi
 open System
 open System.Net.Http
 open System.Text.Json
+open Prelude
 
 [<Literal>]
 let PROJECT_CODE = "RCTFD"
@@ -10,21 +11,23 @@ let PROJECT_CODE = "RCTFD"
 // use one HttpClient for all calls
 let httpClient = new HttpClient()
 
-let makeJiraCall (creds:string) url =
+let makeJiraCall ctx url =
   async {
     let req = new HttpRequestMessage()
     req.Method <- HttpMethod.Get
     req.RequestUri <- Uri url  
     req.Headers.Authorization <-
-      let bytes = System.Text.UTF8Encoding.UTF8.GetBytes creds
+      let bytes = System.Text.UTF8Encoding.UTF8.GetBytes ctx.creds
       let encodedCreds = System.Convert.ToBase64String bytes
       Headers.AuthenticationHeaderValue("Basic", encodedCreds)
+    ctx.log.Information("HTTP REQ {0} {1}", req.Method, req.RequestUri)
     let! rsp = httpClient.SendAsync req |> Async.AwaitTask
     if rsp.IsSuccessStatusCode then 
       let! content = rsp.Content.ReadAsStreamAsync() |> Async.AwaitTask
       let! jd =  JsonDocument.ParseAsync(content) |> Async.AwaitTask
       return Ok(jd)
     else 
+      ctx.log.Error ("Error", req, rsp)
       return Error (sprintf "Error: HTTP Response code: %A" rsp.StatusCode)
   }
 
@@ -33,16 +36,16 @@ let makeUpdateQuery project (updatedSince:DateTimeOffset) =
   let query = sprintf "project=%s AND updatedDate >= \"%s\"" project dt
   Uri.EscapeDataString query
   
-let getChangedIssues creds baseUrl startAt =
+let getChangedIssues ctx baseUrl startAt =
   async {
     let query = makeUpdateQuery PROJECT_CODE DateTimeOffset.MinValue
     let url = sprintf "%s/search?jql=%s&expand=name&maxResults=100&fields=updated&startAt=%i"
                 baseUrl query startAt
     printfn "url: %s\n" url
-    return! makeJiraCall creds url
+    return! makeJiraCall ctx url
   }
 
-let getIssue creds baseUrl issue =
+let getIssue ctx baseUrl issue =
   async {
     let url = sprintf "%s/issue/%s%s%s%s"
                         baseUrl 
@@ -50,11 +53,11 @@ let getIssue creds baseUrl issue =
                         "?fields=assignee,status,summary,description,created,updated,resolutiondate,"
                         "issuetype,components,priority,resolution,"
                         "customfield_10002,subtasks,customfield_10007,parent"
-    return! makeJiraCall creds url
+    return! makeJiraCall ctx url
   } 
 
-let getFields creds baseUrl =
+let getFields ctx baseUrl =
   async {
     let url = sprintf "%s/field" baseUrl
-    return! makeJiraCall creds url
+    return! makeJiraCall ctx url
   }

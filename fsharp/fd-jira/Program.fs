@@ -3,22 +3,10 @@
 open System.Text.Json
 open JsonSerialization
 open Microsoft.FSharp.Core
+open Serilog
 
 [<Literal>]
 let BASE_URL = "https://jira.walmart.com/rest/api/2"
-
-let getUpdatedItems creds =
-  async {
-    match JiraApi.getChangedIssues creds BASE_URL 0 |> Async.RunSynchronously with
-    | Ok jd ->
-      let rs =
-        let opts = JsonSerializerOptions()
-        opts.WriteIndented <- true 
-        JsonSerializer.Serialize(jd.RootElement, opts)
-      printfn "\nresult:\n%s" rs
-    | Error e ->
-      printfn "Error: %s" e
-  }
 
 let jsonSerializerOptions =
   let jo = JsonSerializerOptions()
@@ -28,42 +16,57 @@ let jsonSerializerOptions =
 let div = String('-', 80)
 
 let jsonToStr (jd:JsonDocument) = JsonSerializer.Serialize(jd.RootElement, jsonSerializerOptions)
-  
-let getIssue creds issue =
+
+let getUpdatedItems ctx =
   async {
-    match! JiraApi.getIssue creds BASE_URL issue with
+    match JiraApi.getChangedIssues ctx BASE_URL 0 |> Async.RunSynchronously with
+    | Ok jd ->
+      ctx.log.Information ("Changed Issues Retreived") 
+      (jsonToStr >> printfn "\nresult:\n%s") jd
+    | Error e ->
+      ctx.log.Error ("Error {e}", e)
+  }
+
+let getIssue ctx issue =
+  async {
+    match! JiraApi.getIssue ctx BASE_URL issue with
     | Ok jd ->
       // printfn "\nIssue:\n%s\n" (jsonToStr jd) 
       return Issue.fromJson jd.RootElement
     | Error e ->
-      printfn "Error: %s" e
+      ctx.log.Error ("Error: {e}", e)
       return Error e
   }
 
-let printIssues creds startAt count =
+let printIssues ctx startAt count =
   [1..count] 
   |> List.map(fun n -> sprintf "RCTFD-%i" (startAt + n))
   |> List.iter(fun id -> 
-    match getIssue creds id |> Async.RunSynchronously with
+    match getIssue ctx id |> Async.RunSynchronously with
     | Ok issue -> printfn "%s\nIssue: %s" div (string issue)
-    | Error e -> printfn "%s" e     
-  )
+    | Error e -> ctx.log.Error ("Error: {e}", e)     
+  )  
 
-let printFields creds =
-  match JiraApi.getFields creds BASE_URL |> Async.RunSynchronously with
+let printFields ctx =
+  match JiraApi.getFields ctx BASE_URL |> Async.RunSynchronously with
   | Ok jd ->
     printfn "%s\nfields:\n%s" div (jsonToStr jd)
-  | Error e -> printfn "%s" e
+  | Error e -> ctx.log.Error ("Error: {e}", e)
 
 [<EntryPoint>]    
 let main argv =
-  printfn "FD-Jira. Experiments in Jira API driven utility.\nCopyright 2019-2020 Eric F. Vincent\n"
+  let ctx = Prelude.initCtx
+  ctx.log.Information "Startup"
   Environment.GetEnvironmentVariable("JIRA_CREDS")
   |> Result.ofObj "No Creds Found!"
   |> Result.map (fun cr ->
-      printIssues cr 4100 5
+      ctx.log.Information "Credentials secured"
+      let ctx = ctx.SetCreds cr
+      printIssues ctx 4100 5
     )
-  |> ignore
+  |> (function
+      | Ok _ -> ()
+      | Error e -> ctx.log.Error ("Error: {e}", e))
 
-
+  ctx.log.Information "Program end"
   0
