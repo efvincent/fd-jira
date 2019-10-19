@@ -1,4 +1,4 @@
-open System
+﻿open System
 
 open System.Text.Json
 open JsonSerialization
@@ -54,6 +54,19 @@ let printFields ctx =
     printfn "%s\nfields:\n%s" div (jsonToStr jd)
   | Error e -> ctx.log.Error ("Error: {e}", e)
 
+let commandProcessor ctx opts =
+  match opts with
+  | Opts.Basic b ->
+    if b.version then
+      printfn "Yes Billy there is a version."
+    else
+      printfn "I don't know what you want from me."
+  | Opts.Range r ->
+    printIssues ctx r.startAt r.count
+  | Opts.Unknown ->
+    printfn "Unknown. I don't know what you're asking."
+  0
+
 [<EntryPoint>]    
 let main argv =
   let ctx = Prelude.initCtx
@@ -86,16 +99,16 @@ let main argv =
 
   match opts with
   | Ok opts ->
-  Environment.GetEnvironmentVariable("JIRA_CREDS")
-  |> Result.ofObj "No Creds Found!"
-  |> Result.map (fun cr ->
-      ctx.log.Information "Credentials secured"
-      let ctx = ctx.SetCreds cr
+    Environment.GetEnvironmentVariable("JIRA_CREDS")
+    |> Result.ofObj "No Creds Found!"
+    |> Result.map (fun cr ->
+        ctx.log.Information "Credentials secured"
+        let ctx = ctx.SetCreds cr
         commandProcessor ctx opts
-    )
-  |> (function
-      | Ok _ -> ()
-      | Error e -> ctx.log.Error ("Error: {e}", e))
+      )
+    |> (function
+        | Ok _ -> ()
+        | Error e -> ctx.log.Error ("Error: {e}", e))
   | Error _ -> ()
 
   ctx.log.Information "Program end"
