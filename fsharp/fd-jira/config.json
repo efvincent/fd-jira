@@ -1,0 +1,19 @@
+{
+  "Serilog": {
+    "MinimumLevel": "Information",
+    "WriteTo": [
+      {
+        "Name": "LiterateConsole",
+        "Args:": {}
+      },
+      {
+        "Name": "RollingFile",
+        "Args": {
+          "pathFormat": "log-{Date}.log",
+          "fileSizeLimitBytes": 10000000,
+          "retainedFileCountLimit": 100
+        }
+      }
+    ]
+  }
+}
