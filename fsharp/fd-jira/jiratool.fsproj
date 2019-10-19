@@ -1,9 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <PublishTrimmed>false</PublishTrimmed>
     <PublishReadyToRun>false</PublishReadyToRun>
-    <PublishSingleFile>false</PublishSingleFile>       
+    <PublishSingleFile>false</PublishSingleFile> 
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
@@ -14,6 +14,7 @@
     <Compile Include="types.fs" />
     <Compile Include="jsonSerialization.fs" />
     <Compile Include="database.fs" />
+    <Compile Include="cli.fs" />
     <Compile Include="Program.fs" />
     <Content Include="config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
