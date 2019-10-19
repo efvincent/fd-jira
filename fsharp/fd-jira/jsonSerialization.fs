@@ -46,6 +46,8 @@ open Microsoft.FSharp.Core
           | "wolverine" -> Ok Wolverine
           | "design"    -> Ok Design
           | "ironman"   -> Ok Ironman
+          | "donatello" -> Ok Donatello
+          | "product"   -> Ok Product
           | other       -> Ok (Component.Other other)
         )
 
