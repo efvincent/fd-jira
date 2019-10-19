@@ -71,6 +71,10 @@ let commandProcessor ctx opts =
 let main argv =
   let ctx = Prelude.initCtx
   ctx.log.Information "Startup"
+  if argv |> Seq.length > 0 then 
+    ctx.log.Information("Command line args: {0}", (String.Join(' ', argv)))
+  else
+    ctx.log.Information("No command line args passed")
   let cliResult =
     CommandLine
       .Parser
