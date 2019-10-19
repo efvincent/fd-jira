@@ -1,9 +1,10 @@
-﻿open System
+open System
 
 open System.Text.Json
 open JsonSerialization
+open CommandLine
 open Microsoft.FSharp.Core
-open Serilog
+open Cli
 
 [<Literal>]
 let BASE_URL = "https://jira.walmart.com/rest/api/2"
@@ -57,16 +58,45 @@ let printFields ctx =
 let main argv =
   let ctx = Prelude.initCtx
   ctx.log.Information "Startup"
+  let cliResult =
+    CommandLine
+      .Parser
+      .Default
+      .ParseArguments<BasicOpts,RangeOpts> argv 
+  let opts =    
+    match cliResult with
+    | :? CommandLine.Parsed<obj> as verb ->
+      match verb.Value with
+      | :? BasicOpts as opts -> Ok <| Opts.Basic opts
+      | :? RangeOpts as opts -> Ok <| Opts.Range opts
+      | t -> 
+        ctx.log.Error("Missing parse case for verb type: {0}", (t.GetType().Name))
+        Error (sprintf "Missinc parse case for verb type: %s" (t.GetType().Name))
+    | :? CommandLine.NotParsed<obj> as np -> 
+      ctx.log.Warning("Not parsed: {@0}", np)
+      Error (
+        sprintf "Not parsed: %s" 
+          (np.Errors 
+          |> Seq.map(fun e -> string e.Tag) 
+          |> (fun errs -> String.Join(',', errs))))
+    | _ -> 
+      let msg = "Unexpected CLI parser response"
+      ctx.log.Fatal msg
+      Error msg
+
+  match opts with
+  | Ok opts ->
   Environment.GetEnvironmentVariable("JIRA_CREDS")
   |> Result.ofObj "No Creds Found!"
   |> Result.map (fun cr ->
       ctx.log.Information "Credentials secured"
       let ctx = ctx.SetCreds cr
-      printIssues ctx 4100 5
+        commandProcessor ctx opts
     )
   |> (function
       | Ok _ -> ()
       | Error e -> ctx.log.Error ("Error: {e}", e))
+  | Error _ -> ()
 
   ctx.log.Information "Program end"
   0
