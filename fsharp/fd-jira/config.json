@@ -2,10 +2,10 @@
   "Serilog": {
     "MinimumLevel": "Information",
     "WriteTo": [
-      {
-        "Name": "LiterateConsole",
-        "Args:": {}
-      },
+      // {
+      //   "Name": "LiterateConsole",
+      //   "Args:": {}
+      // },
       {
         "Name": "RollingFile",
         "Args": {
