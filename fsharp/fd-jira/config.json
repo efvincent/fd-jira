@@ -9,6 +9,7 @@
       {
         "Name": "RollingFile",
         "Args": {
+          // "formatter": "Serilog.Formatting.Json.JsonFormatter",
           "pathFormat": "log-{Date}.log",
           "fileSizeLimitBytes": 10000000,
           "retainedFileCountLimit": 100
