@@ -19,7 +19,8 @@ module Prelude
         .Build()
     let log = 
       LoggerConfiguration()
-        .ReadFrom.Configuration(config)
+        .ReadFrom
+        .Configuration(config)
         .CreateLogger() :> ILogger    
     log.Information "Logger initialized"
     {
