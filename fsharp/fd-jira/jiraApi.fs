@@ -20,7 +20,7 @@ let makeJiraCall ctx url =
       let bytes = System.Text.UTF8Encoding.UTF8.GetBytes ctx.creds
       let encodedCreds = System.Convert.ToBase64String bytes
       Headers.AuthenticationHeaderValue("Basic", encodedCreds)
-    ctx.log.Information("HTTP REQ {0} {1}", req.Method, req.RequestUri)
+    ctx.log.Information("{0} {1}", req.Method, req.RequestUri)
     let! rsp = httpClient.SendAsync req |> Async.AwaitTask
     if rsp.IsSuccessStatusCode then 
       let! content = rsp.Content.ReadAsStreamAsync() |> Async.AwaitTask
