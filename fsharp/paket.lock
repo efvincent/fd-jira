@@ -1,5 +1,6 @@
 NUGET
   remote: https://www.nuget.org/api/v2
+    CommandLineParser (2.6)
     FSharp.Core (4.7)
     LiteDB (5.0.0-alpha2)
     Microsoft.Bcl.AsyncInterfaces (1.1.0-preview1.19504.10) - restriction: || (&& (>= monotouch) (>= netstandard2.0)) (&& (>= net461) (>= netstandard2.0)) (&& (>= netcoreapp2.0) (< netcoreapp2.1)) (&& (< netcoreapp2.0) (>= netstandard2.0)) (&& (>= netcoreapp2.1) (< netcoreapp3.0)) (&& (>= netstandard2.0) (>= uap10.1)) (&& (>= netstandard2.0) (>= xamarintvos)) (&& (>= netstandard2.0) (>= xamarinwatchos)) (>= xamarinios) (>= xamarinmac)
