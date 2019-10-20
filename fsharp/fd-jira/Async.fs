@@ -22,12 +22,9 @@ module Option =
 
 
 // ------------------------------------------------------------------------------------------------------------------
-/// Operations on the choice type.
+/// Operations on the Result type.
+/// NOTE: Choice is a holdover name for Result from the Marvel library (from before there was a Result type in F#)
 module Choice =
-  
-  open Prelude
-
-  let returnM : 'a -> Result<'a, 'b> = Ok
 
   /// Maps over the left result type.
   let mapl (f:'a -> 'b) = function
@@ -44,21 +41,15 @@ module Choice =
     | Ok x -> Ok (f1 x)
     | Error x -> Error (f2 x)
 
-  /// Folds a choice pair with functions for each case.
+  /// Folds a Result pair with functions for each case.
   let fold (f1:'a -> 'c) (f2:'b -> 'c) = function
     | Ok x -> f1 x
     | Error x -> f2 x
 
-  /// Extracts the value from a choice with the same type on the left as the right.
+  /// Extracts the value from a result with the same type on the left as the right.
   /// (Also known as the codiagonal morphism).
   let codiag<'a> : Result<'a, 'a> -> 'a =
     fold id id
-
-  /// Binds a function to a choice where the right case represents Error to be propagated.
-  [<Obsolete("Use Result.bind")>]
-  let bind (f:'a -> Result<'b, 'e>) = function
-    | Ok a -> f a
-    | Error e -> Error e
 
   /// evaluate f () and return either the result of the evaluation or the exception
   let tryWith f = try Ok (f ()) with exn -> Error exn
@@ -86,39 +77,37 @@ module Choice =
           else Error error
       | Error error -> Error error
 
-  /// Merges two choices which can potentially contain errors.
-  /// When both choice values are errors, they are concatenated using ';'.
+  /// Merges two results which can potentially contain errors.
+  /// When both results values are errors, they are concatenated using ';'.
   let mergeErrs = function
     | Ok (), Ok () -> Ok ()
     | Error e, Ok _   -> Error e
     | Ok _, Error e   -> Error e
     | Error e1, Error e2 -> Error (String.concat ";" [e1;e2])
 
-  // let errorsOfFirst (xs: Result<unit, string> seq) =
-  //     let x0: Result<unit, string> = Success ()
-  //     xs |> Seq.fold (fun x y ->
-  //         match x, y with
-  //         | Ok x, Success y -> Success ()
-  //         | Ok x, Error y -> Error y
-  //         | Error x, Success y -> Error x
-  //         | Error x, Error y -> Error x
-  //     ) x0
+  let errorsOfFirst (xs: Result<unit, string> seq) =
+    let x0: Result<unit, string> = Ok ()
+    xs |> Seq.fold (fun x y ->
+      match x, y with
+      | Ok _, Ok _ -> Ok ()
+      | Ok _, Error y -> Error y
+      | Error x, Ok _ -> Error x
+      | Error x, Error _ -> Error x
+    ) x0
 
-  type ChoiceBuilder() =
-      member __.Return(value) = returnM value
-      member __.ReturnFrom(c:Result<'a, 'e>) = c
-      member __.Delay(f:unit -> Result<'a, 'e>) = f()
-      member __.Bind(c, f) = Result.bind f c
-      member this.TryWith(opt, h) =
-          try this.ReturnFrom(opt)
-          with e -> h e
-      member this.TryFinally(opt, compensate) =
-          try this.ReturnFrom(opt)
-          finally compensate()
-      member this.Using(res:#IDisposable, body) =
-          this.TryFinally(body res, fun () -> match res with null -> () | disp -> disp.Dispose())
-
-
+  type ResultBuilder() =
+    member __.Return(value) = Ok value
+    member __.ReturnFrom(c:Result<'a, 'e>) = c
+    member __.Delay(f:unit -> Result<'a, 'e>) = f()
+    member __.Bind(c, f) = Result.bind f c
+    member this.TryWith(opt, h) =
+      try this.ReturnFrom(opt)
+      with e -> h e
+    member this.TryFinally(opt, compensate) =
+      try this.ReturnFrom(opt)
+      finally compensate()
+    member this.Using(res:#IDisposable, body) =
+      this.TryFinally(body res, fun () -> match res with null -> () | disp -> disp.Dispose())
 
 /// A backoff strategy.
 /// Accepts the attempt number and returns an interval in milliseconds to wait.
@@ -773,15 +762,15 @@ module AsyncExtensions =
         static member bindOpt (f:'a -> Async<'b option>) (a:Async<'a option>) : Async<'b option> =
             a |> Async.bind (Option.foldOr f (async.Return None))
 
-        // static member mapChoice (f: 'a -> Result<'b,'c>) (a:Async<Result<'a,'c>>) =
-        //     a |> Async.map (function
-        //         | Ok a' -> f a'
-        //         | Error error -> Error error)
+        static member mapResult (f: 'a -> Result<'b,'c>) (a:Async<Result<'a,'c>>) =
+            a |> Async.map (function
+                | Ok a' -> f a'
+                | Error error -> Error error)
 
-        // static member bindChoice (f: 'a -> Async<Result<'b,'c>>) (a:Async<Result<'a,'c>>)  =
-        //     a |> Async.bind (function
-        //         | Ok a' -> f a'
-        //         | Error error -> async.Return (Error error))
+        static member bindResult (f: 'a -> Async<Result<'b,'c>>) (a:Async<Result<'a,'c>>)  =
+            a |> Async.bind (function
+                | Ok a' -> f a'
+                | Error error -> async.Return (Error error))
 
         static member sleepAfter ms (a:Async<_>) : Async<_> = a |> Async.bind (fun a -> Async.Sleep ms |> Async.map (konst a))
 
@@ -860,24 +849,24 @@ module AsyncExtensions =
             Async.StartThreadPoolWithContinuations (a, ok, err, cnc)
             Async.StartThreadPoolWithContinuations (b, ok, err, cnc)
 
-        // /// Creates a computation which returns the result of the first computation that
-        // /// produces a value or the failures if neither returns a value.
-        // static member chooseBothFromChoice (a:Async<Result<'a, 'b>>) (b:Async<Result<'a, 'b>>) : Async<Result<'a, 'b * 'b>> =
-        //   async {
-        //     let! a, bh = Async.chooseBoth a b
-        //     match a with
-        //     | Ok a_s ->
-        //       return Success a_s
-        //     | Error a_f ->
-        //       let! b = bh
-        //       return Choice.mapr (fun b_f -> (a_f, b_f)) b
-        //   }
+        /// Creates a computation which returns the result of the first computation that
+        /// produces a value or the failures if neither returns a value.
+        static member chooseBothFromResult (a:Async<Result<'a, 'b>>) (b:Async<Result<'a, 'b>>) : Async<Result<'a, 'b * 'b>> =
+          async {
+            let! a, bh = Async.chooseBoth a b
+            match a with
+            | Ok a_s ->
+              return Ok a_s
+            | Error a_f ->
+              let! b = bh
+              return Choice.mapr (fun b_f -> (a_f, b_f)) b
+          }
 
-        // static member chooseBothFromChoice1 (a:'c -> Async<Result<'a, 'b>>) (b:'c -> Async<Result<'a, 'b>>) : 'c -> Async<Result<'a, 'b * 'b>> =
-        //   fun c -> Async.chooseBothFromChoice (a c) (b c)
+        static member chooseBothFromResult1 (a:'c -> Async<Result<'a, 'b>>) (b:'c -> Async<Result<'a, 'b>>) : 'c -> Async<Result<'a, 'b * 'b>> =
+          fun c -> Async.chooseBothFromResult (a c) (b c)
 
-        // static member chooseBothFromChoice2 (a:'d -> 'c -> Async<Result<'a, 'b>>) (b:'d -> 'c -> Async<Result<'a, 'b>>) : 'd -> 'c -> Async<Result<'a, 'b * 'b>> =
-        //   fun d c -> Async.chooseBothFromChoice (a d c) (b d c)
+        static member chooseBothFromResult2 (a:'d -> 'c -> Async<Result<'a, 'b>>) (b:'d -> 'c -> Async<Result<'a, 'b>>) : 'd -> 'c -> Async<Result<'a, 'b * 'b>> =
+          fun d c -> Async.chooseBothFromResult (a d c) (b d c)
 
         static member chooseTasks (a:Task<'a>) (b:Task<'a>) : Async<'a * Task<'a>> = async {
           let! ct = Async.CancellationToken
@@ -934,7 +923,7 @@ module AsyncExtensions =
         static member liftSnd (a:Async<'a>, b:'b) : Async<'a * 'b> =
           a |> Async.map (fun a -> a,b)
 
-        /// Converts an async computation returning a Choice where Ok represents Success
+        /// Converts an async computation returning a Result where Ok represents Success
         /// and Error represents Error such that failures are raised as exceptions.
         static member throwMap (f:'e -> exn) (a:Async<Result<'a, 'e>>) : Async<'a> = async {
           let! r = a
