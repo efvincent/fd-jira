@@ -1,4 +1,4 @@
-﻿open System
+open System
 
 open System.Text.Json
 open JsonSerialization
@@ -37,6 +37,13 @@ let getIssue ctx issue =
   }
 
 let printIssues ctx startAt count =
+  let idNumFromId (s:string) =
+    let parts = s.Split '-' 
+    if parts |> Seq.length = 2 then 
+      match Int32.TryParse parts.[1] with
+      | (true, n) -> n
+      | (false, _) -> 0
+    else 0
   let getIssueWithId id = async {
     let! res = getIssue ctx id
     return (id, res)
@@ -54,7 +61,7 @@ let printIssues ctx startAt count =
   if Map.containsKey 0 ans then
     printfn "Issues: "
     ans.[0]
-    |> Seq.sortBy (function (id, Ok _) -> id | _ -> "") 
+    |> Seq.sortBy (function (id, Ok _) -> idNumFromId id | _ -> 0) 
     |> Seq.iter (function
       | (_, Ok issue) -> printfn "%s\n%s" div (string issue)
       | _ -> ()
