@@ -63,7 +63,10 @@ let printIssues ctx startAt count =
     ans.[0]
     |> Seq.sortBy (function (id, Ok _) -> idNumFromId id | _ -> 0) 
     |> Seq.iter (function
-      | (_, Ok issue) -> printfn "%s" (string issue)
+      | (_, Ok issue) -> 
+        match Database.saveIssue ctx issue with
+        | Ok () -> printfn "saved: %s" (string issue)
+        | Error e -> printfn "not-saved: %s" e
       | _ -> ()
     )
   else 
@@ -98,6 +101,7 @@ let commandProcessor ctx opts =
 let main argv =
   let ctx = Prelude.initCtx
   ctx.log.Information "main|Startup"
+  // let argv = ["range"; "4600"; "1"]
   if argv |> Seq.length > 0 then 
     ctx.log.Information("main|args|{0}", (String.Join(' ', argv)))
   else
