@@ -1,4 +1,4 @@
-﻿open System
+open System
 
 open System.Text.Json
 open JsonSerialization
@@ -40,12 +40,34 @@ let getIssue ctx issue =
   }
 
 let printIssues ctx startAt count =
+  let getIssueWithId id = async {
+    let! res = getIssue ctx id
+    return (id, res)
+  }
+  let ans = 
   [1..count] 
-  |> List.map(fun n -> sprintf "RCTFD-%i" (startAt + n))
-  |> List.iter(fun id -> 
-    match getIssue ctx id |> Async.RunSynchronously with
-    | Ok issue -> printfn "%s\nIssue: %s" div (string issue)
-    | Error e -> ctx.log.Error ("Error: {e}", e)     
+    |> List.map(fun n -> 
+      let id = sprintf "RCTFD-%i" (startAt + n)
+      getIssueWithId id)
+    |> Async.Parallel 
+    |> Async.RunSynchronously
+    |> Seq.groupBy(function (_, Ok _) -> 0 | (_, Error _) -> 1)
+    |> Seq.sortBy(fun (group, _) -> group)  
+    |> Map.ofSeq
+  if Map.containsKey 0 ans then
+    printfn "Issues: "
+    ans.[0]
+    |> Seq.sortBy (function (id, Ok _) -> id | _ -> "") 
+    |> Seq.iter (function
+      | (_, Ok issue) -> printfn "%s\n%s" div (string issue)
+      | _ -> ()
+    )
+  if Map.containsKey 1 ans then 
+    printfn "Errors:"
+    ans.[1]
+    |> Seq.iter (function
+    | (id, Error e) -> printfn "Issue: %s - %s" id e
+    | _ -> ()
   )  
 
 let printFields ctx =
