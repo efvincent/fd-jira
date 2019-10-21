@@ -21,6 +21,7 @@ open System
 
     type Component =
     | Unknown
+    | Archive
     | Mojo
     | Phoenix
     | Wolverine 
@@ -28,6 +29,9 @@ open System
     | Donatello
     | Product
     | Design
+    | Platform
+    | NativeTooling
+    | Experience
     | Other of string 
    
     type Status = 
