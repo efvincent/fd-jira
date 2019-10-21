@@ -84,20 +84,40 @@ module JsonSerialization
         } |> Ok
       )
 
+  module Sprint =
+    let fromJson je =
+      _wrapWithTry (fun () ->
+        {
+          Sprint.id     = getPropStr "id" je
+          name          = getPropStr "name" je
+          goal          = getPropStr "goal" je 
+          state         = getPropStr "state" je
+          startDate     = getPropDateTime "startDate" je
+          endDate       = getPropDateTime "endDate" je
+          originBoardId = getPropInt "originBoardId" je
+        } |> Ok
+      )
+
   module Issue =
     let fromJson je =
       _wrapWithTry (fun () ->
         let flds  = getProp "fields" je
         let res   = getPropOpt "resolution" flds
+        let sprint = 
+          getPropOpt "sprint" flds 
+          |> Option.bind (fun je ->
+            match Sprint.fromJson je with 
+            | Ok sprint -> Some sprint
+            | Error _ -> None
+          )
         let assignee = 
-          match getPropOpt "assignee" flds with
-          | Some aje -> 
-            match PersonType.fromJson aje with
+          getPropOpt "assignee" flds
+          |> Option.bind(fun je -> 
+            match PersonType.fromJson je with
             | Ok p -> Some p
-            | Error e ->
-              printfn "malformed person json: %s" e   // If person is malformed json, we're skipping it (should we not?)
-              None
-          | None -> None
+            | Error _ ->
+              None          
+          )
         let comps = 
           getProp "components" flds
           |> getArray
@@ -114,6 +134,7 @@ module JsonSerialization
           resolution     = res |> Option.bind (getPropStrOpt "name") 
           resolutionDate = getPropDateTimeOpt "resolutiondate" flds
           issueType      = IssueType.fromJson (getProp "issuetype" flds) |> Result.orFailWith
+          sprint         = sprint 
           status         = Status.fromJson (getProp "status" flds) |> Result.orFailWith
           components     = comps
           assignee       = assignee

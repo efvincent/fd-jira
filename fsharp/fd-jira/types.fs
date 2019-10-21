@@ -45,6 +45,16 @@ open System
     | ReadyForReview
     | Other of string 
 
+    type Sprint = {
+      id : string
+      name : string
+      goal : string
+      state : string
+      startDate : DateTimeOffset
+      endDate : DateTimeOffset
+      originBoardId : int
+    }
+
     /// A subset issue held as a property of sub-task issues indicating
     /// the parent of the sub-task
     type Parent = {
@@ -72,6 +82,7 @@ open System
       resolutionDate: DateTimeOffset option
       assignee      : Person option
       issueType     : IssueType
+      sprint        : Sprint option
       parent        : Parent option
       status        : Status
       components    : Set<Component>
