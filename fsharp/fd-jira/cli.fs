@@ -10,9 +10,9 @@ module Cli
 
   [<Verb("range", HelpText="Work with a range of Jira tickets")>]
   type RangeOpts = {
-    [<Option('s', "StartAt", Required=true, HelpText="Ticket number to start. Integer. Ex: the 1234 in RCTFD-1234")>]
+    [<Value(0, MetaName="StartAt", Required=true, HelpText="Ticket number to start. Integer. Ex: the 1234 in RCTFD-1234")>]
     startAt: int
-    [<Option('c', "Count", Required=true, HelpText="Number of tickets to get")>]
+    [<Value(1, MetaName="Count", Required=true, HelpText="Number of tickets to get")>]
     count: int
   }
 
