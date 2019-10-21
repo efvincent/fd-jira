@@ -1,4 +1,4 @@
-﻿open System
+open System
 
 open System.Text.Json
 open JsonSerialization
@@ -7,7 +7,7 @@ open Microsoft.FSharp.Core
 open Cli
 
 [<Literal>]
-let BASE_URL = "https://jira.walmart.com/rest/api/2"
+let BASE_URL = "https://jira.walmart.com"
 
 let jsonSerializerOptions =
   let jo = JsonSerializerOptions()
@@ -75,13 +75,17 @@ let printFields ctx =
     printfn "%s\nfields:\n%s" div (jsonToStr jd)
   | Error e -> ctx.log.Error ("printFields|{e}", e)
 
+let printPassThru ctx query =
+  match JiraApi.passThru ctx BASE_URL query |> Async.RunSynchronously with 
+  | Ok jd ->
+    printfn "\nAPI Result:\n%s\n%s\n" div (jsonToStr jd)
+  | Error e ->
+    printfn "API Error: %s" e
+
 let commandProcessor ctx opts =
   match opts with
-  | Opts.Basic b ->
-    if b.version then
-      printfn "Yes Billy there is a version."
-    else
-      printfn "I don't know what you want from me."
+  | Opts.PassThru p ->
+    printPassThru ctx p.query
   | Opts.Range r ->
     printIssues ctx r.startAt r.count
   | Opts.Unknown ->
@@ -100,12 +104,12 @@ let main argv =
     CommandLine
       .Parser
       .Default
-      .ParseArguments<BasicOpts,RangeOpts> argv 
+      .ParseArguments<PassThruOpts,RangeOpts> argv 
   let opts =    
     match cliResult with
     | :? CommandLine.Parsed<obj> as verb ->
       match verb.Value with
-      | :? BasicOpts as opts -> Ok <| Opts.Basic opts
+      | :? PassThruOpts as opts -> Ok <| Opts.PassThru opts
       | :? RangeOpts as opts -> Ok <| Opts.Range opts
       | t -> 
         ctx.log.Error("args|Missing parse case for verb type|{0}", (t.GetType().Name))

@@ -2,10 +2,10 @@ module Cli
 
   open CommandLine
 
-  [<Verb("info", HelpText="Application Information")>]
-  type BasicOpts = {
-    [<Option('v', "Verbose", HelpText="Display the version of JiraTool")>]
-    version: bool
+  [<Verb("api", HelpText="Pass the REST API directly to Jira. GET verb only.")>]
+  type PassThruOpts = {
+    [<Value(0, MetaName="REST-URI", HelpText="The URI to pass to Jira, excluding the base portion. Ex: \"/rest/api/2/field\"")>]
+    query: string
   }
 
   [<Verb("range", HelpText="Work with a range of Jira tickets")>]
@@ -18,6 +18,6 @@ module Cli
 
   [<RequireQualifiedAccess>]
   type Opts =
-  | Basic of BasicOpts
+  | PassThru of PassThruOpts
   | Range of RangeOpts
   | Unknown
