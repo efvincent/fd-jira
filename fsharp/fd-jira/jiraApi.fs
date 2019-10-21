@@ -50,7 +50,7 @@ let makeUpdateQuery project (updatedSince:DateTimeOffset) =
 let getChangedIssues ctx baseUrl startAt =
   async {
     let query = makeUpdateQuery PROJECT_CODE DateTimeOffset.MinValue
-    let url = sprintf "%s/search?jql=%s&expand=name&maxResults=100&fields=updated&startAt=%i"
+    let url = sprintf "%s/rest/api/2/search?jql=%s&expand=name&maxResults=100&fields=updated&startAt=%i"
                 baseUrl query startAt
     printfn "url: %s\n" url
     return! makeJiraCall ctx url
@@ -59,11 +59,11 @@ let getChangedIssues ctx baseUrl startAt =
 let getIssue ctx baseUrl issue =
   async {
     ctx.log.Debug(sprintf "getIssue|start|\"%s\"" issue)
-    let url = sprintf "%s/issue/%s%s%s%s"
+    let url = sprintf "%s/rest/agile/1.0/issue/%s%s%s%s"
                         baseUrl 
                         issue
                         "?fields=assignee,status,summary,description,created,updated,resolutiondate,"
-                        "issuetype,components,priority,resolution,"
+                        "issuetype,components,priority,resolution,sprint,"
                         "customfield_10002,subtasks,customfield_10007,parent"
     let! result = makeJiraCall ctx url
     match result with 
@@ -74,6 +74,17 @@ let getIssue ctx baseUrl issue =
 
 let getFields ctx baseUrl =
   async {
-    let url = sprintf "%s/field" baseUrl
+    let url = sprintf "%s/rest/api/2/field" baseUrl
     return! makeJiraCall ctx url
+  }
+
+let passThru ctx baseUrl query =
+  async {
+    ctx.log.Debug(sprintf "passThru|start|\"%s\"" query)
+    let url = sprintf "%s%s" baseUrl (if query.StartsWith("/") then query else (sprintf "/%s" query))
+    let! result = makeJiraCall ctx url
+    match result with 
+    | Ok _    -> ctx.log.Debug(sprintf "passThru|end|\"%s\"|Success" query)
+    | Error _ -> ctx.log.Debug(sprintf "passThru|end|\"%s\"|Fail" query)
+    return result
   }
