@@ -5,11 +5,20 @@ open System.Net.Http
 open System.Text.Json
 open Prelude
 
-[<Literal>]
+[<Literal>] 
 let PROJECT_CODE = "RCTFD"
 
+[<Literal>] 
+let MAX_HTTP_CONNECTIONS = 20
+
+let jdOpts = JsonDocumentOptions(AllowTrailingCommas = false, CommentHandling = JsonCommentHandling.Skip)
+  
 // use one HttpClient for all calls
-let httpClient = new HttpClient()
+let httpClient =
+  let handler = new HttpClientHandler()
+  handler.MaxConnectionsPerServer <- MAX_HTTP_CONNECTIONS
+  let client = new HttpClient(handler)
+  client
 
 let makeJiraCall ctx url =
   async {
@@ -24,7 +33,7 @@ let makeJiraCall ctx url =
     let! rsp = httpClient.SendAsync req |> Async.AwaitTask
     if rsp.IsSuccessStatusCode then 
       let! content = rsp.Content.ReadAsStreamAsync() |> Async.AwaitTask
-      let! jd =  JsonDocument.ParseAsync(content) |> Async.AwaitTask
+      let! jd =  JsonDocument.ParseAsync(content, jdOpts) |> Async.AwaitTask
       return Ok(jd)
     else 
       let status = LanguagePrimitives.EnumToValue rsp.StatusCode
