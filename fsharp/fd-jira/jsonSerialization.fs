@@ -2,7 +2,6 @@ module JsonSerialization
 
   open Json
   open Types.Jira
-  open System.Text.Json
   open Microsoft.FSharp.Core
 
   let private _wrapWithTry fn =
