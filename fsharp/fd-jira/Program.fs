@@ -1,4 +1,4 @@
-open System
+﻿open System
 
 open System.Text.Json
 open JsonSerialization
@@ -59,15 +59,17 @@ let printIssues ctx startAt count =
     |> Seq.sortBy(fun (group, _) -> group)  
     |> Map.ofSeq
   if Map.containsKey 0 ans then
-    printfn "Issues: "
+    printfn "Tickets: "
     ans.[0]
     |> Seq.sortBy (function (id, Ok _) -> idNumFromId id | _ -> 0) 
     |> Seq.iter (function
       | (_, Ok issue) -> printfn "%s" (string issue)
       | _ -> ()
     )
+  else 
+    printfn "\nNo tickets found for selected range of IDs %i to %i" startAt (startAt + count)
   if Map.containsKey 1 ans then 
-    printfn "\n %i ID numbers were not found" (Seq.length ans.[1])  
+    printfn "\n%i ID numbers were not found" (Seq.length ans.[1])  
   
 let printFields ctx =
   match JiraApi.getFields ctx BASE_URL |> Async.RunSynchronously with
