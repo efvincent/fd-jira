@@ -1,4 +1,4 @@
-open System
+﻿open System
 
 open System.Text.Json
 open JsonSerialization
@@ -63,16 +63,11 @@ let printIssues ctx startAt count =
     ans.[0]
     |> Seq.sortBy (function (id, Ok _) -> idNumFromId id | _ -> 0) 
     |> Seq.iter (function
-      | (_, Ok issue) -> printfn "%s\n%s" div (string issue)
+      | (_, Ok issue) -> printfn "%s" (string issue)
       | _ -> ()
     )
   if Map.containsKey 1 ans then 
-    printfn "Errors:"
-    ans.[1]
-    |> Seq.iter (function
-    | (id, Error e) -> printfn "Issue: %s - %s" id e
-    | _ -> ()
-  )
+    printfn "\n %i ID numbers were not found" (Seq.length ans.[1])  
   
 let printFields ctx =
   match JiraApi.getFields ctx BASE_URL |> Async.RunSynchronously with
