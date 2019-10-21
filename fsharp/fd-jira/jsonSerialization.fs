@@ -102,6 +102,7 @@ module JsonSerialization
           |> Seq.map Component.fromJson
           |> Seq.concatResult
           |> Result.orFailWith
+          |> Set.ofSeq
         {
           Issue.id       = getPropStr "id" je
           key            = getPropStr "key" je
@@ -112,7 +113,7 @@ module JsonSerialization
           resolutionDate = getPropDateTimeOpt "resolutiondate" flds
           issueType      = IssueType.fromJson (getProp "issuetype" flds) |> Result.orFailWith
           status         = Status.fromJson (getProp "status" flds) |> Result.orFailWith
-          components     = comps |> Set.ofSeq
+          components     = comps
           assignee       = assignee
           link           = getPropStr "self" je
           points         = getPropFloatOpt "customfield_10002" flds
