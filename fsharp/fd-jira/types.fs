@@ -41,6 +41,8 @@ open System
     | Active 
     | Done 
     | Deleted 
+    | ReadyToStart
+    | ReadyForReview
     | Other of string 
 
     /// A subset issue held as a property of sub-task issues indicating

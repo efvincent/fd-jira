@@ -61,12 +61,14 @@ module JsonSerialization
       _wrapWithTry (fun () ->
         match (getPropStr "name" je).ToLower() with
         | "work in progress"
-        | "active"         -> Ok Active
-        | "backlog"        -> Ok Backlog
-        | "deleted"        -> Ok Deleted
-        | "done"           -> Ok Done
-        | "ready-for-work" -> Ok ReadyForWork
-        | other            -> Ok (Other other)
+        | "active"           -> Ok Active
+        | "backlog"          -> Ok Backlog
+        | "deleted"          -> Ok Deleted
+        | "done"             -> Ok Done
+        | "ready-for-work"   -> Ok ReadyForWork
+        | "ready to start"   -> Ok ReadyToStart
+        | "ready for review" -> Ok ReadyForReview
+        | other              -> Ok (Other other)
       )
 
   module Parent =
