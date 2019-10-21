@@ -45,3 +45,5 @@ For linux a bit more complicated:
 * [Jira API v2 Documentation](https://developer.atlassian.com/cloud/jira/platform/rest/v2)
 * [Scott Hanselman's blog on single file .NET](https://www.hanselman.com/blog/MakingATinyNETCore30EntirelySelfcontainedSingleExecutable.aspx)
 * [.NET Core Runtime Info](https://docs.microsoft.com/en-us/dotnet/core/rid-catalog)
+* [LiteDB](https://www.litedb.org/) - embedded doc store, .NET and F# friendly
+* [F# client for LiteDB](https://github.com/Zaid-Ajaj/LiteDB.FSharp)
