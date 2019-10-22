@@ -85,7 +85,7 @@ open System
       sprint        : Sprint option
       parent        : Parent option
       status        : Status
-      components    : Set<Component>
+      components    : Component list
       link          : string
       points        : float option
       created       : DateTimeOffset
@@ -103,7 +103,7 @@ open System
         sprintf "%s %s [%s]\nstatus: %s\nsummary: %s\nlink: %s\npoints: %f\ncreated: %A\nupdated: %A\nassignee: %s\nepic: %s\nparent: %s\n" 
           this.key
           (string this.issueType)
-          (this.components |> Set.map string |> (fun comps -> String.Join(",", comps)))
+          (this.components |> List.map string |> (fun comps -> String.Join(",", comps)))
           (string this.status) this.summary 
           this.link
           (this.points |> Option.defaultValue 0.)
@@ -112,4 +112,7 @@ open System
           (match this.epic with Some e -> e | None -> "[no epic]")
           (match this.parent with Some p -> (string p) | None -> "[not a subtask]")
 
-
+    type SystemState = {
+      project: string
+      mostRecentIssueUpdate: DateTimeOffset
+    }    
