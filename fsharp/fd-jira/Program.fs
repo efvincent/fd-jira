@@ -1,4 +1,4 @@
-open System
+﻿open System
 
 open System.Text.Json
 open JsonSerialization
@@ -20,7 +20,7 @@ let jsonToStr (jd:JsonDocument) = JsonSerializer.Serialize(jd.RootElement, jsonS
 
 let getUpdatedItems ctx =
   async {
-    match JiraApi.getChangedIssues ctx BASE_URL 0 |> Async.RunSynchronously with
+    match JiraApi.getChangedIssues ctx BASE_URL DateTimeOffset.MinValue 0 10 |> Async.RunSynchronously with
     | Ok jd ->
       (jsonToStr >> printfn "\nresult:\n%s") jd
     | Error e ->
@@ -76,25 +76,32 @@ let printIssues ctx startAt count =
   
 let printFields ctx =
   match JiraApi.getFields ctx BASE_URL |> Async.RunSynchronously with
-  | Ok jd ->
-    printfn "%s\nfields:\n%s" div (jsonToStr jd)
+  | Ok jd   -> printfn "%s\nfields:\n%s" div (jsonToStr jd)
   | Error e -> ctx.log.Error ("printFields|{e}", e)
 
 let printPassThru ctx query =
   match JiraApi.passThru ctx BASE_URL query |> Async.RunSynchronously with 
-  | Ok jd ->
-    printfn "\nAPI Result:\n%s\n%s\n" div (jsonToStr jd)
-  | Error e ->
-    printfn "API Error: %s" e
+  | Ok jd   -> printfn "\nAPI Result:\n%s\n%s\n" div (jsonToStr jd)
+  | Error e -> printfn "API Error: %s" e
+
+let printItemFromDb ctx key =
+  match Database.tryGetIssue ctx key with
+  | Some issue -> printfn "%s" (issue.ToStringLong())
+  | None  -> printfn "Issue %s not found" key
+
+let printBulk ctx since startAt maxCount =
+  match JiraApi.getChangedIssues ctx BASE_URL since startAt maxCount |> Async.RunSynchronously with 
+  | Ok jd   -> printfn "\n%s\n" (jsonToStr jd) 
+  | Error e -> printfn "API Error: %s" e
+  ()
 
 let commandProcessor ctx opts =
   match opts with
-  | Opts.PassThru p ->
-    printPassThru ctx p.query
-  | Opts.Range r ->
-    printIssues ctx r.startAt r.count
-  | Opts.Unknown ->
-    printfn "Unknown. I don't know what you're asking."
+  | Opts.PassThru p -> printPassThru ctx p.query
+  | Opts.Get g      -> printItemFromDb ctx g.key
+  | Opts.Bulk b     -> printBulk ctx b.changedSince b.startAt b.maxCount
+  | Opts.Range r    -> printIssues ctx r.startAt r.count
+  | Opts.Unknown    -> printfn "Unknown. I don't know what you're asking."
   0
 
 [<EntryPoint>]    

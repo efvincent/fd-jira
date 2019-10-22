@@ -1,11 +1,28 @@
 module Cli
 
   open CommandLine
+  open System
 
   [<Verb("api", HelpText="Pass the REST API directly to Jira. GET verb only.")>]
   type PassThruOpts = {
     [<Value(0, MetaName="REST-URI", HelpText="The URI to pass to Jira, excluding the base portion. Ex: \"/rest/api/2/field\"")>]
     query: string
+  }
+
+  [<Verb("get", HelpText="Get one or more issues from local database")>]
+  type GetOpts = {
+    [<Value(0, MetaName="key", HelpText="Key of issue to get from the database")>]
+    key: string
+  }
+
+  [<Verb("bulk", HelpText="Bulk get items changed since a particular date")>]
+  type BulkOpts = {
+    [<Value(0, MetaName="startAt", HelpText="Start at this record number (for paging)")>]
+    startAt: int
+    [<Value(1, MetaName="maxCount", HelpText="Maximum number of records to return (for paging)")>]
+    maxCount: int
+    [<Value(2, MetaName="date", HelpText="Get items changed after this date")>]
+    changedSince: DateTimeOffset
   }
 
   [<Verb("range", HelpText="Work with a range of Jira tickets")>]
@@ -19,7 +36,9 @@ module Cli
   [<RequireQualifiedAccess>]
   type Opts =
   | PassThru of PassThruOpts
-  | Range of RangeOpts
+  | Get      of GetOpts
+  | Bulk     of BulkOpts
+  | Range    of RangeOpts
   | Unknown
 
   /// Return the selected CLI options if any
