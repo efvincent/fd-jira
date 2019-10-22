@@ -124,7 +124,8 @@ module JsonSerialization
           |> Seq.map Component.fromJson
           |> Seq.concatResult
           |> Result.orFailWith
-          |> Set.ofSeq
+          |> Set.ofSeq  // to eliminate duplicates
+          |> List.ofSeq
         {
           Issue.id       = getPropStr "id" je
           key            = getPropStr "key" je
