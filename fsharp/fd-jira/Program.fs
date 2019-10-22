@@ -1,4 +1,4 @@
-﻿open System
+open System
 
 open System.Text.Json
 open JsonSerialization
@@ -101,38 +101,7 @@ let commandProcessor ctx opts =
 let main argv =
   let ctx = Prelude.initCtx
   ctx.log.Information "main|Startup"
-  // let argv = ["range"; "4600"; "1"]
-  if argv |> Seq.length > 0 then 
-    ctx.log.Information("main|args|{0}", (String.Join(' ', argv)))
-  else
-    ctx.log.Information("main|No args passed")
-  let cliResult =
-    CommandLine
-      .Parser
-      .Default
-      .ParseArguments<PassThruOpts,RangeOpts> argv 
-  let opts =    
-    match cliResult with
-    | :? CommandLine.Parsed<obj> as verb ->
-      match verb.Value with
-      | :? PassThruOpts as opts -> Ok <| Opts.PassThru opts
-      | :? RangeOpts as opts -> Ok <| Opts.Range opts
-      | t -> 
-        ctx.log.Error("args|Missing parse case for verb type|{0}", (t.GetType().Name))
-        Error (sprintf "Missinc parse case for verb type: %s" (t.GetType().Name))
-    | :? CommandLine.NotParsed<obj> as np -> 
-      ctx.log.Warning("args|Not parsed|{@0}", np)
-      Error (
-        sprintf "Not parsed: %s" 
-          (np.Errors 
-          |> Seq.map(fun e -> string e.Tag) 
-          |> (fun errs -> String.Join(',', errs))))
-    | _ -> 
-      let msg = "Unexpected CLI parser response"
-      ctx.log.Fatal("args|{0}", msg)
-      Error msg
-
-  match opts with
+  match getCliOpts ctx argv with
   | Ok opts ->
     Environment.GetEnvironmentVariable("JIRA_CREDS")
     |> Result.ofObj "No Creds Found!"
