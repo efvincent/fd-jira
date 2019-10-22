@@ -4,6 +4,7 @@ open System
 open System.Net.Http
 open System.Text.Json
 open Prelude
+open Json
 
 [<Literal>] 
 let PROJECT_CODE = "RCTFD"
@@ -47,13 +48,45 @@ let makeUpdateQuery project (updatedSince:DateTimeOffset) =
   let query = sprintf "project=%s AND updatedDate >= \"%s\"" project dt
   Uri.EscapeDataString query
   
-let getChangedIssues ctx baseUrl startAt =
+let getChangedIssues ctx baseUrl changedSince startAt maxCount =
   async {
-    let query = makeUpdateQuery PROJECT_CODE DateTimeOffset.MinValue
-    let url = sprintf "%s/rest/api/2/search?jql=%s&expand=name&maxResults=100&fields=updated&startAt=%i"
-                baseUrl query startAt
-    printfn "url: %s\n" url
+    let query = makeUpdateQuery PROJECT_CODE changedSince
+    let url = sprintf "%s/rest/api/2/search?jql=%s&expand=name&maxResults=%i&fields=updated&startAt=%i"
+                baseUrl query maxCount startAt
     return! makeJiraCall ctx url
+  }
+
+let processChangedIssues ctx baseUrl changedSince chunkSize =
+  async {
+    // let tot = 101
+    // let step = 10
+    // let max = if tot % step = 0 then tot else tot + step
+    // let s = seq { for i in step-1 .. 10 .. max do yield i }
+    // s |> Seq.iter (fun n -> printfn "%i" n)
+    // get first chunk, get the max number from that
+    // use ^ to do generate a series of parameters
+    // map those into a sequence of async workflows to do the HTTP call to get chunks
+    // collect those into single list, map to the keys
+    // map those into a sequence of async workflows to do the HTTP call to get items and save them to the db
+    let getIssues je =
+      (getArray (getProp "issues" je))
+      |> Seq.map (fun itemJe -> 
+        {|
+          id = (getPropStr "id" itemJe)
+          key = (getPropStr "key" itemJe)
+          updated = (getPropDateTime "updated" (getProp "fields" itemJe))
+        |})
+    match! getChangedIssues ctx baseUrl changedSince 0 chunkSize with
+    | Ok firstBatch -> 
+      let je = firstBatch.RootElement
+      let total = (getInt (getProp "total" je))
+      let firstBatch = getIssues je
+      let total = if total % chunkSize = 0 then total else total + chunkSize  // extra call if not exact factor of chunkSize
+      
+      ()
+    | Error e ->
+      ()
+    return 0
   }
 
 let getIssue ctx baseUrl issue =
