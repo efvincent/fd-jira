@@ -96,15 +96,31 @@ let printBulk ctx since startAt maxCount =
   ()
 
 let performSync ctx lastUpdate =
+  // fn to save a key. Will be passed to the update processor which will use it
+  // on each found issue. We'll pull the issue from the API, deser and save it
+  let getAndSave key = async {
+    let! jd = JiraApi.getIssue ctx BASE_URL key
+    match jd with
+    | Ok jd -> 
+      match Issue.fromJson jd.RootElement with
+      | Ok issue ->
+        match Database.saveIssue ctx issue with
+        | Ok () -> ()
+        | Error e ->
+          printfn "Error saving key %s: %s" key e
+      | Error e ->
+        printfn "Error deserializing saved json into an issue with key %s: %s" key e
+    | Error e ->
+      printfn "Error getting issue %s: %s" key e
+  }
+
   let result = 
-    JiraApi.processChangedIssues ctx BASE_URL lastUpdate 250 
+    JiraApi.processChangedIssues ctx BASE_URL lastUpdate 250 getAndSave
     |> Async.RunSynchronously
   printfn "Found %i issues updated since %s, new last updated date is %s. Saving."
-    (result.items |> List.length)
+    result.count
     (string lastUpdate)
-    (string result.lastUpdate)
-  result.items
-  |> Seq.iter (fun i -> Database.saveIssue ctx i |> ignore)
+    (string result.updated)
   printfn "Done"
 
 let commandProcessor ctx opts =

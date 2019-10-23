@@ -72,9 +72,8 @@ let getIssue ctx baseUrl issue =
     return result
   } 
 
-// TODO: Pass a fn to process one chunk at a time. Everything at once doesn't scale
 let processChangedIssues 
-  ctx baseUrl changedSince chunkSize = 
+  ctx baseUrl changedSince chunkSize (procFn:string -> Async<unit>) = 
   async {
     /// Deserialize sequence of found issues into anon record
     let deserIssues je =
@@ -87,55 +86,47 @@ let processChangedIssues
         |})
 
     /// Recursively gets pages of changed issue records until no more are returned
-    let rec getBatches acc startAt chunkSize batchCount = async {
+    let rec getBatches 
+          (result:{| count: int; updated: DateTimeOffset |}) 
+          startAt chunkSize batchCount = async {
       ctx.log.Debug("jiraApi.processChangedIssues.getBatches|start|startAt:{start}|chunkSize:{chunkSize}|batchCount:{count}",
         startAt, chunkSize, batchCount)
       // get a page of changed issues
       match! getChangedIssues ctx baseUrl changedSince startAt chunkSize with
       | Ok batch ->
-        // deserialize and add them to the accumulator
         let je = batch.RootElement
         let total = (getPropInt "total" je)
         let issues = deserIssues je |> List.ofSeq
-        let acc' = issues :: acc
+        // find the latest update date from the list
+        let upd' = 
+          let lastFromBatch =
+            issues
+            |> List.map(fun i -> i.updated)
+            |> List.max
+          if lastFromBatch > result.updated then lastFromBatch else result.updated
         // if fewer issues were returned than the max we specified then we're done
         let len = issues |> Seq.length
         ctx.log.Debug(
           "jiraApi.processChangedIssues.getBatches|end|startAt:{start}|chunkSize:{chunkSize}|len:{len}|total:{total}|batchCount:{count}",
           startAt, chunkSize, len, total, batchCount)
-        if len < chunkSize then 
-          return acc'
-        // otherwise call for the next page
+        // process the issues
+        let! _ = 
+          issues 
+          |> List.map(fun item -> procFn item.key)
+          |> Async.Parallel        
+
+        let result' = {|count = result.count + len; updated = upd' |}
+        if len >= chunkSize then 
+          return! getBatches result' (startAt + len) chunkSize (batchCount + 1)
         else
-          return! getBatches acc' (startAt + len) chunkSize (batchCount + 1)
-      // if there's an error getting a page of changed issues, log and return what we have so far
+          return result'
       | Error e -> 
         ctx.log.Error("jiraApi.processChangedIssues.getBatches|startAt:{start}|chunkSize:{chunkSize}|batchCount:{count}|{err}",
           startAt, chunkSize, batchCount, e)
-        return acc
+        return result
     }
 
-    let! batchesOfBatches = getBatches [] 0 chunkSize 1 
-    let! itemGetResults = 
-      batchesOfBatches 
-      |> List.concat
-      |> List.map (fun itemRef ->  getIssue ctx baseUrl itemRef.key)
-      |> Async.Parallel
-    let (items, upd) =
-      itemGetResults
-      |> Seq.fold (fun (acc,dt) res ->
-          match res with
-          | Ok jd -> 
-            match JsonSerialization.Issue.fromJson jd.RootElement with
-            | Ok issue ->
-              if issue.updated > dt then (issue::acc, issue.updated) else (issue::acc,dt)
-            | Error _ ->
-              (acc,dt)    
-          | Error _ -> 
-            (acc,dt)
-        ) ([], DateTimeOffset.MinValue)
-
-    return {| items = items ; lastUpdate = upd |}
+    return! getBatches {|count=0; updated=DateTimeOffset.MinValue|} 0 chunkSize 1 
   }
 
 let getFields ctx baseUrl =
