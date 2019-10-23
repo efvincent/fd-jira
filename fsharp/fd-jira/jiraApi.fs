@@ -55,40 +55,7 @@ let getChangedIssues ctx baseUrl changedSince startAt maxCount =
                 baseUrl query maxCount startAt
     return! makeJiraCall ctx url
   }
-
-let processChangedIssues ctx baseUrl changedSince chunkSize =
-  async {
-    // let tot = 101
-    // let step = 10
-    // let max = if tot % step = 0 then tot else tot + step
-    // let s = seq { for i in step-1 .. 10 .. max do yield i }
-    // s |> Seq.iter (fun n -> printfn "%i" n)
-    // get first chunk, get the max number from that
-    // use ^ to do generate a series of parameters
-    // map those into a sequence of async workflows to do the HTTP call to get chunks
-    // collect those into single list, map to the keys
-    // map those into a sequence of async workflows to do the HTTP call to get items and save them to the db
-    let getIssues je =
-      (getArray (getProp "issues" je))
-      |> Seq.map (fun itemJe -> 
-        {|
-          id = (getPropStr "id" itemJe)
-          key = (getPropStr "key" itemJe)
-          updated = (getPropDateTime "updated" (getProp "fields" itemJe))
-        |})
-    match! getChangedIssues ctx baseUrl changedSince 0 chunkSize with
-    | Ok firstBatch -> 
-      let je = firstBatch.RootElement
-      let total = (getInt (getProp "total" je))
-      let firstBatch = getIssues je
-      let total = if total % chunkSize = 0 then total else total + chunkSize  // extra call if not exact factor of chunkSize
-      
-      ()
-    | Error e ->
-      ()
-    return 0
-  }
-
+  
 let getIssue ctx baseUrl issue =
   async {
     ctx.log.Debug(sprintf "getIssue|start|\"%s\"" issue)
@@ -104,6 +71,71 @@ let getIssue ctx baseUrl issue =
     | Error _ -> ctx.log.Debug(sprintf "getIssue|end|\"%s\"|Fail" issue)
     return result
   } 
+
+let processChangedIssues 
+  ctx baseUrl changedSince chunkSize = 
+  async {
+    /// Deserialize sequence of found issues into anon record
+    let deserIssues je =
+      (getArray (getProp "issues" je))
+      |> Seq.map (fun itemJe -> 
+        {|
+          id = (getPropStr "id" itemJe)
+          key = (getPropStr "key" itemJe)
+          updated = (getPropDateTime "updated" (getProp "fields" itemJe))
+        |})
+
+    /// Recursively gets pages of changed issue records until no more are returned
+    let rec getBatches acc startAt chunkSize batchCount = async {
+      ctx.log.Debug("jiraApi.processChangedIssues.getBatches|start|startAt:{start}|chunkSize:{chunkSize}|batchCount:{count}",
+        startAt, chunkSize, batchCount)
+      // get a page of changed issues
+      match! getChangedIssues ctx baseUrl changedSince startAt chunkSize with
+      | Ok batch ->
+        // deserialize and add them to the accumulator
+        let je = batch.RootElement
+        let total = (getPropInt "total" je)
+        let issues = deserIssues je |> List.ofSeq
+        let acc' = issues :: acc
+        // if fewer issues were returned than the max we specified then we're done
+        let len = issues |> Seq.length
+        ctx.log.Debug(
+          "jiraApi.processChangedIssues.getBatches|end|startAt:{start}|chunkSize:{chunkSize}|len:{len}|total:{total}|batchCount:{count}",
+          startAt, chunkSize, len, total, batchCount)
+        if len < chunkSize then 
+          return acc'
+        // otherwise call for the next page
+        else
+          return! getBatches acc' (startAt + len) chunkSize (batchCount + 1)
+      // if there's an error getting a page of changed issues, log and return what we have so far
+      | Error e -> 
+        ctx.log.Error("jiraApi.processChangedIssues.getBatches|startAt:{start}|chunkSize:{chunkSize}|batchCount:{count}|{err}",
+          startAt, chunkSize, batchCount, e)
+        return acc
+    }
+
+    let! batchesOfBatches = getBatches [] 0 chunkSize 1 
+    let! itemGetResults = 
+      batchesOfBatches 
+      |> List.concat
+      |> List.map (fun itemRef ->  getIssue ctx baseUrl itemRef.key)
+      |> Async.Parallel
+    let (items, upd) =
+      itemGetResults
+      |> Seq.fold (fun (acc,dt) res ->
+          match res with
+          | Ok jd -> 
+            match JsonSerialization.Issue.fromJson jd.RootElement with
+            | Ok issue ->
+              if issue.updated > dt then (issue::acc, issue.updated) else (issue::acc,dt)
+            | Error _ ->
+              (acc,dt)    
+          | Error _ -> 
+            (acc,dt)
+        ) ([], DateTimeOffset.MinValue)
+
+    return {| items = items ; lastUpdate = upd |}
+  }
 
 let getFields ctx baseUrl =
   async {
