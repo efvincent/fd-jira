@@ -72,6 +72,7 @@ let getIssue ctx baseUrl issue =
     return result
   } 
 
+// TODO: Pass a fn to process one chunk at a time. Everything at once doesn't scale
 let processChangedIssues 
   ctx baseUrl changedSince chunkSize = 
   async {
