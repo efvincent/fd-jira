@@ -73,7 +73,7 @@ let getIssue ctx baseUrl issue =
   } 
 
 let processChangedIssues 
-  ctx baseUrl changedSince chunkSize (procFn:string -> Async<unit>) = 
+  ctx baseUrl changedSince chunkSize (procFn:string -> Async<unit>) (batchProgress: int -> int -> int -> unit) = 
   async {
     /// Deserialize sequence of found issues into anon record
     let deserIssues je =
@@ -109,6 +109,10 @@ let processChangedIssues
         ctx.log.Debug(
           "jiraApi.processChangedIssues.getBatches|end|startAt:{start}|chunkSize:{chunkSize}|len:{len}|total:{total}|batchCount:{count}",
           startAt, chunkSize, len, total, batchCount)
+
+        // report progress
+        batchProgress startAt len total
+        
         // process the issues
         let! _ = 
           issues 

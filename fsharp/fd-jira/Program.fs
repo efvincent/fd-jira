@@ -114,9 +114,14 @@ let performSync ctx lastUpdate =
       printfn "Error getting issue %s: %s" key e
   }
 
+  // callback for reporting progress on a batch level
+  let progress completed working total =
+    printfn "completed: %5i current: %3i total: %6i" completed working total
+    
   let result = 
-    JiraApi.processChangedIssues ctx BASE_URL lastUpdate 250 getAndSave
+    JiraApi.processChangedIssues ctx BASE_URL lastUpdate 50 getAndSave progress
     |> Async.RunSynchronously
+
   printfn "Found %i issues updated since %s, new last updated date is %s. Saving."
     result.count
     (string lastUpdate)
