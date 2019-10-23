@@ -95,11 +95,24 @@ let printBulk ctx since startAt maxCount =
   | Error e -> printfn "API Error: %s" e
   ()
 
+let performSync ctx lastUpdate =
+  let result = 
+    JiraApi.processChangedIssues ctx BASE_URL lastUpdate 250 
+    |> Async.RunSynchronously
+  printfn "Found %i issues updated since %s, new last updated date is %s. Saving."
+    (result.items |> List.length)
+    (string lastUpdate)
+    (string result.lastUpdate)
+  result.items
+  |> Seq.iter (fun i -> Database.saveIssue ctx i |> ignore)
+  printfn "Done"
+
 let commandProcessor ctx opts =
   match opts with
   | Opts.PassThru p -> printPassThru ctx p.query
   | Opts.Get g      -> printItemFromDb ctx g.key
   | Opts.Bulk b     -> printBulk ctx b.changedSince b.startAt b.maxCount
+  | Opts.Sync s     -> performSync ctx s.lastUpdate
   | Opts.Range r    -> printIssues ctx r.startAt r.count
   | Opts.Unknown    -> printfn "Unknown. I don't know what you're asking."
   0

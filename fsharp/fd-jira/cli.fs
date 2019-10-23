@@ -3,6 +3,12 @@ module Cli
   open CommandLine
   open System
 
+  [<Verb("sync", HelpText="Sync issues for project")>]
+  type SyncOpts = {
+    [<Value(0, MetaName="since", HelpText="Sync everything changed after this date")>]
+    lastUpdate: DateTimeOffset
+  }
+
   [<Verb("api", HelpText="Pass the REST API directly to Jira. GET verb only.")>]
   type PassThruOpts = {
     [<Value(0, MetaName="REST-URI", HelpText="The URI to pass to Jira, excluding the base portion. Ex: \"/rest/api/2/field\"")>]
@@ -36,6 +42,7 @@ module Cli
   [<RequireQualifiedAccess>]
   type Opts =
   | PassThru of PassThruOpts
+  | Sync     of SyncOpts
   | Get      of GetOpts
   | Bulk     of BulkOpts
   | Range    of RangeOpts
@@ -53,13 +60,14 @@ module Cli
       CommandLine
         .Parser
         .Default
-        .ParseArguments<PassThruOpts,RangeOpts,GetOpts,BulkOpts> argv 
+        .ParseArguments<PassThruOpts,SyncOpts, RangeOpts,GetOpts,BulkOpts> argv 
     let opts =    
       match cliResult with
       | :? CommandLine.Parsed<obj> as verb ->
         match verb.Value with
         | :? PassThruOpts as opts -> Ok <| Opts.PassThru opts
         | :? GetOpts      as opts -> Ok <| Opts.Get opts
+        | :? SyncOpts     as opts -> Ok <| Opts.Sync opts
         | :? BulkOpts     as opts -> Ok <| Opts.Bulk opts
         | :? RangeOpts    as opts -> Ok <| Opts.Range opts
         | t -> 
