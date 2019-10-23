@@ -11,9 +11,9 @@
     <Compile Include="Result.fs" />
     <Compile Include="prelude.fs" />
     <Compile Include="jsonParsing.fs" />
-    <Compile Include="jiraApi.fs" />
     <Compile Include="types.fs" />
     <Compile Include="jsonSerialization.fs" />
+    <Compile Include="jiraApi.fs" />
     <Compile Include="database.fs" />
     <Compile Include="cli.fs" />
     <Compile Include="Program.fs" />
