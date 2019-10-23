@@ -7,7 +7,9 @@ s |> Seq.iter (fun n -> printfn "%i" n)
 
 // get first chunk, get the max number from that
 // use ^ to do generate a series of parameters
-// map those into a sequence of async workflows to do the HTTP call to get chunks
+// map those into a sequence of async workflows to 
+//  do the HTTP call to get chunks
 // collect those into single list, map to the keys
-// map those into a sequence of async workflows to do the HTTP call to get items and save them to the db
+// map those into a sequence of async workflows to 
+//  do the HTTP call to get items and save them to the db
 
