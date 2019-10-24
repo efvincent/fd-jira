@@ -16,6 +16,7 @@
     <Compile Include="jiraApi.fs" />
     <Compile Include="database.fs" />
     <Compile Include="cli.fs" />
+    <Compile Include="parser.fs" />
     <Compile Include="Program.fs" />
     <Content Include="config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
