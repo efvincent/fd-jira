@@ -3,6 +3,12 @@ module Cli
   open CommandLine
   open System
 
+  [<Verb("count", HelpText="Count element")>]
+  type CountOpts = {
+    [<Value(0, MetaName="target", HelpText="What to count. Possible values: \"issues\"")>]
+    target: string
+  }
+
   [<Verb("sync", HelpText="Sync issues for project")>]
   type SyncOpts = {
     [<Value(0, MetaName="since", HelpText="Sync everything changed after this date")>]
@@ -41,6 +47,7 @@ module Cli
 
   [<RequireQualifiedAccess>]
   type Opts =
+  | Count    of CountOpts
   | PassThru of PassThruOpts
   | Sync     of SyncOpts
   | Get      of GetOpts
@@ -60,11 +67,18 @@ module Cli
       CommandLine
         .Parser
         .Default
-        .ParseArguments<PassThruOpts,SyncOpts, RangeOpts,GetOpts,BulkOpts> argv 
+        .ParseArguments(argv, 
+          typeof<CountOpts>,
+          typeof<PassThruOpts>,
+          typeof<SyncOpts>,
+          typeof<RangeOpts>,
+          typeof<GetOpts>,
+          typeof<BulkOpts>)
     let opts =    
       match cliResult with
       | :? CommandLine.Parsed<obj> as verb ->
         match verb.Value with
+        | :? CountOpts    as opts -> Ok <| Opts.Count opts
         | :? PassThruOpts as opts -> Ok <| Opts.PassThru opts
         | :? GetOpts      as opts -> Ok <| Opts.Get opts
         | :? SyncOpts     as opts -> Ok <| Opts.Sync opts
