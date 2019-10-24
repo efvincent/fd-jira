@@ -14,6 +14,12 @@ let systemState =
   col.EnsureIndex(fun s -> s.project) |> ignore
   col
 
+let countIssues (ctx:Prelude.Ctx) =
+  ctx.log.Debug("Database.countIssues|start")
+  let c = issues.Count()
+  ctx.log.Debug("Database.countIssues|end|count:{count}", c)
+  c
+
 let saveSystemState (ctx:Prelude.Ctx) (project:string) (lastUpdate:DateTimeOffset) =
   ctx.log.Debug("Database.saveSystemState|start|project:{project}|lastUpdate:{lastUpdate}",
     project, lastUpdate)
