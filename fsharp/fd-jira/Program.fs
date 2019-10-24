@@ -117,7 +117,7 @@ let performSync ctx lastUpdate =
   // callback for reporting progress on a batch level
   let progress completed working total =
     printfn "completed: %5i current: %3i total: %6i" completed working total
-    
+
   let result = 
     JiraApi.processChangedIssues ctx BASE_URL lastUpdate 50 getAndSave progress
     |> Async.RunSynchronously
@@ -128,26 +128,36 @@ let performSync ctx lastUpdate =
     (string result.updated)
   printfn "Done"
 
+let printCount ctx (target:string) = 
+  let target = target.Trim().ToLower()
+  match if target = "" then "issues" else target with
+  | "issue"
+  | "issues" ->
+    let c = Database.countIssues ctx
+    printfn "Issue Count: %i" c
+  | t ->
+    printfn "I don't know how to count \"%s\". Acceptable count targets are: [issues]" t
+
+
 let commandProcessor ctx opts =
   match opts with
-  | Opts.PassThru p -> printPassThru ctx p.query
+  | Opts.Count t    -> printCount      ctx t.target
+  | Opts.PassThru p -> printPassThru   ctx p.query
   | Opts.Get g      -> printItemFromDb ctx g.key
-  | Opts.Bulk b     -> printBulk ctx b.changedSince b.startAt b.maxCount
-  | Opts.Sync s     -> performSync ctx s.lastUpdate
-  | Opts.Range r    -> printIssues ctx r.startAt r.count
+  | Opts.Bulk b     -> printBulk       ctx b.changedSince b.startAt b.maxCount
+  | Opts.Sync s     -> performSync     ctx s.lastUpdate
+  | Opts.Range r    -> printIssues     ctx r.startAt r.count
   | Opts.Unknown    -> printfn "Unknown. I don't know what you're asking."
   0
 
-[<EntryPoint>]    
-let main argv =
-  let ctx = Prelude.initCtx
-  ctx.log.Information "main|Startup"
+let processArgs ctx argv =
+  let argv = if argv |> Array.isEmpty then [|"--help"|] else argv
   match getCliOpts ctx argv with
   | Ok opts ->
     Environment.GetEnvironmentVariable("JIRA_CREDS")
     |> Result.ofObj "No Creds Found!"
     |> Result.map (fun cr ->
-        ctx.log.Information "main|creds|Credentials secured"
+        ctx.log.Information "processArgs|creds|Credentials secured"
         let ctx = ctx.SetCreds cr
         commandProcessor ctx opts
       )
@@ -155,6 +165,37 @@ let main argv =
         | Ok _ -> ()
         | Error e -> ctx.log.Error ("main|creds|{e}", e))
   | Error _ -> ()
+
+let rec cmdLoop ctx argv =
+  processArgs ctx argv
+  printf "\nFD-JIRA > "
+  let input = Console.ReadLine()
+  printf "\n"
+  if input.Trim().ToLower() <> "exit" then
+    let args = input.Split(' ') |> Seq.map(fun s -> s.Trim()) |> Array.ofSeq
+    cmdLoop ctx args
+  else
+    printfn "bye!\n"
+
+[<EntryPoint>]    
+let main argv =
+  let ctx = Prelude.initCtx
+  ctx.log.Information "main|Startup"
+  let ctxOpt =
+    Environment.GetEnvironmentVariable("JIRA_CREDS")
+    |> Result.ofObj "No Creds Found!"
+    |> Result.map (fun cr ->
+        ctx.log.Information "processArgs|creds|Credentials secured"
+        ctx.SetCreds cr
+      )
+  match ctxOpt with
+  | Ok ctx ->
+    if (not (Array.isEmpty argv)) then   // process single command
+      processArgs ctx argv
+    else                                 // loop commands until user exit
+      cmdLoop ctx argv
+  | Error e ->
+    printfn "%s" e
 
   ctx.log.Information "main|end"
   0
