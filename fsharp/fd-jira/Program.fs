@@ -8,6 +8,7 @@ open Cli
 
 [<Literal>]
 let BASE_URL = "https://jira.walmart.com"
+let PROJECT = "RCTFD"
 
 let jsonSerializerOptions =
   let jo = JsonSerializerOptions()
@@ -27,7 +28,21 @@ let getUpdatedItems ctx =
       ctx.log.Error ("getUpdatedItems|{e}", e)
   }
 
-let getIssue ctx issue =
+let getIssue ctx ident =
+  async {
+    let issue = 
+      match ident with 
+      | Parser.Ast.IssueIdent.Num n -> sprintf "%s-%s" PROJECT n
+      | Parser.Ast.IssueIdent.FullId id -> id 
+
+    match! JiraApi.getIssue ctx BASE_URL issue with
+    | Ok (jd) ->
+      return Issue.fromJson jd.RootElement
+    | Error e ->
+      return Error e
+  }
+
+let getIssue2 ctx issue =
   async {
     match! JiraApi.getIssue ctx BASE_URL issue with
     | Ok jd ->
@@ -45,13 +60,13 @@ let printIssues ctx startAt count =
       | (false, _) -> 0
     else 0
   let getIssueWithId id = async {
-    let! res = getIssue ctx id
+    let! res = getIssue2 ctx id
     return (id, res)
   }
   let ans = 
     [1..count] 
     |> List.map(fun n -> 
-      let id = sprintf "RCTFD-%i" (startAt + n)
+      let id = sprintf "%s-%i" PROJECT (startAt + n)
       getIssueWithId id)
     |> Async.Parallel 
     |> Async.RunSynchronously
@@ -84,10 +99,14 @@ let printPassThru ctx query =
   | Ok jd   -> printfn "\nAPI Result:\n%s\n%s\n" div (jsonToStr jd)
   | Error e -> printfn "API Error: %s" e
 
-let printItemFromDb ctx key =
-  match Database.tryGetIssue ctx key with
+let printIssueFromDb ctx id =
+  let issue = 
+    match id with 
+    | Parser.Ast.IssueIdent.Num n -> sprintf "%s-%s" PROJECT n
+    | Parser.Ast.IssueIdent.FullId id -> id 
+  match Database.tryGetIssue ctx issue with
   | Some issue -> printfn "%s" (issue.ToStringLong())
-  | None  -> printfn "Issue %s not found" key
+  | None  -> printfn "Issue %s not found" issue
 
 let printBulk ctx since startAt maxCount =
   match JiraApi.getChangedIssues ctx BASE_URL since startAt maxCount |> Async.RunSynchronously with 
@@ -128,22 +147,15 @@ let performSync ctx lastUpdate =
     (string result.updated)
   printfn "Done"
 
-let printCount ctx (target:string) = 
-  let target = target.Trim().ToLower()
-  match if target = "" then "issues" else target with
-  | "issue"
-  | "issues" ->
-    let c = Database.countIssues ctx
-    printfn "Issue Count: %i" c
-  | t ->
-    printfn "I don't know how to count \"%s\". Acceptable count targets are: [issues]" t
-
+let printCount ctx = 
+  let c = Database.countIssues ctx
+  printfn "Issue Count: %i" c
 
 let commandProcessor ctx opts =
   match opts with
-  | Opts.Count t    -> printCount      ctx t.target
+  | Opts.Count _    -> ()
   | Opts.PassThru p -> printPassThru   ctx p.query
-  | Opts.Get g      -> printItemFromDb ctx g.key
+  | Opts.Get _      -> ()
   | Opts.Bulk b     -> printBulk       ctx b.changedSince b.startAt b.maxCount
   | Opts.Sync s     -> performSync     ctx s.lastUpdate
   | Opts.Range r    -> printIssues     ctx r.startAt r.count
@@ -176,7 +188,38 @@ let rec cmdLoop ctx argv =
     cmdLoop ctx args
   else
     printfn "bye!\n"
-    
+
+module CmdProc =
+  open Parser 
+  open FParsec    
+  open Parser.Ast
+
+  let prompt () = 
+    printf "\nFD-JIRA > "
+    Console.ReadLine()
+
+  let rec parsecCmdLoop ctx (input:string) =
+    if String.IsNullOrWhiteSpace(input) then parsecCmdLoop ctx (prompt())
+    else
+      interpret ctx input false
+  
+  and interpret ctx input single =
+    match run cmdParser input with 
+    | Success(Command.Count,_,_) -> 
+      printCount ctx
+      if not single then parsecCmdLoop ctx (prompt())
+    | Success(Command.Help,_,_) ->
+      printfn "understood: Help command"
+      if not single then parsecCmdLoop ctx (prompt())
+    | Success(Command.Get id,_,_) ->
+      printIssueFromDb ctx id
+      if not single then parsecCmdLoop ctx (prompt())
+    | Success(Command.Exit,_,_) ->
+      printfn "bye!\n"
+    | Failure(msg,_,_) ->
+      printfn "%s" msg
+      if not single then parsecCmdLoop ctx (prompt())
+
 [<EntryPoint>]    
 let main argv =
   let ctx = Prelude.initCtx
@@ -190,12 +233,14 @@ let main argv =
       )
   match ctxOpt with
   | Ok ctx ->
-    if (not (Array.isEmpty argv)) then   // process single command
-      processArgs ctx argv
-    else                                 // loop commands until user exit
-      cmdLoop ctx argv
+    if not (Array.isEmpty argv) then 
+      CmdProc.interpret ctx (String.Join(' ', argv)) true
+    else
+      CmdProc.parsecCmdLoop ctx (String.Join(' ', argv))
   | Error e ->
     printfn "%s" e
+
+  printfn ""
 
   ctx.log.Information "main|end"
   0
