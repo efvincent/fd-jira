@@ -38,7 +38,17 @@ let helpCmd  = strWs "help"  >>% Command.Help
 let exitCmd  = strWs "exit"  >>% Command.Exit
 
 let getCmd = strWs "get" >>. ws >>. issueId |>> Command.Get
-let cmdParser = choice [countCmd;getCmd;helpCmd;exitCmd] .>> ws .>> eof <?> "Command (use \"help\" for info)"
+
+let cmdParser = 
+  choice 
+    [ countCmd
+      getCmd
+      rangeCmd 
+      helpCmd
+      exitCmd ] 
+  .>> ws 
+  .>> eof 
+  <?> "Command (use \"help\" for info)"
 
 // This resolves generic value restriction
 // see https://www.quanttec.com/fparsec/tutorial.html#fs-value-restriction
