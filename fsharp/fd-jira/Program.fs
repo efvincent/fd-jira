@@ -178,17 +178,6 @@ let processArgs ctx argv =
         | Error e -> ctx.log.Error ("main|creds|{e}", e))
   | Error _ -> ()
 
-let rec cmdLoop ctx argv =
-  processArgs ctx argv
-  printf "\nFD-JIRA > "
-  let input = Console.ReadLine()
-  printf "\n"
-  if input.Trim().ToLower() <> "exit" then
-    let args = input.Split(' ') |> Seq.map(fun s -> s.Trim()) |> Array.ofSeq
-    cmdLoop ctx args
-  else
-    printfn "bye!\n"
-
 module CmdProc =
   open Parser 
   open FParsec    
@@ -213,6 +202,9 @@ module CmdProc =
       if not single then parsecCmdLoop ctx (prompt())
     | Success(Command.Get id,_,_) ->
       printIssueFromDb ctx id
+      if not single then parsecCmdLoop ctx (prompt())
+    | Success(Command.Range (startAt, count),_,_) ->
+      printIssues ctx startAt count
       if not single then parsecCmdLoop ctx (prompt())
     | Success(Command.Exit,_,_) ->
       printfn "bye!\n"

@@ -16,6 +16,7 @@ module Ast =
   type Command =
   | Count 
   | Get of IssueIdent
+  | Range of int * int
   | Help
   | Exit
 
@@ -33,6 +34,7 @@ let fullIssueId =
   |>> fun ((p1,p2),p3) -> (p1 + p2 + p3).ToUpper() |> IssueIdent.FullId
 let issueId = issueNum <|> fullIssueId  <?> "Issue Identifier"
 
+let rangeCmd = strWs "range" >>% Command.Range (4500, 10)
 let countCmd = strWs "count" >>% Command.Count
 let helpCmd  = strWs "help"  >>% Command.Help
 let exitCmd  = strWs "exit"  >>% Command.Exit
