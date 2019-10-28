@@ -114,6 +114,12 @@ let printBulk ctx since startAt maxCount =
   | Error e -> printfn "API Error: %s" e
   ()
 
+let printFindResults ctx =
+  let (count,items) = Database.sampleQuery ctx
+  items
+  |> Seq.iter (fun i -> printfn "%s\n%s\n" div (i.ToStringLong()))
+  printfn "%i items found" count
+
 let performSync ctx lastUpdate =
   // fn to save a key. Will be passed to the update processor which will use it
   // on each found issue. We'll pull the issue from the API, deser and save it
@@ -197,14 +203,18 @@ module CmdProc =
     | Success(Command.Count,_,_) -> 
       printCount ctx
       if not single then parsecCmdLoop ctx (prompt())
-    | Success(Command.Help,_,_) ->
-      printfn "understood: Help command"
-      if not single then parsecCmdLoop ctx (prompt())
     | Success(Command.Get id,_,_) ->
       printIssueFromDb ctx id
       if not single then parsecCmdLoop ctx (prompt())
+    | Success(Command.Sync since,_,_) ->
+      performSync ctx since
+      if not single then parsecCmdLoop ctx (prompt())
     | Success(Command.Range (startAt, count),_,_) ->
-      printIssues ctx startAt count
+      // printIssues ctx startAt count
+      printFindResults ctx
+      if not single then parsecCmdLoop ctx (prompt())
+    | Success(Command.Help,_,_) ->
+      printfn "understood: Help command"
       if not single then parsecCmdLoop ctx (prompt())
     | Success(Command.Exit,_,_) ->
       printfn "bye!\n"

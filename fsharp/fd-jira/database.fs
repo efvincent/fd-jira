@@ -53,4 +53,24 @@ let tryGetIssue (ctx:Prelude.Ctx) (key:string) =
   | None ->
     ctx.log.Error("Database.getIssue|not-found|key:{key}", key)
     None
-  
+
+let sampleQuery (ctx:Prelude.Ctx) =
+  ctx.log.Debug("Database.sampleQuery|start")
+  let pred =
+    Query.And(
+        Query.EQ("status", BsonValue("Active")),
+        Query.EQ("components[*]", BsonValue("Mojo"))
+        // Query.Between(
+        //   "updated", 
+        //   BsonValue(DateTime.Parse("10/01/2017")), 
+        //   BsonValue(DateTime.Parse("10/30/2020"))
+        // )
+    ) 
+    
+  let cnt = issues.Count(pred)
+  let recs = issues.Find(pred, limit=100)
+
+  ctx.log.Debug("Database.sampleQuery|end|count:{count}", cnt)
+  (cnt, recs)
+
+
