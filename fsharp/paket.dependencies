@@ -1,5 +1,6 @@
 source https://www.nuget.org/api/v2
 nuget CommandLineParser 2.6.0
+nuget FParsec 1.0.4-RC3 RC
 nuget FSharp.Core 4.7.0
 nuget LiteDB 4.1.4
 nuget LiteDB.FSharp 2.14.0

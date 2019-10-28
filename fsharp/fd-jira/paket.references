@@ -7,3 +7,4 @@ Serilog.Sinks.RollingFile
 Microsoft.Extensions.Configuration.Json
 CommandLineParser
 LiteDB.FSharp
+FParsec
