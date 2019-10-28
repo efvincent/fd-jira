@@ -87,7 +87,7 @@ let processChangedIssues
 
     /// Recursively gets pages of changed issue records until no more are returned
     let rec getBatches 
-          (result:{| count: int; updated: DateTimeOffset |}) 
+          (result:{| count: int; updated: DateTime |}) 
           startAt chunkSize batchCount = async {
       ctx.log.Debug("jiraApi.processChangedIssues.getBatches|start|startAt:{start}|chunkSize:{chunkSize}|batchCount:{count}",
         startAt, chunkSize, batchCount)
@@ -130,7 +130,7 @@ let processChangedIssues
         return result
     }
 
-    return! getBatches {|count=0; updated=DateTimeOffset.MinValue|} 0 chunkSize 1 
+    return! getBatches {|count=0; updated=DateTime.MinValue|} 0 chunkSize 1 
   }
 
 let getFields ctx baseUrl =

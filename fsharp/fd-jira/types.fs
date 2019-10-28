@@ -50,8 +50,8 @@ open System
       name : string
       goal : string
       state : string
-      startDate : DateTimeOffset
-      endDate : DateTimeOffset
+      startDate : DateTime
+      endDate : DateTime
       originBoardId : int
     }
 
@@ -79,7 +79,7 @@ open System
       summary       : string
       description   : string option
       resolution    : string option
-      resolutionDate: DateTimeOffset option
+      resolutionDate: DateTime option
       assignee      : Person option
       issueType     : IssueType
       sprint        : Sprint option
@@ -88,8 +88,8 @@ open System
       components    : Component list
       link          : string
       points        : float option
-      created       : DateTimeOffset
-      updated       : DateTimeOffset
+      created       : DateTime
+      updated       : DateTime
     }
     with
       override this.ToString() =

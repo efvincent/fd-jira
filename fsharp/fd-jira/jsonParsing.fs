@@ -53,7 +53,7 @@ open System.Text.Json
     | Some f -> f
     | None -> raise <| JsonParseException(_typeErr je.ValueKind "float" je)
 
-  let getDateTimeOpt (je:JsonElement) =
+  let getDTOOpt (je:JsonElement) =
     match je.ValueKind with
     | JsonValueKind.String -> 
       match je.GetString() |> DateTimeOffset.TryParse with 
@@ -61,6 +61,20 @@ open System.Text.Json
       | (false, _) -> raise <| JsonParseException(JsonParseError.DateParseError je) 
     | JsonValueKind.Null -> None 
     | jvk -> raise <| JsonParseException(_typeErr jvk "date" je)
+
+  let getDateTimeOpt (je:JsonElement) =
+    match je.ValueKind with
+    | JsonValueKind.String -> 
+      match je.GetString() |> DateTime.TryParse with 
+      | (true, dto) -> Some dto
+      | (false, _) -> raise <| JsonParseException(JsonParseError.DateParseError je) 
+    | JsonValueKind.Null -> None 
+    | jvk -> raise <| JsonParseException(_typeErr jvk "date" je)
+
+  let getDTO je =
+    match getDTOOpt je with
+    | Some d -> d
+    | None -> raise <| JsonParseException(_typeErr je.ValueKind "date" je)
 
   let getDateTime je =
     match getDateTimeOpt je with
@@ -87,5 +101,7 @@ open System.Text.Json
   let getPropStr n            = getProp n >> getStr
   let getPropStrOpt n je      = getPropOpt n je |> Option.bind getStrOpt
   let getPropFloatOpt n je    = getPropOpt n je |> Option.bind getFloatOpt
+  let getPropDTO n            = getProp n >> getDTO
+  let getPropDTOOpt n je      = getPropOpt n je |> Option.bind getDTOOpt
   let getPropDateTime n       = getProp n >> getDateTime
   let getPropDateTimeOpt n je = getPropOpt n je |> Option.bind getDateTimeOpt

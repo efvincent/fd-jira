@@ -56,10 +56,13 @@ let tryGetIssue (ctx:Prelude.Ctx) (key:string) =
 
 let sampleQuery (ctx:Prelude.Ctx) =
   ctx.log.Debug("Database.sampleQuery|start")
+  let d = DateTimeOffset.Parse("10/31/1999")
+  let dt = d.ToUniversalTime()
   let pred =
     Query.And(
         Query.EQ("status", BsonValue("Active")),
-        Query.EQ("components[*]", BsonValue("Mojo"))
+        Query.EQ("components[*]", BsonValue("Mojo")),
+        Query.GTE("updated", BsonValue(DateTime.Parse("2019-10-28T00:00")))
         // Query.Between(
         //   "updated", 
         //   BsonValue(DateTime.Parse("10/01/2017")), 
