@@ -64,7 +64,7 @@ let getIssue ctx baseUrl issue =
                         issue
                         "?fields=assignee,status,summary,description,created,updated,resolutiondate,"
                         "issuetype,components,priority,resolution,sprint,"
-                        "customfield_10002,subtasks,customfield_10007,parent"
+                        "customfield_10002,subtasks,customfield_10007,parent,labels"
     let! result = makeJiraCall ctx url
     match result with 
     | Ok _    -> ctx.log.Debug(sprintf "getIssue|end|\"%s\"|Success" issue)
