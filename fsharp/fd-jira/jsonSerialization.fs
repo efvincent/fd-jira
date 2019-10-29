@@ -126,6 +126,11 @@ module JsonSerialization
           |> Result.orFailWith
           |> Set.ofSeq  // to eliminate duplicates
           |> List.ofSeq
+        let labels = 
+          getProp "labels" flds 
+          |> getArray 
+          |> Seq.map getStr
+          |> List.ofSeq
         {
           Issue.id       = getPropStr "id" je
           key            = getPropStr "key" je
@@ -140,6 +145,7 @@ module JsonSerialization
           components     = comps
           assignee       = assignee
           link           = getPropStr "self" je
+          labels         = labels
           points         = getPropFloatOpt "customfield_10002" flds
           created        = getPropDateTime "created" flds
           updated        = getPropDateTime "updated" flds
