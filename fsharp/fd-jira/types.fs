@@ -86,6 +86,7 @@ open System
       parent        : Parent option
       status        : Status
       components    : Component list
+      labels        : string list
       link          : string
       points        : float option
       created       : DateTime
@@ -100,12 +101,13 @@ open System
           (string this.status) this.summary 
 
       member this.ToStringLong() =
-        sprintf "%s %s [%s]\nstatus: %s\nsummary: %s\nlink: %s\npoints: %f\ncreated: %A\nupdated: %A\nassignee: %s\nepic: %s\nparent: %s\n" 
+        sprintf "%s %s [%s]\nstatus: %s\nsummary: %s\nlink: %s\nlables: %s\npoints: %f\ncreated: %A\nupdated: %A\nassignee: %s\nepic: %s\nparent: %s\n" 
           this.key
           (string this.issueType)
           (this.components |> List.map string |> (fun comps -> String.Join(",", comps)))
           (string this.status) this.summary 
           this.link
+          (String.Join(",", this.labels))
           (this.points |> Option.defaultValue 0.)
           this.created this.updated
           (match this.assignee with Some a -> a.name | None -> "unassigned")
