@@ -115,6 +115,10 @@ open System
           (match this.parent with Some p -> (string p) | None -> "[not a subtask]")
 
     type SystemState = {
+      id: string
       project: string
-      mostRecentIssueUpdate: DateTimeOffset
-    }    
+      issuesUpdated: DateTime
+    }   
+    with
+      override this.ToString() =
+        sprintf "%s (updated %s)" this.project (string this.issuesUpdated) 
