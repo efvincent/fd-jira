@@ -43,7 +43,7 @@ let makeJiraCall ctx url =
       return Error (sprintf "(%i) %A; Reason: \"%s\"" status rsp.StatusCode rsp.ReasonPhrase)
   }
 
-let makeUpdateQuery project (updatedSince:DateTimeOffset) =
+let makeUpdateQuery project (updatedSince:DateTime) =
   let dt = updatedSince.ToString("yyyy-MM-dd HH:mm")
   let query = sprintf "project=%s AND updatedDate >= \"%s\"" project dt
   Uri.EscapeDataString query
