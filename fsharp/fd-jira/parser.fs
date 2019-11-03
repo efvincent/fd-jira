@@ -44,7 +44,8 @@ let exitCmd  = strWs "exit"  >>% Command.Exit
 
 let getCmd = strWs "get" >>. ws >>. issueId |>> Command.Get
 
-let syncCmd = strWs "sync" >>. ws >>. pdate |>> Command.Sync
+let syncCmd = strWs "sync" >>% Command.Sync None
+let syncWithDateCmd = strWs "sync" >>. ws >>. pdate |>> (Some >> Command.Sync)
 
 let cmdParser = 
   choice 
@@ -52,6 +53,7 @@ let cmdParser =
       getCmd
       rangeCmd 
       syncCmd
+      syncWithDateCmd
       helpCmd
       exitCmd ] 
   .>> ws 

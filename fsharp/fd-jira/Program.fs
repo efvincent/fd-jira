@@ -21,7 +21,7 @@ let jsonToStr (jd:JsonDocument) = JsonSerializer.Serialize(jd.RootElement, jsonS
 
 let getUpdatedItems ctx =
   async {
-    match JiraApi.getChangedIssues ctx BASE_URL DateTimeOffset.MinValue 0 10 |> Async.RunSynchronously with
+    match JiraApi.getChangedIssues ctx BASE_URL DateTime.MinValue 0 10 |> Async.RunSynchronously with
     | Ok jd ->
       (jsonToStr >> printfn "\nresult:\n%s") jd
     | Error e ->
@@ -120,7 +120,7 @@ let printFindResults ctx =
   |> Seq.iter (fun i -> printfn "%s\n%s\n" div (i.ToStringLong()))
   printfn "%i items found" count
 
-let performSync ctx lastUpdate =
+let performSync ctx (lastUpdate: DateTime option) =
   // fn to save a key. Will be passed to the update processor which will use it
   // on each found issue. We'll pull the issue from the API, deser and save it
   let getAndSave key = async {
@@ -139,6 +139,21 @@ let performSync ctx lastUpdate =
       printfn "Error getting issue %s: %s" key e
   }
 
+  let lastUpdate  =
+    match lastUpdate with 
+    | Some d -> 
+      ctx.log.Debug("performSync|Using explicit date: {since}", d)
+      d
+    | None ->
+      match Database.tryGetSystemState ctx PROJECT with 
+      | Some ss -> 
+        ctx.log.Debug("performSync|Using SystemState last update: {since}", ss.issuesUpdated)
+        ss.issuesUpdated
+      | None ->
+        ctx.log.Debug("performSync|Using DateTime.MinValue") 
+        DateTime.MinValue
+  printfn "\nSync since: %s" (lastUpdate.ToString("yyyy-MM-ddThh:mm"))
+
   // callback for reporting progress on a batch level
   let progress completed working total =
     printfn "completed: %5i current: %3i total: %6i" completed working total
@@ -151,7 +166,11 @@ let performSync ctx lastUpdate =
     result.count
     (string lastUpdate)
     (string result.updated)
-  printfn "Done"
+
+  match Database.saveSystemState ctx PROJECT lastUpdate with
+  | Ok () -> printfn "Done"
+  | Error err ->
+    printfn "Error saving system state:%s\nLast update time is not saved.\n" err
 
 let printCount ctx = 
   let c = Database.countIssues ctx
