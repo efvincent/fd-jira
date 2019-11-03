@@ -8,7 +8,7 @@ open Types.Jira
 
 let mapper = FSharpBsonMapper()
 let db = new LiteDatabase("Filename=test.db;Mode=Exclusive", mapper)
-let issues = db.GetCollection<Issue>("issues")
+let issues = db.GetCollection<Issue>("issues")  
 let systemState = 
   let col = db.GetCollection<SystemState>("sysState")
   col.EnsureIndex(fun s -> s.project) |> ignore
@@ -20,10 +20,6 @@ let countIssues (ctx:Prelude.Ctx) =
   ctx.log.Debug("Database.countIssues|end|count:{count}", c)
   c
 
-let saveSystemState (ctx:Prelude.Ctx) (project:string) (lastUpdate:DateTimeOffset) =
-  ctx.log.Debug("Database.saveSystemState|start|project:{project}|lastUpdate:{lastUpdate}",
-    project, lastUpdate)
-
 let tryGetSystemState (ctx:Prelude.Ctx) (project:string) =
   ctx.log.Debug("Database.getSystemState|start|project:{project}", project)
   match systemState.tryFindOne<SystemState> <@ fun ss -> ss.project = project @> with
@@ -33,6 +29,26 @@ let tryGetSystemState (ctx:Prelude.Ctx) (project:string) =
   | None -> 
     ctx.log.Information("Database.getSystemState|not-found|project:{project}", project)
     None
+
+let saveSystemState (ctx:Prelude.Ctx) (project:string) (lastUpdate:DateTime) =
+  ctx.log.Debug("Database.saveSystemState|start|project:{project}|lastUpdate:{lastUpdate}",
+    project, lastUpdate)
+  try 
+    match tryGetSystemState ctx project with
+    | Some ss ->
+      ctx.log.Debug("Database.saveSystemState|Existing system state found; updating")
+      systemState.Update {ss with issuesUpdated = lastUpdate } |> ignore
+    | None ->
+      ctx.log.Debug(
+        "Database.saveSystemState|FirstSave|System state for {project} not found, creating new system state", 
+        project)       
+      systemState.Upsert { id = ""; project = project; issuesUpdated = lastUpdate } |> ignore
+    ctx.log.Debug("Database.saveSystemState|end|project:{project}", project)
+    Ok ()
+  with ex ->
+    ctx.log.Error("Database.saveSystemState|project:{project}|lastUpdate:{lastUpdate}|{err}", 
+      project, lastUpdate, ex.Message)
+    Error (string ex)
 
 let saveIssue (ctx:Prelude.Ctx) (issue:Issue) =
   try 
