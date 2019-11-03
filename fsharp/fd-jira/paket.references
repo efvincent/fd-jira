@@ -8,3 +8,4 @@ Microsoft.Extensions.Configuration.Json
 CommandLineParser
 LiteDB.FSharp
 FParsec
+EFVincent.Fons
