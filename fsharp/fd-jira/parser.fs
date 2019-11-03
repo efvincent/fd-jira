@@ -17,7 +17,7 @@ module Ast =
   | Count 
   | Get of IssueIdent
   | Range of int * int
-  | Sync of DateTimeOffset
+  | Sync of DateTime option
   | Help
   | Exit
 
@@ -28,7 +28,7 @@ let idOpts = IdentifierOptions()
 let ws = spaces
 let strWs s = pstringCI s .>> ws
 let wsStr s = ws >>. pstringCI s
-let pdate' (s:string) = try preturn (DateTimeOffset.Parse (s, null, Globalization.DateTimeStyles.RoundtripKind)) with _ -> fail ""
+let pdate' (s:string) = try preturn (DateTime.Parse (s, null, Globalization.DateTimeStyles.RoundtripKind)) with _ -> fail ""
 let pdate    = between ws ws (anyString 20) >>= pdate'
 
 let issueNum = many1Chars digit   |>> IssueIdent.Num  

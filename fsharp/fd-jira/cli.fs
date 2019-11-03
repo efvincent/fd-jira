@@ -10,9 +10,9 @@ module Cli
   }
 
   [<Verb("sync", HelpText="Sync issues for project")>]
-  type SyncOpts = {
+  type SyncOpts =  {
     [<Value(0, MetaName="since", HelpText="Sync everything changed after this date")>]
-    lastUpdate: DateTimeOffset
+    lastUpdate: DateTime option
   }
 
   [<Verb("api", HelpText="Pass the REST API directly to Jira. GET verb only.")>]
@@ -34,7 +34,7 @@ module Cli
     [<Value(1, MetaName="maxCount", HelpText="Maximum number of records to return (for paging)")>]
     maxCount: int
     [<Value(2, MetaName="date", HelpText="Get items changed after this date")>]
-    changedSince: DateTimeOffset
+    changedSince: DateTime
   }
 
   [<Verb("range", HelpText="Work with a range of Jira tickets")>]
