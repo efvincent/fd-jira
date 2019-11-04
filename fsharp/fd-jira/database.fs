@@ -6,13 +6,26 @@ open LiteDB.FSharp
 open LiteDB.FSharp.Extensions
 open Types.Jira
 
-let mapper = FSharpBsonMapper()
-let db = new LiteDatabase("Filename=test.db;Mode=Exclusive", mapper)
-let issues = db.GetCollection<Issue>("issues")  
-let systemState = 
+let private mapper = FSharpBsonMapper()
+let private dbFile = 
+  let dir =
+    let targetDir =
+      IO.Path.Combine ( 
+        Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+        ".fdjira")
+    if not (IO.Directory.Exists(targetDir)) 
+    then IO.Directory.CreateDirectory(targetDir) |> ignore
+    targetDir
+  IO.Path.Combine(dir, "cache.db")
+let private db = new LiteDatabase((sprintf "Filename=%s;Mode=Exclusive" dbFile), mapper)
+let private issues = db.GetCollection<Issue>("issues")  
+let private systemState = 
   let col = db.GetCollection<SystemState>("sysState")
   col.EnsureIndex(fun s -> s.project) |> ignore
   col
+
+let logDbInfo (ctx:Prelude.Ctx) =
+  ctx.log.Information("Database.logDbInfo|mode=Exclusive|filename={dbFile}", dbFile)
 
 let countIssues (ctx:Prelude.Ctx) =
   ctx.log.Debug("Database.countIssues|start")
