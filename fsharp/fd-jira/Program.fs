@@ -1,4 +1,4 @@
-open System
+﻿open System
 
 open System.Text.Json
 open JsonSerialization
@@ -179,6 +179,13 @@ let printCount ctx =
   let c = Database.countIssues ctx
   printfn "Issue Count: %i" c
 
+let printLastUpd ctx =
+  match Database.tryGetSystemState ctx PROJECT with 
+  | Some ss ->
+    printfn "Last updated project %s: %s" ss.project (string ss.issuesUpdated)
+  | None ->
+    printfn "Project %s has never been synchronized" PROJECT
+
 let commandProcessor ctx opts =
   match opts with
   | Opts.Count _    -> ()
@@ -206,6 +213,7 @@ let processArgs ctx argv =
         | Error e -> ctx.log.Error ("main|creds|{e}", e))
   | Error _ -> ()
 
+  
 module CmdProc =
   open Parser 
   open FParsec    
@@ -265,7 +273,7 @@ let main argv =
     if not (Array.isEmpty argv) then 
       CmdProc.interpret ctx (String.Join(' ', argv)) true
     else
-      CmdProc.parsecCmdLoop ctx (String.Join(' ', argv))
+      CmdProc.parseCmdLoop ctx (String.Join(' ', argv))
   | Error e ->
     printfn "%s" e
 
