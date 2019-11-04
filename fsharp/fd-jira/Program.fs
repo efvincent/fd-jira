@@ -1,4 +1,4 @@
-﻿open System
+open System
 
 open System.Text.Json
 open JsonSerialization
@@ -216,8 +216,8 @@ module CmdProc =
     render [getCmdLinePrompt()] RenderState.init |> ignore
     Console.ReadLine()
 
-  let rec parsecCmdLoop ctx (input:string) =
-    if String.IsNullOrWhiteSpace(input) then parsecCmdLoop ctx (prompt())
+  let rec parseCmdLoop ctx (input:string) =
+    if String.IsNullOrWhiteSpace(input) then parseCmdLoop ctx (prompt())
     else
       interpret ctx input false
   
@@ -225,25 +225,28 @@ module CmdProc =
     match run cmdParser input with 
     | Success(Command.Count,_,_) -> 
       printCount ctx
-      if not single then parsecCmdLoop ctx (prompt())
+      if not single then parseCmdLoop ctx (prompt())
     | Success(Command.Get id,_,_) ->
       printIssueFromDb ctx id
-      if not single then parsecCmdLoop ctx (prompt())
+      if not single then parseCmdLoop ctx (prompt())
+    | Success(Command.LastUpd,_,_) ->
+      printLastUpd ctx
+      if not single then parseCmdLoop ctx (prompt())
     | Success(Command.Sync since,_,_) ->
       performSync ctx since
-      if not single then parsecCmdLoop ctx (prompt())
+      if not single then parseCmdLoop ctx (prompt())
     | Success(Command.Range (startAt, count),_,_) ->
       // printIssues ctx startAt count
       printFindResults ctx
-      if not single then parsecCmdLoop ctx (prompt())
+      if not single then parseCmdLoop ctx (prompt())
     | Success(Command.Help,_,_) ->
       printfn "understood: Help command"
-      if not single then parsecCmdLoop ctx (prompt())
+      if not single then parseCmdLoop ctx (prompt())
     | Success(Command.Exit,_,_) ->
       printfn "bye!\n"
     | Failure(msg,_,_) ->
       printfn "%s" msg
-      if not single then parsecCmdLoop ctx (prompt())
+      if not single then parseCmdLoop ctx (prompt())
 
 [<EntryPoint>]    
 let main argv =
