@@ -1,4 +1,4 @@
-open System
+﻿open System
 
 open System.Text.Json
 open JsonSerialization
@@ -249,6 +249,7 @@ module CmdProc =
 let main argv =
   let ctx = Prelude.initCtx
   ctx.log.Information "main|Startup"
+  Database.logDbInfo ctx
   let ctxOpt =
     Environment.GetEnvironmentVariable("JIRA_CREDS")
     |> Result.ofObj "No Creds Found!"
