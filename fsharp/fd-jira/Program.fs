@@ -1,10 +1,13 @@
-﻿open System
+open System
 
 open System.Text.Json
 open JsonSerialization
 open CommandLine
 open Microsoft.FSharp.Core
 open Cli
+open Fons.Components
+open FonsCli
+open Fons.Internal
 
 [<Literal>]
 let BASE_URL = "https://jira.walmart.com"
@@ -209,7 +212,8 @@ module CmdProc =
   open Parser.Ast
 
   let prompt () = 
-    printf "\nFD-JIRA > "
+    printf "\n"
+    render [getCmdLinePrompt()] RenderState.init |> ignore
     Console.ReadLine()
 
   let rec parsecCmdLoop ctx (input:string) =
