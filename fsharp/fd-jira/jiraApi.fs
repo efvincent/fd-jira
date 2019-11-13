@@ -55,7 +55,9 @@ let getChangedIssues ctx baseUrl changedSince startAt maxCount =
                 baseUrl query maxCount startAt
     return! makeJiraCall ctx url
   }
-  
+
+/// Returns json from jira for the specified issue. Which fields are returned is 
+/// controlled by the query string parameters that go to jira.
 let getIssue ctx baseUrl issue =
   async {
     ctx.log.Debug(sprintf "getIssue|start|\"%s\"" issue)
@@ -72,6 +74,10 @@ let getIssue ctx baseUrl issue =
     return result
   } 
 
+/// gets the issues changed since the passed `changedSince` date one page at a time, where the
+/// page size is `chunkSize`. These issues are passed to a "processing function", `procFn`, which 
+/// will do the work of saving the model in the cache database. The `batchProgress` function is called
+/// at intervals and can be used for progress reporting
 let processChangedIssues 
   ctx baseUrl changedSince chunkSize (procFn:string -> Async<unit>) (batchProgress: int -> int -> int -> unit) = 
   async {

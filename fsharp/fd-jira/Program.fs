@@ -1,4 +1,4 @@
-open System
+﻿open System
 
 open System.Text.Json
 open JsonSerialization
@@ -22,6 +22,7 @@ let div = String('-', 80)
 
 let jsonToStr (jd:JsonDocument) = JsonSerializer.Serialize(jd.RootElement, jsonSerializerOptions)
 
+/// Returns the Issue model as populated from the Jira API json
 let getIssue ctx issue =
   async {
     match! JiraApi.getIssue ctx BASE_URL issue with
@@ -31,7 +32,11 @@ let getIssue ctx issue =
       return Error e
   }
 
+/// Prints issues starting at an issue number for the specified count. Issues come
+/// from the Jira API, not the cached database
 let printIssues ctx startAt count =
+  /// Parses out number from the full issue id (ex: RCTFD-1234 -> 1234). We need this
+  /// because we're going to start at this number and run a range for the specified count
   let idNumFromId (s:string) =
     let parts = s.Split '-' 
     if parts |> Seq.length = 2 then 
@@ -100,9 +105,14 @@ let printFindResults ctx =
   |> Seq.iter (fun i -> printfn "%s\n%s\n" div (i.ToStringLong()))
   printfn "%i items found" count
 
+/// Syncs issues from the Jira API into the local database cache. If
+/// the lastUpdate date is supplied it is used as a parameter, getting
+/// issues from Jira that were modified after that date. Otherwise, it
+/// checks for the last update date stored in the cache. If there is no
+/// such date there, then MinDate is used.
 let performSync ctx (lastUpdate: DateTime option) =
-  // fn to save a key. Will be passed to the update processor which will use it
-  // on each found issue. We'll pull the issue from the API, deser and save it
+  /// fn to save a key. Will be passed to the update processor which will use it
+  /// on each found issue. We'll pull the issue from the API, deser and save it
   let getAndSave key = async {
     let! jd = JiraApi.getIssue ctx BASE_URL key
     match jd with
