@@ -1,4 +1,4 @@
-﻿open System
+open System
 
 open System.Text.Json
 open JsonSerialization
@@ -22,30 +22,7 @@ let div = String('-', 80)
 
 let jsonToStr (jd:JsonDocument) = JsonSerializer.Serialize(jd.RootElement, jsonSerializerOptions)
 
-let getUpdatedItems ctx =
-  async {
-    match JiraApi.getChangedIssues ctx BASE_URL DateTime.MinValue 0 10 |> Async.RunSynchronously with
-    | Ok jd ->
-      (jsonToStr >> printfn "\nresult:\n%s") jd
-    | Error e ->
-      ctx.log.Error ("getUpdatedItems|{e}", e)
-  }
-
-let getIssue ctx ident =
-  async {
-    let issue = 
-      match ident with 
-      | Parser.Ast.IssueIdent.Num n -> sprintf "%s-%s" PROJECT n
-      | Parser.Ast.IssueIdent.FullId id -> id 
-
-    match! JiraApi.getIssue ctx BASE_URL issue with
-    | Ok (jd) ->
-      return Issue.fromJson jd.RootElement
-    | Error e ->
-      return Error e
-  }
-
-let getIssue2 ctx issue =
+let getIssue ctx issue =
   async {
     match! JiraApi.getIssue ctx BASE_URL issue with
     | Ok jd ->
@@ -63,7 +40,7 @@ let printIssues ctx startAt count =
       | (false, _) -> 0
     else 0
   let getIssueWithId id = async {
-    let! res = getIssue2 ctx id
+    let! res = getIssue ctx id
     return (id, res)
   }
   let ans = 
