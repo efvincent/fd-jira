@@ -104,7 +104,7 @@ let processChangedIssues
         let total = (getPropInt "total" je)
         let issues = deserIssues je |> List.ofSeq
         // find the latest update date from the list
-        let upd' = 
+        let newLastUpdate = 
           let lastFromBatch =
             issues
             |> List.map(fun i -> i.updated)
@@ -125,11 +125,11 @@ let processChangedIssues
           |> List.map(fun item -> procFn item.key)
           |> Async.Parallel        
 
-        let result' = {|count = result.count + len; updated = upd' |}
+        let revisedResult = {|count = result.count + len; updated = newLastUpdate |}
         if len >= chunkSize then 
-          return! getBatches result' (startAt + len) chunkSize (batchCount + 1)
+          return! getBatches revisedResult (startAt + len) chunkSize (batchCount + 1)
         else
-          return result'
+          return revisedResult
       | Error e -> 
         ctx.log.Error("jiraApi.processChangedIssues.getBatches|startAt:{start}|chunkSize:{chunkSize}|batchCount:{count}|{err}",
           startAt, chunkSize, batchCount, e)
