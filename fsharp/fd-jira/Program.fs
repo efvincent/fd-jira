@@ -152,13 +152,12 @@ let performSync ctx (lastUpdate: DateTime option) =
     JiraApi.processChangedIssues ctx BASE_URL lastUpdate 50 getAndSave progress
     |> Async.RunSynchronously
 
-  /// TODO: Latest update date not being saved properly ... debug
   printfn "Found %i issues updated since %s, new last updated date is %s. Saving."
     result.count
     (string lastUpdate)
     (string result.updated)
 
-  match Database.saveSystemState ctx PROJECT lastUpdate with
+  match Database.saveSystemState ctx PROJECT result.updated with
   | Ok () -> printfn "Done"
   | Error err ->
     printfn "Error saving system state:%s\nLast update time is not saved.\n" err
