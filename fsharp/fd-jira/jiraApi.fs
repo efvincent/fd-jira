@@ -103,13 +103,16 @@ let processChangedIssues
         let je = batch.RootElement
         let total = (getPropInt "total" je)
         let issues = deserIssues je |> List.ofSeq
+
         // find the latest update date from the list
         let newLastUpdate = 
           let lastFromBatch =
-            issues
-            |> List.map(fun i -> i.updated)
-            |> List.max
-          if lastFromBatch > result.updated then lastFromBatch else result.updated
+            if List.isEmpty issues then DateTime.MinValue else
+              issues
+              |> List.map(fun i -> i.updated)
+              |> List.max
+          [lastFromBatch; result.updated; changedSince] |> List.max
+
         // if fewer issues were returned than the max we specified then we're done
         let len = issues |> Seq.length
         ctx.log.Debug(
