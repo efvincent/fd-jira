@@ -1,15 +1,13 @@
-open System
-let tot = 101
-let step = 10
-let max = if tot % step = 0 then tot else tot + step
-let s = seq { for i in step-1 .. 10 .. max do yield i }
-s |> Seq.iter (fun n -> printfn "%i" n)
+#r @"/Users/eric.vincent/.nuget/packages/fparsec/1.0.4-rc3/lib/netstandard1.6/FParsecCS.dll"
+#r @"/Users/eric.vincent/.nuget/packages/fparsec/1.0.4-rc3/lib/netstandard1.6/FParsec.dll"
 
-// get first chunk, get the max number from that
-// use ^ to do generate a series of parameters
-// map those into a sequence of async workflows to 
-//  do the HTTP call to get chunks
-// collect those into single list, map to the keys
-// map those into a sequence of async workflows to 
-//  do the HTTP call to get items and save them to the db
+open FParsec
+
+let test s p =
+  match run p s with 
+  | Success(v,_,_) -> printfn "Success: %A" v
+  | Failure(e,_,_) -> printfn "Failure: %s" e
+
+let pyear:Parser<string,unit> = many1Satisfy isDigit
+
 
