@@ -28,10 +28,37 @@ let idOpts = IdentifierOptions()
 
 let ws = spaces
 let strWs s = ws >>. pstringCI s .>> ws
-let pdate' (s:string) = 
-  try preturn (DateTime.Parse (s, null, Globalization.DateTimeStyles.RoundtripKind)) 
-  with _ -> fail ""
-let pdate = between ws ws (anyString 20) >>= pdate'
+
+// Date Parsing. Known sub-optimal, learning FParsec
+
+let pFourDigit:Parser<int,unit> =  
+  pipe4 
+    digit digit digit digit 
+    (fun c1 c2 c3 c4 -> Int32.Parse(sprintf "%c%c%c%c" c1 c2 c3 c4))
+
+let pTwoDigit:Parser<int,unit> = 
+  pipe2  
+    digit digit (fun c1 c2 -> Int32.Parse(sprintf "%c%c" c1 c2 ))
+
+let pDateDelimiter:Parser<string,unit> = (pstring "/") <|> (pstring "-")
+
+let mkDate (y,m,d) =
+  try preturn (DateTime(y,m,d))
+  with _ -> fail "Invalid Date"
+
+let pDate1 =
+  pipe3 
+    pFourDigit (pDateDelimiter >>. pTwoDigit) (pDateDelimiter >>. pTwoDigit)
+    (fun y m d -> (y, m, d))
+  >>= mkDate
+
+let pDate2 =
+  pipe3 
+    pTwoDigit (pDateDelimiter >>. pTwoDigit) (pDateDelimiter >>. pFourDigit)
+    (fun m d y -> (y, m, d))
+  >>= mkDate
+
+let pDate = (attempt pDate2) <|> pDate1
 
 let issueNum = many1Chars digit   |>> IssueIdent.Num  
 let fullIssueId = 
@@ -46,8 +73,10 @@ let exitCmd  = strWs "exit"        >>% Command.Exit
 let lastUpd  = strWs "last update" >>% Command.LastUpd
 let getCmd   = strWs "get"         >>. ws >>. issueId |>> Command.Get
 
-let syncCmd = strWs "sync" >>% Command.Sync None
-let syncWithDateCmd = strWs "sync" >>. ws >>. pdate |>> (Some >> Command.Sync)
+let pSyncCmd = strWs "sync" >>% Command.Sync None
+let pSyncWithDateCmd = strWs "sync" >>. ws >>. pDate |>> (Some >> Command.Sync)
+
+let syncCmd = (attempt pSyncWithDateCmd) <|> pSyncCmd
 
 let cmdParser = 
   choice 
@@ -55,7 +84,6 @@ let cmdParser =
       getCmd
       rangeCmd 
       syncCmd
-      syncWithDateCmd
       lastUpd
       helpCmd
       exitCmd ] 
