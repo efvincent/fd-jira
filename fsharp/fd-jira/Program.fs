@@ -173,6 +173,22 @@ let printLastUpd ctx =
   | None ->
     printfn "Project %s has never been synchronized" PROJECT
 
+let printHelp () =
+  let hlp = """
+Available Commands:
+
+  count             - displays the count of cached items
+  range             - pulls a range of items from the Jira API
+  last update       - displays the last update date for sync
+  get [id]          - gets the ID from cache. ID can be the full ID or the number
+  sync [yyyy/mm/dd] - syncs cache to Jira API. If the  date is not supplied uses
+                      the latest sync date from issues in the cache
+  help              - displays this help
+  exit              - exits the CLI
+
+"""
+  printfn "%s" hlp
+
 let commandProcessor ctx opts =
   match opts with
   | Opts.Count _    -> ()
@@ -235,7 +251,7 @@ module CmdProc =
       printFindResults ctx
       if not single then parseCmdLoop ctx (prompt())
     | Success(Command.Help,_,_) ->
-      printfn "understood: Help command"
+      printHelp ()
       if not single then parseCmdLoop ctx (prompt())
     | Success(Command.Exit,_,_) ->
       printfn "bye!\n"
