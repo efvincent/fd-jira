@@ -139,7 +139,13 @@ let processChangedIssues
         return result
     }
 
-    return! getBatches {|count=0; updated=DateTime.MinValue|} 0 chunkSize 1 
+    // process batches of sync records
+    let! result = getBatches {|count=0; updated=DateTime.MinValue|} 0 chunkSize 1
+    
+    // send the final update indicating total work done
+    batchProgress result.count 0 result.count
+    
+    return result 
   }
 
 let getFields ctx baseUrl =
