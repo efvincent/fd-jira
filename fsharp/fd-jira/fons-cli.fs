@@ -12,17 +12,29 @@ let private style =
     keyword     = [fg 150 150 250]
   |}
 
-  let getCmdLinePrompt () =
-    let curTime = DateTime.Now
-    block
-      [
-        space
+let getCmdLinePrompt () =
+  let curTime = DateTime.Now
+  block
+    [
+      space
       text style.sysName "Jira "
       text style.projectCode "RCTFD "
       text style.delimiter "["
       text style.data (sprintf "%02i:%02i:%02i" curTime.Hour curTime.Minute curTime.Second)
       text style.delimiter "]"
-        space
+      space
       text style.plain "$"
-        space
-      ]
+      space
+    ]
+
+
+let updateSyncStatus completed total =
+  block 
+    [
+      clrLine
+      left 100
+      text style.keyword "Completed "
+      text style.data (string completed)
+      text style.keyword " of "
+      text style.data (string total)
+    ]
