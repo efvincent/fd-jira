@@ -142,17 +142,17 @@ let performSync ctx (lastUpdate: DateTime option) =
       | None ->
         ctx.log.Debug("performSync|Using DateTime.MinValue") 
         DateTime.MinValue
-  printfn "\nSync since: %s" (lastUpdate.ToString("yyyy-MM-ddThh:mm"))
+  printfn "\nSync since: %s\n" (lastUpdate.ToString("yyyy-MM-ddThh:mm"))
 
   // callback for reporting progress on a batch level
-  let progress completed working total =
-    printfn "completed: %5i current: %3i total: %6i" completed working total
+  let progress completed _ total =
+    render [updateSyncStatus completed total] RenderState.init |> ignore
 
   let result = 
     JiraApi.processChangedIssues ctx BASE_URL lastUpdate 50 getAndSave progress
     |> Async.RunSynchronously
 
-  printfn "Found %i issues updated since %s, new last updated date is %s. Saving."
+  printfn "\n\nFound %i issues updated since %s, new last updated date is %s. Saving."
     result.count
     (string lastUpdate)
     (string result.updated)
