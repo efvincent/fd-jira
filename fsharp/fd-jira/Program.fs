@@ -276,7 +276,9 @@ let main argv =
     if not (Array.isEmpty argv) then 
       CmdProc.interpret ctx (String.Join(' ', argv)) true
     else
+      render [switchToAlt; clrScreen; pos 0 0] RenderState.init |> ignore
       CmdProc.parseCmdLoop ctx (String.Join(' ', argv))
+      render [switchToMain] RenderState.init |> ignore 
   | Error e ->
     printfn "%s" e
 
