@@ -1,11 +1,9 @@
 # FD Jira
-Build an event stream from Jira ticket data
-
-## What?
-Figure out a way to go to the Jira API and turn whatever we find there (history? audit logs? static snapshots? reports?) into a series of events in the event db style (ie change/delta events).
+A CLI/TUI tool/utility for manipulating Jira, specifically the way we use it on our team at Jet.com
 
 ## Why?
-The idea is if we had Jira data in a stream, we could then project it into various data stores for more interesting reporting and analysis.
+Started out as something else whatever, now it's an experiment in manipulating the Jira API and an excuse to play
+with some CLI/TUI code, using a library called (Fons)[https://github.com/efvincent/fons] that I'm also working on.
 
 ## Jira API
 This is a typical rest call:
@@ -47,3 +45,4 @@ For linux a bit more complicated:
 * [.NET Core Runtime Info](https://docs.microsoft.com/en-us/dotnet/core/rid-catalog)
 * [LiteDB](https://www.litedb.org/) - embedded doc store, .NET and F# friendly
 * [F# client for LiteDB](https://github.com/Zaid-Ajaj/LiteDB.FSharp)
+* [Fons CLI lib for F#](https://github.com/efvincent/fons)
