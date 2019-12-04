@@ -5,7 +5,7 @@ mod jira_api;
 mod jira_sqlite;
 mod jira_types;
 
-use credentials::*;
+use credentials::get_creds;
 use structopt::StructOpt;
 // use crossterm::{
 //     execute, input, style, AsyncReader, Clear, ClearType, Color, Crossterm, Goto, InputEvent,

@@ -1,6 +1,6 @@
 use crate::credentials::Creds;
 use crate::jira_types;
-use chrono::prelude::*;
+use chrono::prelude::{DateTime, FixedOffset, Utc};
 use curl::easy::{Auth, Easy2, Handler, WriteError};
 use serde::{Deserialize, Serialize};
 

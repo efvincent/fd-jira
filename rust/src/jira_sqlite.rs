@@ -1,4 +1,4 @@
-use crate::jira_api::*;
+use crate::jira_api::IssueSearchResult;
 use rusqlite::{params, Connection, NO_PARAMS};
 
 pub fn write_issues(
